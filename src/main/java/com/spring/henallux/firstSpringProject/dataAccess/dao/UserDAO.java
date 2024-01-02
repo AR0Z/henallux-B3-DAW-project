@@ -1,10 +1,13 @@
 package com.spring.henallux.firstSpringProject.dataAccess.dao;
 
 import com.spring.henallux.firstSpringProject.Model.User;
+import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.repository.UserRepository;
 import com.spring.henallux.firstSpringProject.dataAccess.util.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDAO implements UserDataAccess {
 
     private UserRepository userRepository;
@@ -16,8 +19,22 @@ public class UserDAO implements UserDataAccess {
         this.providerConverter = providerConverter;
     }
 
-    public User findByUsername(String username) {
-        return providerConverter.userEntityToUser(userRepository.findByUsername(username));
+    public User findByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+        if (userEntity == null) {
+            return null;
+        }
+
+        return providerConverter.userEntityToUser(userEntity);
+    }
+
+    public User save(User user) {
+        UserEntity userEntity = providerConverter.userToUserEntity(user);
+
+        userEntity = userRepository.save(userEntity);
+
+        return providerConverter.userEntityToUser(userEntity);
     }
 
 }

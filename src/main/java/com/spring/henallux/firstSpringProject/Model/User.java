@@ -4,15 +4,30 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class User implements UserDetails {
 
-    private String username;
+    @Email
+    private String email;
 
+    @Size(min=8, max=30)
     private String password;
+
+    private String passwordConfirm;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String deliveryAddress;
+
+    private String phoneNumber;
+
 
     private String authorities;
 
@@ -24,9 +39,14 @@ public class User implements UserDetails {
 
     private Boolean enabled;
 
-    public User(String username, String password, String authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
-        this.username = username;
+    public User(String email, String password, String passwordConfirm, String firstName, String lastName, String deliveryAddress, String phoneNumber, String authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
+        this.email = email;
         this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.deliveryAddress = deliveryAddress;
+        this.phoneNumber = phoneNumber;
         this.authorities = authorities;
         this.accountNonExpired = accountNonExpired;
         this.accountNonLocked = accountNonLocked;
@@ -53,6 +73,10 @@ public class User implements UserDetails {
 
         return grantedAuthorities;
     }
+
+    public String getAuthoritiesString() {
+    	return authorities;
+    }
     @Override
     public boolean isEnabled() {
         return enabled;
@@ -74,11 +98,15 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -124,5 +152,45 @@ public class User implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getFirstName() {
+    	return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+    	this.firstName = firstName;
+    }
+
+    public String getLastName() {
+    	return lastName;
+    }
+
+    public void setLastName(String lastName) {
+    	this.lastName = lastName;
+    }
+
+    public String getDeliveryAddress() {
+    	return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+    	this.deliveryAddress = deliveryAddress;
+    }
+
+    public String getPhoneNumber() {
+    	return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+    	this.phoneNumber = phoneNumber;
+    }
+
+    public String getPasswordConfirm() {
+    	return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+    	this.passwordConfirm = passwordConfirm;
     }
 }

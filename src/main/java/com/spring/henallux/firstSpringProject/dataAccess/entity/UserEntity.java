@@ -3,12 +3,24 @@ package com.spring.henallux.firstSpringProject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class UserEntity {
 
     @Id
-    @Column(name="username")
-    private String username;
+    @Column(name="email")
+    private String email;
+
+    @Column(name="first_name")
+    private String firstName;
+
+    @Column(name="last_name")
+    private String lastName;
+
+    @Column(name="phone_number")
+    private String phoneNumber;
+
+    @Column(name="delivery_address")
+    private String deliveryAddress;
 
     @Column(name="password")
     private String password;
@@ -30,8 +42,24 @@ public class UserEntity {
 
     public UserEntity() {};
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
     }
 
     public String getPassword() {
@@ -58,12 +86,28 @@ public class UserEntity {
         return enabled;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 
     public void setPassword(String password) {
-        this.password= password;
+        this.password = password;
     }
 
     public void setAuthorities(String authorities) {

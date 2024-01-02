@@ -1,3 +1,14 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ include file="../include/importTags.jsp"%>
+
+<spring:url var="localeFr" value="">
+    <spring:param name="locale" value="fr" />
+</spring:url>
+
+<spring:url var="localeEn" value="">
+    <spring:param name="locale" value="en" />
+</spring:url>
+
 <header
         class="d-flex flex-nowrap align-items-center justify-content-between justify-content-md-between p-3 mb-4 border-bottom w-90">
     <a href="/"
@@ -42,14 +53,20 @@
                     langues
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Francais</a></li>
-                    <li><a class="dropdown-item" href="#">Anglais</a></li>
+                    <li><a class="dropdown-item" href="${localeFr}">Francais</a></li>
+                    <li><a class="dropdown-item" href="${localeEn}">Anglais</a></li>
                 </ul>
             </div>
         </div>
         <div class="container d-flex">
-            <a class="btn btn-outline-primary me-2" href="">S'identifé</a>
-            <a class="btn btn-outline-primary me-3" href="">S'inscrire</a>
+            <sec:authorize access="!isAuthenticated()">
+                <a class="btn btn-outline-primary me-2" href="/login"><spring:message code="login" /></a>
+                <a class="btn btn-outline-primary me-3" href="">S'inscrire</a>
+            </sec:authorize>
+
+            <sec:authorize access="isAuthenticated()">
+                <a class="btn btn-outline-primary me-2" href="<spring:url value="/logout" />">se déconnecter</a>
+            </sec:authorize>
 
             <button type="button" class="btn btn-outline-primary">Panier</button>
         </div>
