@@ -1,23 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Guru Login Form</title>
-</head>
-<body>
-<form action="login" method="post">
-    <table style="with: 50%">
-        <tr>
-            <td>UserName</td>
-            <td><input type="text" name="username" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" /></td>
-        </tr>
-    </table>
-    <input type="submit" value="Login" /></form>
-</body>
-</html>
+<section class="d-flex justify-content-center align-items-center" style="height: 70vh;">
+
+    <form>
+        <!-- Email input -->
+        <div class="form-outline mb-4 border">
+            <input type="email" id="email" class="form-control" />
+            <label class="form-label" for="email">Email address</label>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4 border">
+            <input type="password" id="password" class="form-control" />
+            <label class="form-label" for="password">Password</label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Not a member? <a href="">Register</a></p>
+        </div>
+    </form>
+</section>

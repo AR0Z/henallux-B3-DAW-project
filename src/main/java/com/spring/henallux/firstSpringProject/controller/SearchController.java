@@ -2,11 +2,14 @@ package com.spring.henallux.firstSpringProject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 @Controller
+@RequestMapping(value="/search")
 public class SearchController {
-    @GetMapping(value="/search")
+    @RequestMapping(method = RequestMethod.GET)
     public String search(){
-        return "search-result";
+        return "integrated:search-product";
     }
 }
