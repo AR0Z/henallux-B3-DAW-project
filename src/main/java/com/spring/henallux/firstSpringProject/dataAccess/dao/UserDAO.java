@@ -1,6 +1,7 @@
 package com.spring.henallux.firstSpringProject.dataAccess.dao;
 
 import com.spring.henallux.firstSpringProject.Model.User;
+import com.spring.henallux.firstSpringProject.Model.UserEdit;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.repository.UserRepository;
 import com.spring.henallux.firstSpringProject.dataAccess.util.ProviderConverter;
@@ -31,6 +32,34 @@ public class UserDAO implements UserDataAccess {
 
     public User save(User user) {
         UserEntity userEntity = providerConverter.userToUserEntity(user);
+
+        userEntity = userRepository.save(userEntity);
+
+        return providerConverter.userEntityToUser(userEntity);
+    }
+
+    public User update(UserEdit user, User oldUser) {
+        if (user.getEmail() != null) {
+            oldUser.setEmail(oldUser.getEmail());
+        }
+
+        if (user.getFirstName() != null) {
+            oldUser.setFirstName(user.getFirstName());
+        }
+
+        if (user.getLastName() != null) {
+            oldUser.setLastName(user.getLastName());
+        }
+
+        if (user.getDeliveryAddress() != null) {
+            oldUser.setDeliveryAddress(user.getDeliveryAddress());
+        }
+
+        if (user.getPhoneNumber() != null) {
+            oldUser.setPhoneNumber(user.getPhoneNumber());
+        }
+
+        UserEntity userEntity = providerConverter.userToUserEntity(oldUser);
 
         userEntity = userRepository.save(userEntity);
 

@@ -61,11 +61,12 @@
         <div class="container d-flex">
             <sec:authorize access="!isAuthenticated()">
                 <a class="btn btn-outline-primary me-2" href="/login"><spring:message code="login" /></a>
-                <a class="btn btn-outline-primary me-3" href="">S'inscrire</a>
+                <a class="btn btn-outline-primary me-3" href="/register">S'inscrire</a>
             </sec:authorize>
 
             <sec:authorize access="isAuthenticated()">
-                <a class="btn btn-outline-primary me-2" href="<spring:url value="/logout" />">se déconnecter</a>
+                <a class="btn btn-outline-primary me-2" href="/editProfile">Modifier mon compte</a>
+                <a class="btn btn-outline-primary me-2" href="/logout">se déconnecter</a>
             </sec:authorize>
 
             <button type="button" class="btn btn-outline-primary">Panier</button>

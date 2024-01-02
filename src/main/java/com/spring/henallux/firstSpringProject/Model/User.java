@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,48 +15,26 @@ public class User implements UserDetails {
 
     @Email
     private String email;
-
-    @Size(min=8, max=30)
+    @NotNull
+    @Size(max=30)
+    private String oldPassword;
+    @NotNull
+    @Size(max=30)
     private String password;
-
+    @NotNull
+    @Size(max=30)
     private String passwordConfirm;
-
     private String firstName;
-
     private String lastName;
-
     private String deliveryAddress;
-
     private String phoneNumber;
-
-
     private String authorities;
-
     private Boolean accountNonExpired;
-
     private Boolean accountNonLocked;
-
     private Boolean credentialsNonExpired;
-
     private Boolean enabled;
 
-    public User(String email, String password, String passwordConfirm, String firstName, String lastName, String deliveryAddress, String phoneNumber, String authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled) {
-        this.email = email;
-        this.password = password;
-        this.passwordConfirm = passwordConfirm;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.deliveryAddress = deliveryAddress;
-        this.phoneNumber = phoneNumber;
-        this.authorities = authorities;
-        this.accountNonExpired = accountNonExpired;
-        this.accountNonLocked = accountNonLocked;
-        this.credentialsNonExpired = credentialsNonExpired;
-        this.enabled = enabled;
-    }
-
-    public User() {
-    }
+    public User() { }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
@@ -192,5 +171,13 @@ public class User implements UserDetails {
 
     public void setPasswordConfirm(String passwordConfirm) {
     	this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getOldPassword() {
+    	return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+    	this.oldPassword = oldPassword;
     }
 }
