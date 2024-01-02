@@ -1,6 +1,8 @@
 package com.spring.henallux.firstSpringProject.dataAccess.util;
 
+import com.spring.henallux.firstSpringProject.Model.Product;
 import com.spring.henallux.firstSpringProject.Model.User;
+import com.spring.henallux.firstSpringProject.dataAccess.entity.ProductEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -44,5 +46,24 @@ public class ProviderConverter {
         userEntity.setEnabled(user.getEnabled());
 
         return userEntity;
+    }
+
+    public Product productEntityToProduct(ProductEntity productEntity) {
+        Product product = new Product();
+
+        product.setId(productEntity.getId());
+        product.setLabelEn(productEntity.getLabelEn());
+        product.setLabelFr(productEntity.getLabelFr());
+        product.setDescriptionEn(productEntity.getDescriptionEn());
+        product.setDescriptionFr(productEntity.getDescriptionFr());
+        product.setCategoryId(productEntity.getCategoryId());
+        product.setPromotionId(productEntity.getPromotionId());
+        product.setDimension(productEntity.getDimension());
+        product.setWeight(productEntity.getWeight());
+        product.setPrice(productEntity.getPrice());
+        product.setStock(productEntity.getStock());
+        product.setDateAdded(productEntity.getDateAdded());
+
+        return product;
     }
 }

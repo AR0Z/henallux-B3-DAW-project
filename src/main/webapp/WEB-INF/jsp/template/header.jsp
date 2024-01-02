@@ -69,7 +69,7 @@
                 <a class="btn btn-outline-primary me-2" href="/logout">se déconnecter</a>
             </sec:authorize>
 
-            <button type="button" class="btn btn-outline-primary">Panier</button>
+            <a class="btn btn-outline-primary" href="/cart">Panier</a>
         </div>
     </div>
 </header>
