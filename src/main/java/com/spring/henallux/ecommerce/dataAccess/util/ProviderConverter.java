@@ -96,4 +96,11 @@ public class ProviderConverter {
         return orderEntity;
     }
 
+    public OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {
+        OrderLineEntity orderLineEntity = new OrderLineEntity();
+        orderLineEntity.setQuantity(orderLine.getQuantity());
+        orderLineEntity.setPrice(orderLine.getPrice());
+        return orderLineEntity;
+    }
+
 }
