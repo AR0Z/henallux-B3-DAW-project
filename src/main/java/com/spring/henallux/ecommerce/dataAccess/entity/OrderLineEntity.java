@@ -5,7 +5,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "orders_lines")
-public class LineEntity {
+public class OrderLineEntity {
     @Id
     @Column(name = "line_id")
     private Integer id;

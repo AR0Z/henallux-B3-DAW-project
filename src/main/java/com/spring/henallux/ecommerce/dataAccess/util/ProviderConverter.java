@@ -1,13 +1,7 @@
 package com.spring.henallux.ecommerce.dataAccess.util;
 
-import com.spring.henallux.ecommerce.Model.Category;
-import com.spring.henallux.ecommerce.Model.Product;
-import com.spring.henallux.ecommerce.Model.Promotion;
-import com.spring.henallux.ecommerce.Model.User;
-import com.spring.henallux.ecommerce.dataAccess.entity.CategoryEntity;
-import com.spring.henallux.ecommerce.dataAccess.entity.ProductEntity;
-import com.spring.henallux.ecommerce.dataAccess.entity.PromotionEntity;
-import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
+import com.spring.henallux.ecommerce.Model.*;
+import com.spring.henallux.ecommerce.dataAccess.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -93,6 +87,28 @@ public class ProviderConverter {
         promotion.setPercentage(promotionEntity.getPercentage());
         promotion.setType(promotionEntity.getType());
         return promotion;
+    }
+
+    private OrderEntity orderToOrderEntity(Order order) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setUserId(order.getUserId());
+        orderEntity.setDate(order.getDate());
+        orderEntity.setTotalPrice(order.getTotalPrice());
+        orderEntity.setTotalPriceWithShippingCost(order.getTotalPriceWithShippingCost());
+        orderEntity.setShippingCost(order.getShippingCost());
+        orderEntity.setOrderLines(order.getOrderLines());
+        orderEntity.setOrderStatus(order.getOrderStatus());
+        orderEntity.setDeliveryAddress(order.getDeliveryAddress());
+        return orderEntity;
+    }
+
+    private OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {
+        OrderLineEntity orderLineEntity = new OrderLineEntity();
+        orderLineEntity.setOrderId(orderLine.getOrderId());
+        orderLineEntity.setProductId(orderLine.getProductId());
+        orderLineEntity.setQuantity(orderLine.getQuantity());
+        orderLineEntity.setPrice(orderLine.getPrice());
+        return orderLineEntity;
     }
 
 
