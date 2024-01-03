@@ -12,13 +12,14 @@ import java.util.Collections;
 
 @Configuration
 public class PayPalConfig {
+
     @Value("${paypal.clientId}")
     private String clientId;
 
     @Value("${paypal.secret}")
     private String secret;
 
-    @Value("${paypal.baseUrl}")
+    @Value("${paypal.base-url}")
     private String baseUrl;
 
     @Bean
@@ -30,41 +31,46 @@ public class PayPalConfig {
         String apiUrl = baseUrl + endpoint;
 
         if (headers == null) {
-            headers = new HttpHeaders();
+            headers = createHeaders();
         }
-
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBasicAuth(clientId, secret);
 
         return restTemplate().exchange(apiUrl, method, entity, String.class);
     }
 
     public String getAccessToken() {
         String apiUrl = "/v1/oauth2/token";
-        HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = createHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "client_credentials");
 
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+        ResponseEntity<String> response = makePayPalApiCall(apiUrl, HttpMethod.POST, headers, new HttpEntity<>(body, headers));
 
-        // Utiliser cette ligne pour passer les paramètres corrects à makePayPalApiCall
-        ResponseEntity<String> response = makePayPalApiCall(apiUrl, HttpMethod.POST, null, entity);
-
-
-        // Analyser la réponse pour extraire le jeton d'accès
         if (response.getStatusCode().is2xxSuccessful()) {
-            // Exemple simplifié - Vous devrez peut-être utiliser une bibliothèque JSON pour analyser la réponse de manière plus robuste
-            return response.getBody().split("\"access_token\":\"")[1].split("\"")[0];
+            String responseBody = response.getBody();
+            return extractAccessToken(responseBody);
         } else {
-            // Gestion des erreurs, si nécessaire
-            System.out.println("Erreur lors de la récupération du jeton d'accès PayPal. Code de statut : " + response.getStatusCode());
+            handleAccessTokenError(response);
             return null;
         }
     }
 
+    private HttpHeaders createHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBasicAuth(clientId, secret);
+        return headers;
+    }
 
+    private String extractAccessToken(String responseBody) {
+        return responseBody.split("\"access_token\":\"")[1].split("\"")[0];
+    }
 
+    private void handleAccessTokenError(ResponseEntity<String> response) {
+        // Gestion des erreurs, si nécessaire
+        System.out.println("Erreur lors de la récupération du jeton d'accès PayPal. Code de statut : " + response.getStatusCode());
+        // Autres actions de gestion des erreurs...
+    }
 }

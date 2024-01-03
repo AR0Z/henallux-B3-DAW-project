@@ -103,9 +103,4 @@ public class cartController {
         return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String cartPost(){
-        System.out.println("cartPost");
-        return "redirect:/";
-    }
 }

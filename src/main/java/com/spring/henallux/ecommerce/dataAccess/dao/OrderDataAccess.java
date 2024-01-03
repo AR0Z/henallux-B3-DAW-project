@@ -6,5 +6,6 @@ import com.spring.henallux.ecommerce.dataAccess.entity.OrderEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 
 public interface OrderDataAccess {
-    OrderEntity save(Order order, UserEntity userEntity);
+    OrderEntity save(Order order);
+    Order findById(Integer id);
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Cart {
     private HashMap<Integer, CartLine> cartLines; // Utilisation explicite de HashMap
+    private int orderId;
 
     public Cart() {
         cartLines = new HashMap<>();
@@ -32,7 +33,7 @@ public class Cart {
         cartLines.remove(cartLine.getProduct().getId());
     }
 
-    public void clearCart() {
+    public void clear() {
         cartLines.clear();
     }
 
@@ -86,5 +87,13 @@ public class Cart {
         }
 
         return orderLines;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getOrderId() {
+        return orderId;
     }
 }

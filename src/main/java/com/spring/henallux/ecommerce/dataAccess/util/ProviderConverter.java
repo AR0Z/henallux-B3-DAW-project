@@ -84,4 +84,8 @@ public class ProviderConverter {
         return orderLineEntity;
     }
 
+    public Order orderEntityToOrder(OrderEntity orderEntity) {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        return mapper.map(orderEntity, Order.class);
+    }
 }

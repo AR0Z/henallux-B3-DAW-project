@@ -22,14 +22,17 @@ public class OrderDAO implements OrderDataAccess {
         this.providerConverter = providerConverter;
     }
 
-    public OrderEntity save(Order order, UserEntity userEntity) {
+    public OrderEntity save(Order order) {
         OrderEntity orderEntity = providerConverter.orderToOrderEntity(order);
-
-        orderEntity.setUserId(userEntity);
 
         orderEntity = orderRepository.save(orderEntity);
 
         return orderEntity;
+    }
+
+    public Order findById(Integer id) {
+        OrderEntity orderEntity = orderRepository.findById(id);
+        return providerConverter.orderEntityToOrder(orderEntity);
     }
 
 }

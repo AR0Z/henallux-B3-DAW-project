@@ -29,6 +29,10 @@ public class OrderLine {
         return order;
     }
 
+    public double getTotalPrice() {
+        return quantity * price;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

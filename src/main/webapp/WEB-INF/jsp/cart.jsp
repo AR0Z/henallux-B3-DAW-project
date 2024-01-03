@@ -124,11 +124,7 @@
                                         <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()}€</p>
                                     </div>
 
-                                    <button type="button" class="btn btn-primary btn-block btn-lg">
-                                        <span class="d-flex justify-content-between">
-                                            <span>Checkout</span>
-                                        </span>
-                                    </button>
+                                    <div id="paypal-button-container"></div>
 
                                 </div>
                             </div>
@@ -140,7 +136,7 @@
             </div>
         </div>
     </section>
-
+<script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR"></script>
 <script>
     const quantityInputs = document.getElementsByClassName("editQuantity");
 
@@ -219,4 +215,67 @@
             quantityInput.dispatchEvent(new Event("input"));
         });
     }
+
+    const sumbitCart = document.getElementById("sumbitCart");
+
+    window.paypal.Buttons({
+        async createOrder() {
+            try {
+                const response = await fetch("/payment/paypal", {
+                    method: "POST",
+                    credentials: 'include'
+                });
+
+                // Vérifiez si la réponse a un statut OK (200)
+                if (response.ok) {
+                    const orderData = await response.json();
+
+                    if (orderData.id) {
+                        // Si l'ID de la commande est présent, retournez-le
+                        return orderData.id;
+                    } else {
+                        // Sinon, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
+                        throw new Error("Invalid response from server. Missing order ID.");
+                    }
+                } else {
+                    // Si la réponse n'est pas OK, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
+                    throw new Error("Server returned an error: " + response.status);
+                }
+            } catch (error) {
+                // Gérez l'erreur ici, vous pouvez la journaliser ou prendre d'autres mesures
+                console.error("Error creating order:", error);
+                return false; // Retournez une valeur indiquant une erreur
+            }
+        },
+        async onApprove(data, actions) {
+            const reponse = await fetch("/payment/paypal/capture/" + data.orderID, {
+                method: "POST",
+                credentials: 'include'
+            });
+
+            const captureData = await reponse.json();
+
+            if(captureData.status) {
+                window.location.href = "/payment/success";
+            } else {
+                window.location.href = "/payment/error";
+            }
+
+        },
+        async onCancel(data, actions) {
+            const reponse = await fetch("/payment/paypal/cancel/", {
+                method: "POST",
+                credentials: 'include'
+            });
+
+            const cancelData = await reponse.json();
+
+            if(cancelData.status) {
+                window.location.href = "/payment/cancel";
+            } else {
+                window.location.href = "/payment/error";
+            }
+
+        },
+    }).render("#paypal-button-container");
 </script>

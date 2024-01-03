@@ -26,48 +26,54 @@ public class PaypalService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(payPalConfig.getAccessToken());
+        String accessToken = payPalConfig.getAccessToken();
+        headers.setBearerAuth(accessToken);
 
         // Construire le corps de la requête pour créer un paiement avec les articles de la commande
         String requestBody = buildRequestBody(order);
 
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
 
-        return payPalConfig.makePayPalApiCall(apiUrl, HttpMethod.POST, null, entity);
+        return payPalConfig.makePayPalApiCall(apiUrl, HttpMethod.POST, headers, entity);
+    }
+
+    public ResponseEntity<String> capturePayment(String orderId) {
+        String apiUrl = "/v2/checkout/orders/" + orderId + "/capture";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String accessToken = payPalConfig.getAccessToken();
+        headers.setBearerAuth(accessToken);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return payPalConfig.makePayPalApiCall(apiUrl, HttpMethod.POST, headers, entity);
     }
 
     private String buildRequestBody(Order order) {
-        // Construire dynamiquement le corps de la requête en fonction des articles de la commande
-        // Adapté en fonction de la structure exacte de votre modèle Order
+        StringBuilder json = new StringBuilder(
+                        "{"
+                        + "\"intent\": \"CAPTURE\","
+                        + "\"purchase_units\": ["
+                        + "{"
+                        + "\"amount\": {"
+                        + "\"currency_code\": \"EUR\","
+                        + "\"value\": " + order.getTotalPriceWithShippingCost()
+                        + "}"
+                        + "}"
+                        + "],"
+                        + "\"payment_source\": {"
+                        + "\"paypal\": {"
+                        + "\"experience_context\": {"
+                        + "\"payment_method_preference\": \"IMMEDIATE_PAYMENT_REQUIRED\","
+                        + "\"brand_name\": \"Furniture paradise\","
+                        + "\"landing_page\": \"LOGIN\","
+                        + "\"user_action\": \"PAY_NOW\""
+                        + "}"
+                        + "}"
+                        + "}"
+                        + "}");
 
-        StringBuilder itemsJson = new StringBuilder();
-        for (Map.Entry<Integer, OrderLine> entry : order.getOrderLines().entrySet()) {
-            OrderLine orderLine = entry.getValue();
-            itemsJson.append("{"
-                    + "\"name\": \"" + orderLine.getProduct().getLabelEn() + "\","
-                    + "\"description\": \"" + orderLine.getProduct().getDescriptionEn() + "\","
-                    + "\"unit_amount\": {"
-                    + "\"currency_code\": \"EUR\","
-                    + "\"value\": \"" + orderLine.getPrice() + "\""
-                    + "},"
-                    + "\"quantity\": \"" + orderLine.getQuantity() + "\""
-                    + "},");
-        }
-
-        // Supprimer la virgule à la fin de la liste des articles
-        itemsJson.deleteCharAt(itemsJson.length() - 1);
-
-        return "{"
-                + "\"intent\": \"CAPTURE\","
-                + "\"purchase_units\": ["
-                + "{"
-                + "\"amount\": {"
-                + "\"currency_code\": \"USD\","
-                + "\"value\": \"" + order.getTotalPrice() + "\""
-                + "},"
-                + "\"items\": [" + itemsJson.toString() + "]"
-                + "}"
-                + "]"
-                + "}";
+        return json.toString();
     }
 }
