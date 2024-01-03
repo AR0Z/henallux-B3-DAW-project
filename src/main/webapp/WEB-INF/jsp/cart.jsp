@@ -26,16 +26,14 @@
                                        </th>
                                        <td class="align-middle">
                                            <div class="d-flex flex-row">
-                                               <button class="btn btn-link px-2"
-                                                       onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                               <button class="btn btn-link px-2">
                                                    <i class="fas fa-minus"></i>
                                                </button>
 
-                                               <input min="0" name="quantity" value="${cartLine.quantity}" type="number"
-                                                      class="form-control form-control-sm" style="width: 50px;" />
+                                               <input min="0" name="quantity" data-product-id="${cartLine.product.id}" value="${cartLine.quantity}" type="number"
+                                                      class="form-control form-control-sm editQuantity" style="width: 50px;" />
 
-                                               <button class="btn btn-link px-2"
-                                                       onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                               <button class="btn btn-link px-2">
                                                    <i class="fas fa-plus"></i>
                                                </button>
                                            </div>
@@ -108,7 +106,7 @@
                                 <div class="col-lg-4 col-xl-3">
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                                         <p class="mb-2">Subtotal</p>
-                                        <p class="mb-2">${cart.getTotalPrice()}</p>
+                                        <p class="mb-2" id="totalPrice">${cart.getTotalPrice()}</p>
                                     </div>
 
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
@@ -120,7 +118,7 @@
 
                                     <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
                                         <p class="mb-2">Total (tax included)</p>
-                                        <p class="mb-2">${cart.getTotalPriceWithShippingCost()}€</p>
+                                        <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()}€</p>
                                     </div>
 
                                     <button type="button" class="btn btn-primary btn-block btn-lg">
@@ -139,3 +137,79 @@
             </div>
         </div>
     </section>
+
+<script>
+    const quantityInputs = document.getElementsByClassName("editQuantity");
+
+    for (let quantityInput of quantityInputs) {
+        quantityInput.addEventListener("input", function () {
+            const productId = quantityInput.dataset.productId; // Obtenez l'ID du produit depuis l'attribut data
+            let quantity = quantityInput.value;
+
+            const apiUrl = "/cart/editQuantity";
+            const data = new URLSearchParams();
+            data.append("productId", productId);
+
+            if (quantity !== "") {
+                if (quantity <= 0) {
+                    quantityInput.value = 0;
+                    quantity = 0;
+                }
+
+                if (quantity === 0) {
+                    console.log("test")
+                    console.log(quantityInput.parentNode.parentNode.parentNode)
+                    quantityInput.parentNode.parentNode.parentNode.remove();
+                }
+
+                data.append("quantity", quantity);
+
+                if(quantity >= 0)
+                    fetch(apiUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: data,
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Logique à exécuter après la réception de la réponse
+                        console.log(data);
+
+                        // Mettez à jour le prix ou toute autre logique nécessaire ici
+                        const totalPriceElement = document.getElementById("totalPrice");
+                        const totalPriceWithShippingCostElement = document.getElementById("totalPriceWithShippingCost");
+
+                        // Utilisez les propriétés déstructurées
+                        const { totalPrice, totalPriceWithShippingCost } = data;
+
+                        totalPriceElement.innerText = totalPrice;
+                        totalPriceWithShippingCostElement.innerText = totalPriceWithShippingCost;
+                    })
+                    .catch(error => {
+                        console.error("Fetch error:", error);
+                    });
+                }
+        });
+
+        // Ajoutez ces lignes pour gérer le bouton de plus
+        const increaseButton = quantityInput.nextElementSibling;
+        increaseButton.addEventListener("click", function () {
+            quantityInput.stepUp();
+            quantityInput.dispatchEvent(new Event("input"));
+        });
+
+        // Ajoutez ces lignes pour gérer le bouton de moins
+        const decreaseButton = quantityInput.previousElementSibling;
+        decreaseButton.addEventListener("click", function () {
+            quantityInput.stepDown();
+            quantityInput.dispatchEvent(new Event("input"));
+        });
+    }
+</script>

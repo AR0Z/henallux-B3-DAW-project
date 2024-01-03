@@ -2,6 +2,7 @@ package com.spring.henallux.firstSpringProject.Model;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Cart {
     private ArrayList<CartLine> cartLines;
@@ -12,6 +13,24 @@ public class Cart {
 
     public ArrayList<CartLine> getCartLines() {
         return cartLines;
+    }
+
+    public void editQuantity(int productId, int quantity) {
+        for (CartLine cartLine : cartLines) {
+            if (cartLine.getProduct().getId() == productId) {
+                cartLine.setQuantity(quantity);
+            }
+        }
+    }
+
+    public void removeProduct(int productId) {
+        Iterator<CartLine> iterator = cartLines.iterator();
+        while (iterator.hasNext()) {
+            CartLine cartLine = iterator.next();
+            if (cartLine.getProduct().getId() == productId) {
+                iterator.remove();
+            }
+        }
     }
 
     public void addCartLine(CartLine cartLine) {

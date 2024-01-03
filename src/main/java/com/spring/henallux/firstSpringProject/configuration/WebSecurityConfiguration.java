@@ -20,6 +20,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/",
             "/register",
             "/cart",
+            "/cart/**",
             "/product/**",
             "/search",
             "/terms",
