@@ -16,6 +16,7 @@ import java.util.List;
 public class ProductEntity {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="product_id")
     private Integer id;
 

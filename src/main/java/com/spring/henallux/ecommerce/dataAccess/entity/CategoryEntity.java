@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class CategoryEntity {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "category_id")
     private Integer id;
     @Column(name = "label_fr")

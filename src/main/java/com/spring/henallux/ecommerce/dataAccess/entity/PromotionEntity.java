@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "promotions")
@@ -18,6 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class PromotionEntity {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "promotion_id")
     private Integer id;
     @Column(name = "label_fr")
