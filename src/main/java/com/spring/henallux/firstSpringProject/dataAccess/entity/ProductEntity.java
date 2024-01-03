@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
-@Table(name="product")
+@Table(name="products")
 @Getter
 @Setter
 @NoArgsConstructor

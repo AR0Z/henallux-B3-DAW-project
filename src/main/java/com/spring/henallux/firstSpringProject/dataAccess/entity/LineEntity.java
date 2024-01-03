@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
-@Table(name = "line")
+@Table(name = "irders_lines")
 public class LineEntity {
     @Id
     @Column(name = "id")

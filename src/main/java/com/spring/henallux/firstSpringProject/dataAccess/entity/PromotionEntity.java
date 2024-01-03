@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "promotion")
+@Table(name = "promotions")
 @Getter
 @Setter
 @NoArgsConstructor
