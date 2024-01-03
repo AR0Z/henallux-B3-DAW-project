@@ -1,10 +1,10 @@
-package com.spring.henallux.firstSpringProject.dataAccess.dao;
+package com.spring.henallux.ecommerce.dataAccess.dao;
 
-import com.spring.henallux.firstSpringProject.Model.User;
-import com.spring.henallux.firstSpringProject.Model.UserEdit;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.repository.UserRepository;
-import com.spring.henallux.firstSpringProject.dataAccess.util.ProviderConverter;
+import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.Model.UserEdit;
+import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
+import com.spring.henallux.ecommerce.dataAccess.repository.UserRepository;
+import com.spring.henallux.ecommerce.dataAccess.util.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

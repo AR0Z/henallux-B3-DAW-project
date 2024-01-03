@@ -1,7 +1,7 @@
-package com.spring.henallux.firstSpringProject.service;
+package com.spring.henallux.ecommerce.service;
 
-import com.spring.henallux.firstSpringProject.Model.User;
-import com.spring.henallux.firstSpringProject.dataAccess.dao.UserDataAccess;
+import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject.configuration;
+package com.spring.henallux.ecommerce.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

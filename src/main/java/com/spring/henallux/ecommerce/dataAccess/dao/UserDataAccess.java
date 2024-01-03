@@ -1,7 +1,7 @@
-package com.spring.henallux.firstSpringProject.dataAccess.dao;
+package com.spring.henallux.ecommerce.dataAccess.dao;
 
-import com.spring.henallux.firstSpringProject.Model.User;
-import com.spring.henallux.firstSpringProject.Model.UserEdit;
+import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.Model.UserEdit;
 
 public interface UserDataAccess {
     User findByEmail(String username);

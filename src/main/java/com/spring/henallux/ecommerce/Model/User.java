@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject.Model;
+package com.spring.henallux.ecommerce.Model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,13 +1,11 @@
-package com.spring.henallux.firstSpringProject.dataAccess.entity;
+package com.spring.henallux.ecommerce.dataAccess.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @Entity
 @Table(name="products")

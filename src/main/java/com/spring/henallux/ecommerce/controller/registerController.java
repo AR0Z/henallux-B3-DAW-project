@@ -1,13 +1,12 @@
-package com.spring.henallux.firstSpringProject.controller;
+package com.spring.henallux.ecommerce.controller;
 
-import com.spring.henallux.firstSpringProject.Model.User;
-import com.spring.henallux.firstSpringProject.dataAccess.dao.UserDataAccess;
+import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

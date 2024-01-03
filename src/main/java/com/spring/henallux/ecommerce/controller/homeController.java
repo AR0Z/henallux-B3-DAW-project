@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject.controller;
+package com.spring.henallux.ecommerce.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

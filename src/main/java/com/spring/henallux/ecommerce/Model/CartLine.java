@@ -1,6 +1,4 @@
-package com.spring.henallux.firstSpringProject.Model;
-
-import java.text.DecimalFormat;
+package com.spring.henallux.ecommerce.Model;
 
 public class CartLine {
     private Product product;

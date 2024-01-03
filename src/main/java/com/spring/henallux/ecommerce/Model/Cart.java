@@ -1,8 +1,6 @@
-package com.spring.henallux.firstSpringProject.Model;
+package com.spring.henallux.ecommerce.Model;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Cart {
     private HashMap<Integer, CartLine> cartLines; // Utilisation explicite de HashMap

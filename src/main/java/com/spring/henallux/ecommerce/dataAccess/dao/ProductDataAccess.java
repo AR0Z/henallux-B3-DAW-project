@@ -1,6 +1,6 @@
-package com.spring.henallux.firstSpringProject.dataAccess.dao;
+package com.spring.henallux.ecommerce.dataAccess.dao;
 
-import com.spring.henallux.firstSpringProject.Model.Product;
+import com.spring.henallux.ecommerce.Model.Product;
 
 public interface ProductDataAccess {
     Product findByLabelEnAndId(String labelEn, Integer id);

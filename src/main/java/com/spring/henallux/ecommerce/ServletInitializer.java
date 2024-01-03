@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject;
+package com.spring.henallux.ecommerce;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

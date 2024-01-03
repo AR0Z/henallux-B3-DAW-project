@@ -1,18 +1,14 @@
-package com.spring.henallux.firstSpringProject.dataAccess.util;
+package com.spring.henallux.ecommerce.dataAccess.util;
 
-import com.spring.henallux.firstSpringProject.Model.Category;
-import com.spring.henallux.firstSpringProject.Model.Product;
-import com.spring.henallux.firstSpringProject.Model.Promotion;
-import com.spring.henallux.firstSpringProject.Model.User;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.CategoryEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.ProductEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.PromotionEntity;
-import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
+import com.spring.henallux.ecommerce.Model.Category;
+import com.spring.henallux.ecommerce.Model.Product;
+import com.spring.henallux.ecommerce.Model.Promotion;
+import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.dataAccess.entity.CategoryEntity;
+import com.spring.henallux.ecommerce.dataAccess.entity.ProductEntity;
+import com.spring.henallux.ecommerce.dataAccess.entity.PromotionEntity;
+import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class ProviderConverter {

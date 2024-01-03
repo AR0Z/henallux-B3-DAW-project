@@ -1,11 +1,9 @@
-package com.spring.henallux.firstSpringProject.Model;
+package com.spring.henallux.ecommerce.Model;
 
-import com.spring.henallux.firstSpringProject.dataAccess.entity.PromotionEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Locale;
 

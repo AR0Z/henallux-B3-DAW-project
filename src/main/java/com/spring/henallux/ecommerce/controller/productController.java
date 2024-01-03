@@ -1,17 +1,13 @@
-package com.spring.henallux.firstSpringProject.controller;
+package com.spring.henallux.ecommerce.controller;
 
-import com.spring.henallux.firstSpringProject.Model.Cart;
-import com.spring.henallux.firstSpringProject.Model.CartLine;
-import com.spring.henallux.firstSpringProject.Model.Product;
-import com.spring.henallux.firstSpringProject.dataAccess.dao.ProductDataAccess;
+import com.spring.henallux.ecommerce.Model.CartLine;
+import com.spring.henallux.ecommerce.Model.Product;
+import com.spring.henallux.ecommerce.dataAccess.dao.ProductDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.spring.henallux.firstSpringProject.service.Constants;
 
-import java.util.HashMap;
 import java.util.Locale;
 
 @Controller

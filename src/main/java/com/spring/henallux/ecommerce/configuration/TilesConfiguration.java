@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject.configuration;
+package com.spring.henallux.ecommerce.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

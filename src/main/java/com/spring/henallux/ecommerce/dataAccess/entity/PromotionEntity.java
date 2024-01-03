@@ -1,4 +1,4 @@
-package com.spring.henallux.firstSpringProject.dataAccess.entity;
+package com.spring.henallux.ecommerce.dataAccess.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
