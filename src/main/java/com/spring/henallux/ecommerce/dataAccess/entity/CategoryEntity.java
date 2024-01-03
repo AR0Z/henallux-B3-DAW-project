@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class CategoryEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Integer id;
     @Column(name = "label_fr")
