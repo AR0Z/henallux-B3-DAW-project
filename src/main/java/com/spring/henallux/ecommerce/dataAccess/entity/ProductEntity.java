@@ -31,9 +31,9 @@ public class ProductEntity {
     @Column(name="description_fr")
     private String descriptionFr;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name="product_id")
-    private List<CategoryEntity> categoryId;
+    private CategoryEntity categoryId;
 
     @OneToOne
     @JoinColumn(name="promotion_id")

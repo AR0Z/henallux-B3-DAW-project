@@ -22,7 +22,6 @@ public class OrderEntity {
     private String paypalOrderId;
     @Column(name = "order_status")
     private String orderStatus;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity userId;

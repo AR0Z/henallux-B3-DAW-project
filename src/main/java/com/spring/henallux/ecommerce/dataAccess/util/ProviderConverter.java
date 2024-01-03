@@ -2,6 +2,7 @@ package com.spring.henallux.ecommerce.dataAccess.util;
 
 import com.spring.henallux.ecommerce.Model.*;
 import com.spring.henallux.ecommerce.dataAccess.entity.*;
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -47,26 +48,22 @@ public class ProviderConverter {
     }
 
     public Product productEntityToProduct(ProductEntity productEntity) {
-        Product product = new Product();
+//        Product product = new Product();
 
-        product.setId(productEntity.getId());
-        product.setLabelEn(productEntity.getLabelEn());
-        product.setLabelFr(productEntity.getLabelFr());
-        product.setDescriptionEn(productEntity.getDescriptionEn());
-        product.setDescriptionFr(productEntity.getDescriptionFr());
-        List<Category> categories = productEntity.getCategoryId()
-                .stream()
-                .map(categoryId -> getCategoryByCategoryEntity(categoryId)) // Replace getCategoryById with your logic
-                .toList();
-        product.setCategory(categories);
-        product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
-        product.setDimension(productEntity.getDimension());
-        product.setWeight(productEntity.getWeight());
-        product.setPrice(productEntity.getPrice());
-        product.setStock(productEntity.getStock());
-        product.setDateAdded(productEntity.getDateAdded());
-
-        return product;
+//        product.setId(productEntity.getId());
+//        product.setLabelEn(productEntity.getLabelEn());
+//        product.setLabelFr(productEntity.getLabelFr());
+//        product.setDescriptionEn(productEntity.getDescriptionEn());
+//        product.setDescriptionFr(productEntity.getDescriptionFr());
+//        product.setCategory(productEntity.getCategoryId());
+//        product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
+//        product.setDimension(productEntity.getDimension());
+//        product.setWeight(productEntity.getWeight());
+//        product.setPrice(productEntity.getPrice());
+//        product.setStock(productEntity.getStock());
+//        product.setDateAdded(productEntity.getDateAdded());
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        return mapper.map(productEntity, Product.class);
     }
 
     private Category getCategoryByCategoryEntity(CategoryEntity categoryEntity) {
@@ -90,10 +87,8 @@ public class ProviderConverter {
     }
 
     public OrderEntity orderToOrderEntity(Order order) {
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setDate(order.getDate());
-        orderEntity.setOrderStatus(order.getOrderStatus());
-        return orderEntity;
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        return mapper.map(order, OrderEntity.class);
     }
 
     public OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {

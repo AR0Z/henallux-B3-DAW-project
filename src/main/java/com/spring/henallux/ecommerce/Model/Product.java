@@ -17,7 +17,7 @@ public class Product {
     private String labelFr;
     private String descriptionEn;
     private String descriptionFr;
-    private List<Category> category;
+    private Category category;
     private Promotion promotion;
     private String dimension;
     private Double weight;

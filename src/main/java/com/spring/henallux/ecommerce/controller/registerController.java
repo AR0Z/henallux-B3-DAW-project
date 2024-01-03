@@ -32,7 +32,6 @@ public class registerController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerSubmit(Model model, @Valid @ModelAttribute(value="user") User user, final BindingResult errors) {
-
         //check error
         if(errors.hasErrors()){
             model.addAttribute("user", user);
@@ -47,12 +46,15 @@ public class registerController {
         }
 
 
+
         //check if user already exist
         if(userDAO.findByEmail(user.getEmail()) != null){
             model.addAttribute("user", user);
             model.addAttribute("error", "User already exist");
             return "integrated:register";
         }
+
+
 
         //crypt password
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -65,7 +67,6 @@ public class registerController {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-
         //save to db
         userDAO.save(user);
 
