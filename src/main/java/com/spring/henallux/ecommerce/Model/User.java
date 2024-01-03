@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public class User implements UserDetails {
 
-    private int id;
+    private Integer id;
     @Email
     private String email;
     @NotNull
@@ -186,11 +186,11 @@ public class User implements UserDetails {
     	this.oldPassword = oldPassword;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
