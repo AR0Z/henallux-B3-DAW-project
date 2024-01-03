@@ -163,23 +163,7 @@ public class User implements UserDetails {
     public void setPhoneNumber(String phoneNumber) {
     	this.phoneNumber = phoneNumber;
     }
-
-    public String getPasswordConfirm() {
-    	return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-    	this.passwordConfirm = passwordConfirm;
-    }
-
-    public String getOldPassword() {
-    	return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-    	this.oldPassword = oldPassword;
-    }
-
+    
     public Integer getId() {
         return id;
     }
