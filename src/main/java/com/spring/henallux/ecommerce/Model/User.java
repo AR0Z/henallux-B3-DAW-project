@@ -1,6 +1,7 @@
 package com.spring.henallux.ecommerce.Model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class User implements UserDetails {
 
     private Integer id;
@@ -33,9 +35,6 @@ public class User implements UserDetails {
     private Boolean accountNonLocked;
     private Boolean credentialsNonExpired;
     private Boolean enabled;
-
-    public User() { }
-
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

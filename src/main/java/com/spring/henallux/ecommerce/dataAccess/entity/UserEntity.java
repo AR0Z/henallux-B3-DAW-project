@@ -19,8 +19,7 @@ public class UserEntity {
     @Column(name="user_id")
     private Integer id;
 
-    @Column(name="email")
-    @UniqueElements
+    @Column(name="email", unique=true)
     private String email;
 
     @Column(name="first_name")

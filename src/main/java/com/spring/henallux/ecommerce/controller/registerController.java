@@ -33,11 +33,12 @@ public class registerController {
     @RequestMapping(method = RequestMethod.POST)
     public String registerSubmit(Model model, @Valid @ModelAttribute(value="user") User user, final BindingResult errors) {
         //check error
+        System.out.println("error");
         if(errors.hasErrors()){
             model.addAttribute("user", user);
             return "integrated:register";
         }
-
+        System.out.println("password");
         //check match password
         if(!user.getPassword().equals(user.getPasswordConfirm())){
             model.addAttribute("user", user);
