@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order")
 @Data
 public class OrderEntity {
     @Id
@@ -17,8 +17,7 @@ public class OrderEntity {
     private String paypalOrderId;
     @Column(name = "order_status")
     private String orderStatus;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "user_email"))
-    private UserEntity userEmail;
+    @Column(name = "user_id")
+    private Integer userId;
 
 }

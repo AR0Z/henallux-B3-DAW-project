@@ -11,15 +11,11 @@ public class LineEntity {
     private Integer id;
     @Column(name = "quantity")
     private Integer quantity;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "product_id"))
-    private ProductEntity productId;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "order_id"))
-    private OrderEntity orderId;
+    @Column(name = "product_id")
+    private Integer productId;
+    @Column(name = "order_id")
+    private Integer orderId;
     @Column(name = "price")
     @Min(0)
     private Double price;
-
-
 }

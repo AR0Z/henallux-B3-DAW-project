@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import java.util.List;
 
 @Entity
-@Table(name="products")
+@Table(name="product")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,12 +32,11 @@ public class ProductEntity {
     @Column(name="description_fr")
     private String descriptionFr;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private List<CategoryEntity> categoryId;
+    @Column(name="category_id")
+    private Integer categoryId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "promotion_id"))
-    private PromotionEntity promotionId;
+    @Column(name = "promotion_id")
+    private Integer promotionId;
 
     @Column(name="dimension")
     private String dimension;

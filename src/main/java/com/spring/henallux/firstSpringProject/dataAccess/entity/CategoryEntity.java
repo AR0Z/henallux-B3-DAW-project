@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class CategoryEntity {
     @Id
+    @Column(name = "id")
     private Integer id;
     @Column(name = "label_fr")
     private String labelFr;
