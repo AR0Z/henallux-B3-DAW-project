@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
 @Setter
 public class OrderLineEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "line_id")
     private Integer id;
     @Column(name = "quantity")

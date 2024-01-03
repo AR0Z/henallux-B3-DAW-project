@@ -48,20 +48,6 @@ public class ProviderConverter {
     }
 
     public Product productEntityToProduct(ProductEntity productEntity) {
-//        Product product = new Product();
-
-//        product.setId(productEntity.getId());
-//        product.setLabelEn(productEntity.getLabelEn());
-//        product.setLabelFr(productEntity.getLabelFr());
-//        product.setDescriptionEn(productEntity.getDescriptionEn());
-//        product.setDescriptionFr(productEntity.getDescriptionFr());
-//        product.setCategory(productEntity.getCategoryId());
-//        product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
-//        product.setDimension(productEntity.getDimension());
-//        product.setWeight(productEntity.getWeight());
-//        product.setPrice(productEntity.getPrice());
-//        product.setStock(productEntity.getStock());
-//        product.setDateAdded(productEntity.getDateAdded());
         DozerBeanMapper mapper = new DozerBeanMapper();
         return mapper.map(productEntity, Product.class);
     }

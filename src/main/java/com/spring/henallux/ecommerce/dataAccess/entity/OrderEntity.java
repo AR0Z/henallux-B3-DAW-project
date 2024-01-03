@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 public class OrderEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Integer id;
     @Column(name ="date")
