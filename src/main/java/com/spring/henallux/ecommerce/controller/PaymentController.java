@@ -52,6 +52,8 @@ public class PaymentController {
 
         // save order lines in database
         orderLineDAO.save(cart.toOrderLines(), orderEntity);
+
+        return "redirect:/cart";
     }
 
 

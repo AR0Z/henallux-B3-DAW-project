@@ -35,7 +35,10 @@ public class OrderLineDAO implements OrderLineDataAccess {
 
             OrderLineEntity orderLineEntity = providerConverter.orderLineToOrderLineEntity(orderline);
 
+            orderLineEntity.setOrderId(orderEntity);
+            orderLineEntity.setProductId(productEntity);
 
+            orderLineRepository.save(orderLineEntity);
         }
     }
 }
