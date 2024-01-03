@@ -1,12 +1,18 @@
 package com.spring.henallux.firstSpringProject.dataAccess.util;
 
+import com.spring.henallux.firstSpringProject.Model.Category;
 import com.spring.henallux.firstSpringProject.Model.Product;
+import com.spring.henallux.firstSpringProject.Model.Promotion;
 import com.spring.henallux.firstSpringProject.Model.User;
+import com.spring.henallux.firstSpringProject.dataAccess.entity.CategoryEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.ProductEntity;
+import com.spring.henallux.firstSpringProject.dataAccess.entity.PromotionEntity;
 import com.spring.henallux.firstSpringProject.dataAccess.entity.UserEntity;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ProviderConverter {
@@ -56,8 +62,12 @@ public class ProviderConverter {
         product.setLabelFr(productEntity.getLabelFr());
         product.setDescriptionEn(productEntity.getDescriptionEn());
         product.setDescriptionFr(productEntity.getDescriptionFr());
-        product.setCategoryId(productEntity.getCategoryId());
-        product.setPromotionId(productEntity.getPromotionId());
+        List<Category> categories = productEntity.getCategoryId()
+                .stream()
+                .map(categoryId -> getCategoryByCategoryEntity(categoryId)) // Replace getCategoryById with your logic
+                .toList();
+        product.setCategory(categories);
+        product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
         product.setDimension(productEntity.getDimension());
         product.setWeight(productEntity.getWeight());
         product.setPrice(productEntity.getPrice());
@@ -66,4 +76,26 @@ public class ProviderConverter {
 
         return product;
     }
+
+    private Category getCategoryByCategoryEntity(CategoryEntity categoryEntity) {
+        Category category = new Category();
+        category.setId(categoryEntity.getId());
+        category.setLabelEn(categoryEntity.getLabelEn());
+        category.setLabelFr(categoryEntity.getLabelFr());
+        return category;
+    }
+
+    private Promotion getPromotionByPromotionEntity(PromotionEntity promotionEntity) {
+        Promotion promotion = new Promotion();
+        promotion.setId(promotionEntity.getId());
+        promotion.setLabelEn(promotionEntity.getLabelEn());
+        promotion.setLabelFr(promotionEntity.getLabelFr());
+        promotion.setBeginDate(promotionEntity.getBeginDate());
+        promotion.setEndDate(promotionEntity.getEndDate());
+        promotion.setPercentage(promotionEntity.getPercentage());
+        promotion.setType(promotionEntity.getType());
+        return promotion;
+    }
+
+
 }

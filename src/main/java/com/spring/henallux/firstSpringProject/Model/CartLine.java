@@ -29,7 +29,7 @@ public class CartLine {
         this.quantity = quantity;
     }
 
-    public float getTotalPrice() {
+    public Double getTotalPrice() {
         return product.getPrice() * quantity;
     }
 

@@ -7,3 +7,7 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/ecommerce?user=root&serverTimezone=UTC
     driverClassName: com.mysql.cj.jdbc.Driver
+paypal:
+  baseUrl: https://api-m.sandbox.paypal.com
+  clientId: YOUR CLIENT ID
+  secret: YOUR SECRET

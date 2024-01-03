@@ -1,12 +1,21 @@
 package com.spring.henallux.firstSpringProject.dataAccess.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="users")
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserEntity {
 
     @Id
+    private Integer id;
+
     @Column(name="email")
     private String email;
 
@@ -39,7 +48,7 @@ public class UserEntity {
 
     @Column(name="enabled")
     private Boolean enabled;
-
+    /*
     public UserEntity() {};
 
     public String getEmail() {
@@ -129,4 +138,5 @@ public class UserEntity {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+    */
 }
