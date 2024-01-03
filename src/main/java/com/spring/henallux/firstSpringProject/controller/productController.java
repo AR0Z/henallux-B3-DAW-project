@@ -5,23 +5,19 @@ import com.spring.henallux.firstSpringProject.Model.CartLine;
 import com.spring.henallux.firstSpringProject.Model.Product;
 import com.spring.henallux.firstSpringProject.dataAccess.dao.ProductDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.spring.henallux.firstSpringProject.service.Constants;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 @Controller
-@SessionAttributes({Constants.CURRENT_CART})
 public class productController {
 
     private ProductDataAccess productDAO;
-
-    @ModelAttribute(Constants.CURRENT_CART)
-    public Cart cart() {
-        return new Cart();
-    }
 
     @Autowired
     public productController(ProductDataAccess productDAO){
@@ -38,16 +34,5 @@ public class productController {
         model.addAttribute("cartLine", cartLine);
 
         return "integrated:product";
-    }
-
-    @PostMapping("/product/{productName}-{productId}/add")
-    public String addProduct(@PathVariable String productName, @PathVariable Integer productId, Model model, Locale locale,
-                             @ModelAttribute(value = Constants.CURRENT_CART) Cart cart, @ModelAttribute(value="cartLine") CartLine cartLine) {
-        Product product = productDAO.findByLabelEnAndId(productName, productId);
-        cartLine.setProduct(product);
-
-        cart.addProduct(cartLine);
-
-        return "redirect:/product/{productName}-{productId}";
     }
 }

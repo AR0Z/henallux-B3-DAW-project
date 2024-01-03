@@ -1,44 +1,37 @@
 package com.spring.henallux.firstSpringProject.Model;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
-    private ArrayList<CartLine> cartLines;
+    private HashMap<Integer, CartLine> cartLines; // Utilisation explicite de HashMap
 
     public Cart() {
-        cartLines = new ArrayList<>();
+        cartLines = new HashMap<>();
     }
 
-    public ArrayList<CartLine> getCartLines() {
+    public HashMap<Integer, CartLine> getCartLines() {
         return cartLines;
     }
 
     public void editQuantity(int productId, int quantity) {
-        for (CartLine cartLine : cartLines) {
-            if (cartLine.getProduct().getId() == productId) {
-                cartLine.setQuantity(quantity);
-            }
+        CartLine cartLine = cartLines.get(productId);
+        if (cartLine != null) {
+            cartLine.setQuantity(quantity);
         }
     }
 
     public void removeProduct(int productId) {
-        Iterator<CartLine> iterator = cartLines.iterator();
-        while (iterator.hasNext()) {
-            CartLine cartLine = iterator.next();
-            if (cartLine.getProduct().getId() == productId) {
-                iterator.remove();
-            }
-        }
+        cartLines.remove(productId);
     }
 
     public void addCartLine(CartLine cartLine) {
-        cartLines.add(cartLine);
+        cartLines.put(cartLine.getProduct().getId(), cartLine);
     }
 
     public void removeCartLine(CartLine cartLine) {
-        cartLines.remove(cartLine);
+        cartLines.remove(cartLine.getProduct().getId());
     }
 
     public void clearCart() {
@@ -47,7 +40,7 @@ public class Cart {
 
     public Float getTotalPrice() {
         float totalPrice = 0;
-        for (CartLine cartLine : cartLines) {
+        for (CartLine cartLine : cartLines.values()) {
             totalPrice += cartLine.getProduct().getPrice() * cartLine.getQuantity();
         }
         double roundedTotalPrice = Math.round(totalPrice * 100.0) / 100.0;
@@ -57,27 +50,19 @@ public class Cart {
     }
 
     public Float getTotalPriceWithShippingCost() {
-        float totalPrice = 0;
-        for (CartLine cartLine : cartLines) {
-            totalPrice += cartLine.getProduct().getPrice() * cartLine.getQuantity();
-        }
+        float totalPrice = getTotalPrice();
         double roundedTotalPrice = Math.round(totalPrice * 100.0) / 100.0;
 
-        // Retourner le prix total arrondi en tant que float
+        // Retourner le prix total arrondi en tant que float avec frais de port
         return (float) roundedTotalPrice + 5;
     }
 
     public void addProduct(CartLine cartLine) {
-        Boolean productFound = false;
-        for (CartLine cartLine1 : cartLines) {
-            if (cartLine1.getProduct().getId().equals(cartLine.getProduct().getId())) {
-                cartLine1.setQuantity(cartLine1.getQuantity() + cartLine.getQuantity());
-                productFound = true;
-            }
-        }
-
-        if (!productFound) {
-            cartLines.add(cartLine);
+        CartLine existingCartLine = cartLines.get(cartLine.getProduct().getId());
+        if (existingCartLine != null) {
+            existingCartLine.setQuantity(existingCartLine.getQuantity() + cartLine.getQuantity());
+        } else {
+            cartLines.put(cartLine.getProduct().getId(), cartLine);
         }
     }
 }

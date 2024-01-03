@@ -29,4 +29,14 @@ public class ProductDAO implements ProductDataAccess {
 
         return providerConverter.productEntityToProduct(productEntity);
     }
+
+    public Product findById(Integer id) {
+        ProductEntity productEntity = productRepository.findById(id);
+
+        if (productEntity == null) {
+            return null;
+        }
+
+        return providerConverter.productEntityToProduct(productEntity);
+    }
 }

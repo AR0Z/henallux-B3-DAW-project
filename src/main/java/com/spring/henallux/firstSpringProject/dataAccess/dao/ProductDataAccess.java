@@ -4,4 +4,5 @@ import com.spring.henallux.firstSpringProject.Model.Product;
 
 public interface ProductDataAccess {
     Product findByLabelEnAndId(String labelEn, Integer id);
+    Product findById(Integer id);
 }

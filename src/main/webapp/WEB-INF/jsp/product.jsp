@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="py-5">
     <div class="container">
         <div class="row gx-5">
@@ -46,7 +47,12 @@
                         ${product.getLocalizedLabel(locale)}
                     </h4>
                     <div class="d-flex flex-row my-3">
-                        <span class="text-success">In stock</span>
+                        <c:if test="${product.stock >0}">
+                            <span class="badge bg-success me-2">En stock</span>
+                        </c:if>
+                        <c:if test="${product.stock <=0}">
+                            <span class="badge bg-danger me-2">Rupture de stock</span>
+                        </c:if>
                     </div>
 
                     <div class="mb-3">
@@ -73,30 +79,26 @@
                     </div>
 
                     <hr />
-                    <form:form method="post" action="/product/${product.labelEn}-${product.id}/add" modelAttribute="cartLine">
                         <div class="row mb-4">
                                 <div class="col-md-4 col-6 mb-3">
                                     <label class="mb-2 d-block">Quantity</label>
                                     <div class="input-group mb-3" style="width: 170px;">
-                                        <button class="btn btn-white border border-secondary px-3" type="button"
-                                                id="button-addon1" data-mdb-ripple-color="dark">
+                                        <button class="btn btn-white border border-secondary px-3" type="button" data-mdb-ripple-color="dark">
                                             <i class="fas fa-minus"></i>
                                         </button>
-                                        <form:input type="number" class="form-control text-center border border-secondary"
-                                               placeholder="14" aria-label="Example text with button addon"
-                                               aria-describedby="button-addon1" path="quantity" />
-                                        <button class="btn btn-white border border-secondary px-3" type="button"
-                                                id="button-addon2" data-mdb-ripple-color="dark">
+                                        <input id="quantity" type="number" class="form-control text-center border border-secondary"
+                                               placeholder="14" value="1" aria-label="Example text with button addon"
+                                               aria-describedby="button-addon1" />
+                                        <button class="btn btn-white border border-secondary px-3" type="button" data-mdb-ripple-color="dark">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to
+                            <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0" > <i class="me-1 fa fa-shopping-basket" ></i> Add to
                                 cart
                             </button>
                         </div>
-                    </form:form>
             </main>
         </div>
     </div>
@@ -207,3 +209,49 @@
         </div>
     </div>
 </section>
+
+<script>
+    let quantity = document.getElementById("quantity");
+
+    quantity.addEventListener("input", function() {
+        if (this.value !== "" && this.value < 1)
+            this.value = 1;
+    });
+
+    const increaseButton = quantity.nextElementSibling;
+    increaseButton.addEventListener("click", function () {
+        quantity.stepUp();
+        quantity.dispatchEvent(new Event("input"));
+    });
+
+    // Ajoutez ces lignes pour gérer le bouton de moins
+    const decreaseButton = quantity.previousElementSibling;
+    decreaseButton.addEventListener("click", function () {
+        quantity.stepDown();
+        quantity.dispatchEvent(new Event("input"));
+    });
+
+    let submitAddProduct = document.getElementById("sumbitAddProduct");
+    submitAddProduct.addEventListener("click", function () {
+        let quantity = document.getElementById("quantity").value;
+        const apiUrl = "/cart/addProduct";
+        const data = new URLSearchParams();
+        data.append("productId", ${product.id});
+        data.append("quantity", quantity);
+
+        fetch(apiUrl, {
+            method: "POST",
+            body: data
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            console.log(data);
+        }).catch(error => {
+            console.log(error);
+        });
+
+    });
+</script>

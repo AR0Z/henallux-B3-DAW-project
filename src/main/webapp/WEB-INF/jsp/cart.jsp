@@ -13,7 +13,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="cartLine" items="${cart.cartLines}">
+                            <c:forEach var="entry" items="${cart.cartLines.entrySet()}">
+                                <c:set var="cartLine" value="${entry.value}" />
                                    <tr>
                                        <th scope="row">
                                            <div class="d-flex align-items-center">
@@ -36,6 +37,8 @@
                                                <button class="btn btn-link px-2">
                                                    <i class="fas fa-plus"></i>
                                                </button>
+
+                                               <p class="text-danger px-2 pt-3"></p>
                                            </div>
                                        </td>
                                        <td class="align-middle">
@@ -157,8 +160,6 @@
                 }
 
                 if (quantity === 0) {
-                    console.log("test")
-                    console.log(quantityInput.parentNode.parentNode.parentNode)
                     quantityInput.parentNode.parentNode.parentNode.remove();
                 }
 
@@ -180,17 +181,23 @@
                     })
                     .then(data => {
                         // Logique à exécuter après la réception de la réponse
-                        console.log(data);
+                        let errorDisplay = this.parentNode.querySelector(".text-danger")
 
-                        // Mettez à jour le prix ou toute autre logique nécessaire ici
-                        const totalPriceElement = document.getElementById("totalPrice");
-                        const totalPriceWithShippingCostElement = document.getElementById("totalPriceWithShippingCost");
+                        if(data.success) {
+                            errorDisplay.innerText = "";
+                            // Mettez à jour le prix ou toute autre logique nécessaire ici
+                            const totalPriceElement = document.getElementById("totalPrice");
+                            const totalPriceWithShippingCostElement = document.getElementById("totalPriceWithShippingCost");
 
-                        // Utilisez les propriétés déstructurées
-                        const { totalPrice, totalPriceWithShippingCost } = data;
+                            // Utilisez les propriétés déstructurées
+                            const { totalPrice, totalPriceWithShippingCost } = data;
 
-                        totalPriceElement.innerText = totalPrice;
-                        totalPriceWithShippingCostElement.innerText = totalPriceWithShippingCost;
+                            totalPriceElement.innerText = totalPrice;
+                            totalPriceWithShippingCostElement.innerText = totalPriceWithShippingCost;
+                        } else if (data.error) {
+                            quantityInput.value = data.maxQuantity;
+                            errorDisplay.innerText = data.error;
+                        }
                     })
                     .catch(error => {
                         console.error("Fetch error:", error);
