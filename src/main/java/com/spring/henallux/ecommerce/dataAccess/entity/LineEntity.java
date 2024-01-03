@@ -4,17 +4,19 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
-@Table(name = "irders_lines")
+@Table(name = "orders_lines")
 public class LineEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "line_id")
     private Integer id;
     @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = "product_id")
-    private Integer productId;
-    @Column(name = "order_id")
-    private Integer orderId;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity productId;
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity orderId;
     @Column(name = "price")
     @Min(0)
     private Double price;

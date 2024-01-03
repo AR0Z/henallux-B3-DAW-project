@@ -16,11 +16,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class CategoryEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "category_id")
     private Integer id;
     @Column(name = "label_fr")
     private String labelFr;
     @Column(name = "label_en")
     private String labelEn;
-
 }

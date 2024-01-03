@@ -3,6 +3,7 @@ package com.spring.henallux.ecommerce.dataAccess.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 
@@ -14,9 +15,11 @@ import javax.persistence.*;
 public class UserEntity {
 
     @Id
+    @Column(name="user_id")
     private Integer id;
 
     @Column(name="email")
+    @UniqueElements
     private String email;
 
     @Column(name="first_name")

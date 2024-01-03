@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class PromotionEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "promotion_id")
     private Integer id;
     @Column(name = "label_fr")
     private String labelFr;

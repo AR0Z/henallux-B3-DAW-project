@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.util.List;
 
 @Entity
 @Table(name="products")
@@ -15,7 +16,7 @@ import javax.validation.constraints.Min;
 public class ProductEntity {
 
     @Id
-    @Column(name="id")
+    @Column(name="product_id")
     private Integer id;
 
     @Column(name="label_en")
@@ -30,11 +31,13 @@ public class ProductEntity {
     @Column(name="description_fr")
     private String descriptionFr;
 
-    @Column(name="category_id")
-    private Integer categoryId;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name="product_id")
+    private List<CategoryEntity> categoryId;
 
-    @Column(name = "promotion_id")
-    private Integer promotionId;
+    @OneToOne
+    @JoinColumn(name="promotion_id")
+    private PromotionEntity promotionId;
 
     @Column(name="dimension")
     private String dimension;

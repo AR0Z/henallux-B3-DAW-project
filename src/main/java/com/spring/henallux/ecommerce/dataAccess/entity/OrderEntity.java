@@ -1,7 +1,7 @@
 package com.spring.henallux.ecommerce.dataAccess.entity;
+import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 public class OrderEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "order_id")
     private Integer id;
     @Column(name ="date")
     private String date;
@@ -17,7 +17,9 @@ public class OrderEntity {
     private String paypalOrderId;
     @Column(name = "order_status")
     private String orderStatus;
-    @Column(name = "user_id")
-    private Integer userId;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
 
 }
