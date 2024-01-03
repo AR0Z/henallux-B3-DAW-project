@@ -10,6 +10,8 @@ import com.spring.henallux.ecommerce.dataAccess.entity.PromotionEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProviderConverter {
 
@@ -58,12 +60,12 @@ public class ProviderConverter {
         product.setLabelFr(productEntity.getLabelFr());
         product.setDescriptionEn(productEntity.getDescriptionEn());
         product.setDescriptionFr(productEntity.getDescriptionFr());
-//        List<Category> categories = productEntity.getCategoryId()
-//                .stream()
-//                .map(categoryId -> getCategoryByCategoryEntity(categoryId)) // Replace getCategoryById with your logic
-//                .toList();
-        // product.setCategory(productEntity.getCategoryId()); //categories
-        // product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
+        List<Category> categories = productEntity.getCategoryId()
+                .stream()
+                .map(categoryId -> getCategoryByCategoryEntity(categoryId)) // Replace getCategoryById with your logic
+                .toList();
+        product.setCategory(categories);
+        product.setPromotion(getPromotionByPromotionEntity(productEntity.getPromotionId()));
         product.setDimension(productEntity.getDimension());
         product.setWeight(productEntity.getWeight());
         product.setPrice(productEntity.getPrice());
