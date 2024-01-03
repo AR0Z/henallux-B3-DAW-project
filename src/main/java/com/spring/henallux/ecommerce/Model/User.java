@@ -23,6 +23,7 @@ public class User implements UserDetails {
     @NotNull
     @Size(max=30)
     private String password;
+    private String passwordConfirm;
     private String firstName;
     private String lastName;
     private String deliveryAddress;
@@ -163,7 +164,7 @@ public class User implements UserDetails {
     public void setPhoneNumber(String phoneNumber) {
     	this.phoneNumber = phoneNumber;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -171,4 +172,5 @@ public class User implements UserDetails {
     public void setId(Integer id) {
         this.id = id;
     }
+    
 }
