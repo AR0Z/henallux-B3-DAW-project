@@ -22,13 +22,7 @@ public class User implements UserDetails {
     private String email;
     @NotNull
     @Size(max=30)
-    private String oldPassword;
-    @NotNull
-    @Size(max=30)
     private String password;
-    @NotNull
-    @Size(max=30)
-    private String passwordConfirm;
     private String firstName;
     private String lastName;
     private String deliveryAddress;
