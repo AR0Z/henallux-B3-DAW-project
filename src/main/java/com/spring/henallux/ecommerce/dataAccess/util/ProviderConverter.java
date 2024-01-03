@@ -89,20 +89,15 @@ public class ProviderConverter {
         return promotion;
     }
 
-    private OrderEntity orderToOrderEntity(Order order) {
+    public OrderEntity orderToOrderEntity(Order order) {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setUserId(order.getUserId());
         orderEntity.setDate(order.getDate());
-        orderEntity.setTotalPrice(order.getTotalPrice());
-        orderEntity.setTotalPriceWithShippingCost(order.getTotalPriceWithShippingCost());
-        orderEntity.setShippingCost(order.getShippingCost());
-        orderEntity.setOrderLines(order.getOrderLines());
         orderEntity.setOrderStatus(order.getOrderStatus());
-        orderEntity.setDeliveryAddress(order.getDeliveryAddress());
         return orderEntity;
     }
 
-    private OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {
+    public OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {
         OrderLineEntity orderLineEntity = new OrderLineEntity();
         orderLineEntity.setOrderId(orderLine.getOrderId());
         orderLineEntity.setProductId(orderLine.getProductId());
