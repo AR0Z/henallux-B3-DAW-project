@@ -63,4 +63,28 @@ public class Cart {
             cartLines.put(cartLine.getProduct().getId(), cartLine);
         }
     }
+
+    public Order toOrder() {
+        Order order = new Order();
+
+        order.setDate(java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        order.setOrderStatus("Waiting for payment");
+
+        return order;
+    }
+
+    public HashMap<Integer, OrderLine> toOrderLines() {
+        HashMap<Integer, OrderLine> orderLines = new HashMap<>();
+
+        for (CartLine cartLine : cartLines.values()) {
+            OrderLine orderLine = new OrderLine();
+            orderLine.setQuantity(cartLine.getQuantity());
+            orderLine.setPrice(cartLine.getProduct().getPrice());
+            orderLine.setProduct(cartLine.getProduct());
+
+            orderLines.put(orderLine.getProduct().getId(), orderLine);
+        }
+
+        return orderLines;
+    }
 }

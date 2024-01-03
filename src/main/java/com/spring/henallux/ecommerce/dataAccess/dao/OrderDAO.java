@@ -1,22 +1,35 @@
 package com.spring.henallux.ecommerce.dataAccess.dao;
 
+import com.spring.henallux.ecommerce.Model.Order;
+import com.spring.henallux.ecommerce.Model.User;
 import com.spring.henallux.ecommerce.dataAccess.entity.OrderEntity;
+import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
+import com.spring.henallux.ecommerce.dataAccess.repository.OrderRepository;
 import com.spring.henallux.ecommerce.dataAccess.repository.UserRepository;
 import com.spring.henallux.ecommerce.dataAccess.util.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderDAO implements OrderDataAccess {
-    private UserRepository userRepository;
+    private OrderRepository orderRepository;
     private ProviderConverter providerConverter;
 
 
     @Autowired
-    public OrderDAO(UserRepository userRepository, ProviderConverter providerConverter) {
-        this.userRepository = userRepository;
+    public OrderDAO(OrderRepository orderRepository, ProviderConverter providerConverter) {
+        this.orderRepository = orderRepository;
         this.providerConverter = providerConverter;
     }
 
-    public void save() {
-        OrderEntity orderEntity = providerConverter.order();
+    public OrderEntity save(Order order, UserEntity userEntity) {
+        OrderEntity orderEntity = providerConverter.orderToOrderEntity(order);
+
+        orderEntity.setUserId(userEntity);
+
+        orderEntity = orderRepository.save(orderEntity);
+
+        return orderEntity;
     }
+
 }

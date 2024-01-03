@@ -91,20 +91,9 @@ public class ProviderConverter {
 
     public OrderEntity orderToOrderEntity(Order order) {
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setUserId(order.getUserId());
         orderEntity.setDate(order.getDate());
         orderEntity.setOrderStatus(order.getOrderStatus());
         return orderEntity;
     }
-
-    public OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine) {
-        OrderLineEntity orderLineEntity = new OrderLineEntity();
-        orderLineEntity.setOrderId(orderLine.getOrderId());
-        orderLineEntity.setProductId(orderLine.getProductId());
-        orderLineEntity.setQuantity(orderLine.getQuantity());
-        orderLineEntity.setPrice(orderLine.getPrice());
-        return orderLineEntity;
-    }
-
 
 }

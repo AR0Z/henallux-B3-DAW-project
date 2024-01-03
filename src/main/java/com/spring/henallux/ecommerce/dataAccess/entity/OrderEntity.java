@@ -2,11 +2,16 @@ package com.spring.henallux.ecommerce.dataAccess.entity;
 import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orders")
 @Data
+@Setter
+@Getter
 public class OrderEntity {
     @Id
     @Column(name = "order_id")

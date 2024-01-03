@@ -1,10 +1,15 @@
 package com.spring.henallux.ecommerce.dataAccess.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "orders_lines")
+@Getter
+@Setter
 public class OrderLineEntity {
     @Id
     @Column(name = "line_id")
