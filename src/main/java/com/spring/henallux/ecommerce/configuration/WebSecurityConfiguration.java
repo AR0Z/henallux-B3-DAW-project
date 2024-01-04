@@ -27,7 +27,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/search",
             "/terms",
             "assets/**",
-            "/assets/**"
+            "/assets/**",
+            "/login",
     };
     private static final String[] AUTHORIZED_REQUESTS_ADMIN = new String[]{"/admin"};
 
