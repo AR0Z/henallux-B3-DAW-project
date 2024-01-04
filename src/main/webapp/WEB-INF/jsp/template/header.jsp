@@ -20,7 +20,7 @@
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" style="border-radius: 5px 0 0 5px;">
-                    Categories
+                    <spring:message code="categories" />
                 </button>
                 <ul class=" dropdown-menu">
                     <li><a class="dropdown-item" href="#">Action</a></li>
@@ -33,7 +33,8 @@
                     <div class="col-md-6 w-100">
                         <div>
                             <div class="search-2 d-flex">
-                                <input class="w-100" type="text" placeholder="Que recherchez-vous ?">
+                                <spring:message code="searchBarPlaceholder" var="placeholderSearchbar" />
+                                <input class="w-100" type="text" placeholder='${placeholderSearchbar}' />
                                 <button type="button" class="btn btn-outline-secondary pb-2"
                                         style="border-radius: 0 5px 5px 0;">
                                     <i class="bi bi-search"></i>
@@ -50,26 +51,26 @@
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    langues
+                    <spring:message code="language" />
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="${localeFr}">Francais</a></li>
-                    <li><a class="dropdown-item" href="${localeEn}">Anglais</a></li>
+                    <li><a class="dropdown-item" href="${localeFr}"><spring:message code="languageFr" /></a></li>
+                    <li><a class="dropdown-item" href="${localeEn}"><spring:message code="languageEn" /></a></li>
                 </ul>
             </div>
         </div>
         <div class="container d-flex">
             <sec:authorize access="!isAuthenticated()">
                 <a class="btn btn-outline-primary me-2" href="/login"><spring:message code="login" /></a>
-                <a class="btn btn-outline-primary me-3" href="/register">S'inscrire</a>
+                <a class="btn btn-outline-primary me-3" href="/register"><spring:message code="register" /></a>
             </sec:authorize>
 
             <sec:authorize access="isAuthenticated()">
-                <a class="btn btn-outline-primary me-2" href="/editProfile">Modifier mon compte</a>
-                <a class="btn btn-outline-primary me-2" href="/logout">se déconnecter</a>
+                <a class="btn btn-outline-primary me-2" href="/editProfile"><spring:message code="editAccount" /></a>
+                <a class="btn btn-outline-primary me-2" href="/logout"><spring:message code="disconnect" /></a>
             </sec:authorize>
 
-            <a class="btn btn-outline-primary" href="/cart">Panier</a>
+            <a class="btn btn-outline-primary" href="/cart"><spring:message code="cart" /></a>
         </div>
     </div>
 </header>

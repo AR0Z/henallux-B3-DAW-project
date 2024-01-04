@@ -75,14 +75,6 @@
     }
 
     @media(min-width:991px) {
-        .navbar-nav {
-            margin-left: 35%;
-        }
-
-        .nav-item {
-            padding-left: 20px;
-        }
-
         .card {
             width: 190px;
             display: inline-block;
@@ -100,14 +92,6 @@
     }
 
     @media(min-width:768px) and (max-width:991px) {
-        .navbar-nav {
-            margin-left: 20%;
-        }
-
-        .nav-item {
-            padding-left: 10px;
-        }
-
         .card {
             width: 230px;
             display: inline-block;
@@ -126,14 +110,6 @@
     }
 
     @media(min-width:568px) and (max-width:767px) {
-        .navbar-nav {
-            margin-left: 20%;
-        }
-
-        .nav-item {
-            padding-left: 10px;
-        }
-
         .card {
             width: 205px;
             display: inline-block;
@@ -156,14 +132,6 @@
     }
 
     @media(max-width:567px) {
-        .navbar-nav {
-            margin-left: 0%;
-        }
-
-        .nav-item {
-            padding-left: 10px;
-        }
-
         #sidebar {
             width: 100%;
             padding: 10px;
