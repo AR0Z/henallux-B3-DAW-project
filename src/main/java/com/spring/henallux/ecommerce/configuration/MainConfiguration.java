@@ -1,5 +1,6 @@
 package com.spring.henallux.ecommerce.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import java.util.Locale;
 @Configuration
 public class MainConfiguration implements WebMvcConfigurer {
 
+    @Autowired
+    private CustomLocaleChangeInterceptor customLocaleChangeInterceptor;
+
     @Bean
     public DefaultMessageCodesResolver defaultMessageCodesResolver() {
         DefaultMessageCodesResolver defaultMessageCodesResolver = new DefaultMessageCodesResolver();
@@ -33,7 +37,7 @@ public class MainConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        LocaleChangeInterceptor interceptor = customLocaleChangeInterceptor;
         interceptor.setParamName("locale");
         registry.addInterceptor(interceptor);
     }
