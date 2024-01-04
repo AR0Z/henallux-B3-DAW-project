@@ -1,5 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+
+</style>
 <section class="py-5">
     <div class="container">
         <div class="row gx-5">
@@ -107,44 +110,6 @@
 <section class="bg-light border-top py-4">
     <div class="container">
         <div class="row gx-4">
-            <div class="col-lg-8 mb-4">
-                <div class="border rounded-2 px-3 py-2 bg-white">
-                    <!-- Pills navs -->
-                    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                        <li class="nav-item d-flex" role="presentation">
-                            <a class="nav-link d-flex align-items-center justify-content-center w-100 active"
-                               id="ex1-tab-1" data-bs-toggle="pill" href="#ex1-pills-1" role="tab"
-                               aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
-                        </li>
-                        <li class="nav-item d-flex" role="presentation">
-                            <a class="nav-link d-flex align-items-center justify-content-center w-100"
-                               id="ex1-tab-2" data-bs-toggle="pill" href="#ex1-pills-2" role="tab"
-                               aria-controls="ex1-pills-2" aria-selected="true">Specification2</a>
-                        </li>
-                        <!-- https://placehold.co/400 Other tab links https://placehold.co/400 -->
-                    </ul>
-                    <!-- Pills navs -->
-
-                    <!-- Pills content -->
-                    <div class="tab-content" id="ex1-content">
-                        <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
-                             aria-labelledby="ex1-tab-1">
-                            exemple 1
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius odio aliquid ducimus,
-                            impedit quidem nemo cum quis praesentium! Modi delectus excepturi corporis molestias
-                            natus expedita numquam ullam dolores enim labore.
-                        </div>
-                        <div class="tab-pane fade show" id="ex1-pills-2" role="tabpanel"
-                             aria-labelledby="ex1-tab-2">
-                            exemple 2
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius odio aliquid ducimus,
-                            impedit quidem nemo cum quis praesentium! Modi delectus excepturi corporis molestias
-                            natus expedita numquam ullam dolores enim labore.
-                        </div>
-                    </div>
-                    <!-- Pills content -->
-                </div>
-            </div>
             <div class="col-lg-4">
                 <div class="px-0 border rounded-2 shadow-0">
                     <div class="card">
@@ -209,6 +174,8 @@
         </div>
     </div>
 </section>
+
+
 
 <script>
     let quantity = document.getElementById("quantity");
