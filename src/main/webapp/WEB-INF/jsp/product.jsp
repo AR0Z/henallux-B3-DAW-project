@@ -98,6 +98,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-2" id="displayMessage"></div>
                             <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0" > <i class="me-1 fa fa-shopping-basket" ></i> Add to
                                 cart
                             </button>
@@ -215,7 +216,19 @@
             }
             return response.json();
         }).then(data => {
-            console.log(data);
+            let displayMessage = document.getElementById("displayMessage");
+            displayMessage.innerHTML = "";
+            if(data.success) {
+                let span = document.createElement("span");
+                span.classList.add("text-success");
+                span.innerText = data.success;
+                displayMessage.appendChild(span);
+            } else {
+                let span = document.createElement("span");
+                span.classList.add("text-danger");
+                span.innerText = data.error;
+                displayMessage.appendChild(span);
+            }
         }).catch(error => {
             console.log(error);
         });

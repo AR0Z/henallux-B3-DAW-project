@@ -29,6 +29,9 @@ public class productController {
         cartLine.setQuantity(1);
         model.addAttribute("cartLine", cartLine);
 
+        if(product == null)
+            return "redirect:/error";
+
         return "integrated:product";
     }
 }

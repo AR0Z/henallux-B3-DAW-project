@@ -32,4 +32,23 @@ public class Product {
     public String getLocalizedDescription(Locale locale) {
         return "fr".equalsIgnoreCase(locale.getLanguage()) ? descriptionFr : descriptionEn;
     }
+
+    @Override
+    public String toString(){
+        // return all element
+        return "Product{" +
+                "id=" + id +
+                ", labelEn='" + labelEn + '\'' +
+                ", labelFr='" + labelFr + '\'' +
+                ", descriptionEn='" + descriptionEn + '\'' +
+                ", descriptionFr='" + descriptionFr + '\'' +
+                ", category=" + category +
+                ", promotion=" + promotion +
+                ", dimension='" + dimension + '\'' +
+                ", weight=" + weight +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", dateAdded='" + dateAdded + '\'' +
+                '}';
+    }
 }

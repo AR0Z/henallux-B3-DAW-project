@@ -81,14 +81,14 @@ public class cartController {
             return ResponseEntity.ok(response);
         }
 
-
-
+        int quantityTotal = quantity;
         // check if user alradey has this product in his cart and add quantity to it
         if(cart.getCartLines().containsKey(productId)){
-            quantity += cart.getCartLines().get(productId).getQuantity();
+            quantityTotal += cart.getCartLines().get(productId).getQuantity();
+
         }
 
-        if(product.getStock() < quantity){
+        if(product.getStock() < quantityTotal){
             response.put("error", "Not enough stock");
         }
         else{
