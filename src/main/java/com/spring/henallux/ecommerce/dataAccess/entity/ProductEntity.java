@@ -33,7 +33,7 @@ public class ProductEntity {
     private String descriptionFr;
 
     @OneToOne
-    @JoinColumn(name="product_id")
+    @JoinColumn(name="category_id")
     private CategoryEntity categoryId;
 
     @OneToOne

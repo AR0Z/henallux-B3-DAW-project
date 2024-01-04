@@ -24,8 +24,7 @@
                     <div class="col">
                         <spring:message code="register_name" var="namePlaceholder"/>
                         <form:input type="text" class="form-control" placeholder='${namePlaceholder}' aria-label="Nom"
-                                    name="lastname"
-                                    data-mdb-input-init="" required="" pattern="[A-Za-z\-]{2,}" path="lastName"/>
+                                    name="lastname" data-mdb-input-init="" required="" pattern="[A-Za-z\-]{2,}" path="lastName"/>
                         <div class="invalid-feedback">
                             <spring:message code="register_error_name"/>
                         </div>
@@ -44,7 +43,7 @@
                 <div class="row mb-4 w-100">
                     <div class="col">
                         <spring:message code="register_password" var="passwordPlaceholder"/>
-                        <form:input var="password" type="password" id="password" class="form-control" placeholder="Mot de passe"
+                        <form:input var="password" type="password" id="password" class="form-control" placeholder="${passwordPlaceholder}"
                                     name="password" aria-label="Mot de passe" data-mdb-input-init="" require="require"
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" path="password"/>
 

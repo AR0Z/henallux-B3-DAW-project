@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="./include/importTags.jsp" %>
+
 <style>
 
 </style>
@@ -51,16 +52,22 @@
                     </h4>
                     <div class="d-flex flex-row my-3">
                         <c:if test="${product.stock >0}">
-                            <span class="badge bg-success me-2">En stock</span>
+                            <span class="badge bg-success me-2">
+                                <spring:message code="product_instock" />
+                            </span>
                         </c:if>
                         <c:if test="${product.stock <=0}">
-                            <span class="badge bg-danger me-2">Rupture de stock</span>
+                            <span class="badge bg-danger me-2">
+                                <spring:message code="product_notInstock" />
+                            </span>
                         </c:if>
                     </div>
 
                     <div class="mb-3">
                         <span class="h5">${product.price}€</span>
-                        <span class="text-muted">/par objet</span>
+                        <span class="text-muted">/
+                            <spring:message code="product_each" />
+                        </span>
                     </div>
 
                     <p>
@@ -68,17 +75,24 @@
                     </p>
 
                     <div class="row">
-                        <dt class="col-3">Taille:</dt>
+                        <dt class="col-3">
+                            <spring:message code="product_size" />
+                            :</dt>
                         <dd class="col-9">${product.dimension}</dd>
 
-                        <dt class="col-3">Poids:</dt>
+                        <dt class="col-3">
+                            <spring:message code="product_weight" />
+                            :</dt>
                         <dd class="col-9">${product.weight}</dd>
 
-                        <dt class="col-3">Material</dt>
-                        <dd class="col-9">Cotton, Jeans</dd>
-
-                        <dt class="col-3">Brand</dt>
-                        <dd class="col-9">Reebook</dd>
+                        <dt class="col-3">
+                            <spring:message code="product_category" />
+                            :
+                        </dt>
+                        <dd class="col-9">${product.category}</dd>
+                        ${System.out.println(product)}
+                        <dt class="col-3">Stock:</dt>
+                        <dd class="col-9">${product.stock}</dd>
                     </div>
 
                     <hr />
