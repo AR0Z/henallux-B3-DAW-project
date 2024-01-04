@@ -10,6 +10,8 @@ import java.util.List;
 @Component
 public class ProviderConverter {
 
+    private DozerBeanMapper mapper = new DozerBeanMapper();
+
     public User userEntityToUser(UserEntity userEntity) {
         User user = new User();
 
@@ -48,7 +50,6 @@ public class ProviderConverter {
     }
 
     public Product productEntityToProduct(ProductEntity productEntity) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
         return mapper.map(productEntity, Product.class);
     }
 
@@ -73,7 +74,6 @@ public class ProviderConverter {
     }
 
     public OrderEntity orderToOrderEntity(Order order) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
         return mapper.map(order, OrderEntity.class);
     }
 
@@ -85,7 +85,6 @@ public class ProviderConverter {
     }
 
     public Order orderEntityToOrder(OrderEntity orderEntity) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
         return mapper.map(orderEntity, Order.class);
     }
 }
