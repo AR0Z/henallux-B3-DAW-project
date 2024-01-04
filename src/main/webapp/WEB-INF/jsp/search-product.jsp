@@ -182,6 +182,8 @@
         }
     }
 </style>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="filter">
     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter"
             aria-expanded="false" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span></button>

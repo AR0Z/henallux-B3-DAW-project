@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./include/importTags.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <section class="h-100 h-custom">
         <div class="container h-100 py-3">

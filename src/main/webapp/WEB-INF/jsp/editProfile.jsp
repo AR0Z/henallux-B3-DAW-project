@@ -1,4 +1,5 @@
 <%@ include file="./include/importTags.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
 <div class="wrapper d-flex align-items-center justify-content-center" style="height:100%;width:100%">

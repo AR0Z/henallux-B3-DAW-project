@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="./include/importTags.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <section class="d-flex justify-content-center align-items-center" style="height: 70vh;">
     <form:form method="post" action="" modelAttribute="user">
