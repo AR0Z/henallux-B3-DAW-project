@@ -51,8 +51,6 @@
         word-break: break-word !important;
     }
 </style>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <div data-custom-class="body" class="wrapper">
     <div style="text-align: left;">
         <div class="MsoNormal" data-custom-class="title" style="line-height: 1.5;">

@@ -1,6 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="./include/importTags.jsp" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
     .invalid-feedback {

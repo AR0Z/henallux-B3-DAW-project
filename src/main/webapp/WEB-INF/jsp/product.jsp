@@ -1,79 +1,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="./include/importTags.jsp" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <div class="py-5 m-0" style="
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    ">
-        <div class="bg-light border-top">
-            <div class="container">
-                <div class="col-lg-4 w-100">
-                    <div class="px-0 border rounded-2 shadow-0">
-                        <div class="card card-body">
-                            <h5 class="card-title">
-                                <spring:message code="product_similar"/>
-                            </h5>
-                            <div class="d-flex mb-3">
-                                <a href="#" class="me-3">
-                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
-                                         class="img-md img-thumbnail"/>
-                                </a>
-                                <div class="info">
-                                    <a href="#" class="nav-link mb-1">
-                                        Rucksack Backpack Large <br/>
-                                        Line Mounts
-                                    </a>
-                                    <strong class="text-dark"> $38.90</strong>
-                                </div>
-                            </div>
+<style>
 
-                            <div class="d-flex mb-3">
-                                <a href="#" class="me-3">
-                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
-                                         class="img-md img-thumbnail"/>
-                                </a>
-                                <div class="info">
-                                    <a href="#" class="nav-link mb-1">
-                                        Summer New Men's Denim <br/>
-                                        Jeans Shorts
-                                    </a>
-                                    <strong class="text-dark"> $29.50</strong>
-                                </div>
-                            </div>
-
-                            <div class="d-flex mb-3">
-                                <a href="#" class="me-3">
-                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
-                                         class="img-md img-thumbnail"/>
-                                </a>
-                                <div class="info">
-                                    <a href="#" class="nav-link mb-1"> T-shirts with multiple colors, for men and
-                                        lady
-                                    </a>
-                                    <strong class="text-dark"> $120.00</strong>
-                                </div>
-                            </div>
-
-                            <div class="d-flex">
-                                <a href="#" class="me-3">
-                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
-                                         class="img-md img-thumbnail"/>
-                                </a>
-                                <div class="info">
-                                    <a href="#" class="nav-link mb-1"> Blazer Suit Dress Jacket for Men, Blue color
-                                    </a>
-                                    <strong class="text-dark"> $339.90</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <aside class="col-lg-6" style="max-width: 30vw">
+</style>
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
                 <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
@@ -111,7 +45,6 @@
                     })
                 </script>
             </aside>
-        <div class="row gx-5">
             <main class="col-lg-6">
                 <div class="ps-lg-3">
                     <h4 class="title text-dark">
@@ -120,12 +53,12 @@
                     <div class="d-flex flex-row my-3">
                         <c:if test="${product.stock >0}">
                             <span class="badge bg-success me-2">
-                                <spring:message code="product_instock"/>
+                                <spring:message code="product_instock" />
                             </span>
                         </c:if>
                         <c:if test="${product.stock <=0}">
                             <span class="badge bg-danger me-2">
-                                <spring:message code="product_notInstock"/>
+                                <spring:message code="product_notInstock" />
                             </span>
                         </c:if>
                     </div>
@@ -133,70 +66,136 @@
                     <div class="mb-3">
                         <span class="h5">${product.price}€</span>
                         <span class="text-muted">/
-                            <spring:message code="product_each"/>
+                            <spring:message code="product_each" />
                         </span>
                     </div>
 
                     <p>
-                        ${product.getLocalizedDescription(locale)}
+                       ${product.getLocalizedDescription(locale)}
                     </p>
 
                     <div class="row">
-                        <dt class="col-5">
-                            <spring:message code="product_size"/> :
-                        </dt>
-                        <dd class="col-7">${product.dimension}</dd>
+                        <dt class="col-3">
+                            <spring:message code="product_size" />
+                            :</dt>
+                        <dd class="col-9">${product.dimension}</dd>
 
-                        <dt class="col-5">
-                            <spring:message code="product_weight"/> :
+                        <dt class="col-3">
+                            <spring:message code="product_weight" />
+                            :</dt>
+                        <dd class="col-9">${product.weight}</dd>
+
+                        <dt class="col-3">
+                            <spring:message code="product_category" />
+                            :
                         </dt>
-                        <dd class="col-7">${product.weight}</dd>
-                        <dt class="col-5">
-                            <spring:message code="product_category"/> :
-                        </dt>
-                        <dd class="col-7">${product.category.getLocalizedLabel(locale)}</dd>
-                        <dt class="col-5">Stock :</dt>
-                        <dd class="col-7">${product.stock}</dd>
+                        <dd class="col-9">${product.category}</dd>
+                        ${System.out.println(product)}
+                        <dt class="col-3">Stock:</dt>
+                        <dd class="col-9">${product.stock}</dd>
                     </div>
 
-                    <hr/>
-                    <div class="row mb-4">
-                        <div class="col-md-4 col-6 mb-3">
-                            <label class="mb-2 d-block">
-                                <spring:message code="quantity"/>
-                            </label>
-                            <div class="input-group mb-3" style="width: 170px;">
-                                <button class="btn btn-white border border-secondary px-3" type="button"
-                                        data-mdb-ripple-color="dark">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <input id="quantity" type="number"
-                                       class="form-control text-center border border-secondary"
-                                       placeholder="14" value="1" aria-label="Example text with button addon"
-                                       aria-describedby="button-addon1"/>
-                                <button class="btn btn-white border border-secondary px-3" type="button"
-                                        data-mdb-ripple-color="dark">
-                                    <i class="fas fa-plus"></i>
-                                </button>
+                    <hr />
+                        <div class="row mb-4">
+                                <div class="col-md-4 col-6 mb-3">
+                                    <label class="mb-2 d-block">Quantity</label>
+                                    <div class="input-group mb-3" style="width: 170px;">
+                                        <button class="btn btn-white border border-secondary px-3" type="button" data-mdb-ripple-color="dark">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input id="quantity" type="number" class="form-control text-center border border-secondary"
+                                               placeholder="14" value="1" aria-label="Example text with button addon"
+                                               aria-describedby="button-addon1" />
+                                        <button class="btn btn-white border border-secondary px-3" type="button" data-mdb-ripple-color="dark">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="p-2" id="displayMessage"></div>
+                            <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0" > <i class="me-1 fa fa-shopping-basket" ></i> Add to
+                                cart
+                            </button>
                         </div>
-                    </div>
-                    <div class="p-2" id="displayMessage"></div>
-                    <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0"><i
-                            class="me-1 fa fa-shopping-basket"></i>
-                        <spring:message code="product_addCart"/>
-                    </button>
-                </div>
             </main>
         </div>
     </div>
+</section>
 <!-- content -->
+<section class="bg-light border-top py-4">
+    <div class="container">
+        <div class="row gx-4">
+            <div class="col-lg-4">
+                <div class="px-0 border rounded-2 shadow-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Similar items</h5>
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                                         class="img-md img-thumbnail" />
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="nav-link mb-1">
+                                        Rucksack Backpack Large <br />
+                                        Line Mounts
+                                    </a>
+                                    <strong class="text-dark"> $38.90</strong>
+                                </div>
+                            </div>
+
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                                         class="img-md img-thumbnail" />
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="nav-link mb-1">
+                                        Summer New Men's Denim <br />
+                                        Jeans Shorts
+                                    </a>
+                                    <strong class="text-dark"> $29.50</strong>
+                                </div>
+                            </div>
+
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                                         class="img-md img-thumbnail" />
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="nav-link mb-1"> T-shirts with multiple colors, for men and
+                                        lady
+                                    </a>
+                                    <strong class="text-dark"> $120.00</strong>
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <a href="#" class="me-3">
+                                    <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                                         class="img-md img-thumbnail" />
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="nav-link mb-1"> Blazer Suit Dress Jacket for Men, Blue color
+                                    </a>
+                                    <strong class="text-dark"> $339.90</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 <script>
     let quantity = document.getElementById("quantity");
 
-    quantity.addEventListener("input", function () {
+    quantity.addEventListener("input", function() {
         if (this.value !== "" && this.value < 1)
             this.value = 1;
     });
@@ -233,7 +232,7 @@
         }).then(data => {
             let displayMessage = document.getElementById("displayMessage");
             displayMessage.innerHTML = "";
-            if (data.success) {
+            if(data.success) {
                 let span = document.createElement("span");
                 span.classList.add("text-success");
                 span.innerText = data.success;
