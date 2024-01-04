@@ -30,16 +30,17 @@ public class CategoryController {
 
         @RequestMapping(value="/{category}", method = RequestMethod.GET)
         public String category(@PathVariable(value="category") String categoryLabelEn, Model model, Locale locale){
-
             Category category = categoryDAO.findByLabelEn(categoryLabelEn);
 
             if(category == null) {
                 return "redirect:/";
             }
-
-            ArrayList<Product> products = productDAO.findByCategory(category);
-
-            System.out.println(products.size());
+            ArrayList<Product> products;
+            try {
+            products = productDAO.findByCategory(category);
+            } catch (Exception e) {
+                return "redirect:/";
+            }
 
             model.addAttribute("products", products);
             model.addAttribute("locale", locale);

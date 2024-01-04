@@ -10,4 +10,5 @@ public interface ProductDataAccess {
     Product findByLabelEnAndId(String labelEn, Integer id);
     Product findById(Integer id);
     ArrayList<Product> findByCategory(Category category);
+    ArrayList<Product> findAll();
 }

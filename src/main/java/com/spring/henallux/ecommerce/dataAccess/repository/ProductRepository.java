@@ -11,5 +11,6 @@ import java.util.ArrayList;
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
     ProductEntity findByLabelEnAndId(String labelEn, Integer id);
     ProductEntity findById(Integer id);
-    ArrayList<ProductEntity> findAllByCategoryId(CategoryEntity category);
+    ArrayList<ProductEntity> findAllByCategoryId(Integer category);
+    ArrayList<ProductEntity> findAll();
 }

@@ -1,6 +1,7 @@
 package com.spring.henallux.ecommerce.controller;
 
 import com.spring.henallux.ecommerce.Model.Category;
+import com.spring.henallux.ecommerce.Model.SearchForm;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class homeController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home() {
+    public String home(Model model) {
         return "integrated:home";
     }
 }

@@ -36,8 +36,6 @@ public class cartController {
         model.addAttribute("locale", locale);
         model.addAttribute("cart", cart);
 
-
-
         return "integrated:cart";
     }
 
