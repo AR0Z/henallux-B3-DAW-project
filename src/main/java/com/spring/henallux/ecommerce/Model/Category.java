@@ -16,10 +16,6 @@ public class Category {
     private String labelEn;
     private String labelFr;
 
-<<<<<<<<< Temporary merge branch 1
-    public String getLocalizedLabel(Locale locale) {
-        return "fr".equalsIgnoreCase(locale.getLanguage()) ? labelFr : labelEn;
-=========
     public String getName(Locale locale) {
         if (locale.getLanguage().equals("fr")) {
             return labelFr;
