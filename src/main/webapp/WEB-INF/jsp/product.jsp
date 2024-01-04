@@ -89,8 +89,7 @@
                             <spring:message code="product_category" />
                             :
                         </dt>
-                        <dd class="col-9">${product.category}</dd>
-                        ${System.out.println(product)}
+                        <dd class="col-9">${product.category.getLocalizedLabel(locale)}</dd>
                         <dt class="col-3">Stock:</dt>
                         <dd class="col-9">${product.stock}</dd>
                     </div>
@@ -98,7 +97,9 @@
                     <hr />
                         <div class="row mb-4">
                                 <div class="col-md-4 col-6 mb-3">
-                                    <label class="mb-2 d-block">Quantity</label>
+                                    <label class="mb-2 d-block">
+                                        <spring:message code="quantity" />
+                                    </label>
                                     <div class="input-group mb-3" style="width: 170px;">
                                         <button class="btn btn-white border border-secondary px-3" type="button" data-mdb-ripple-color="dark">
                                             <i class="fas fa-minus"></i>
@@ -113,8 +114,8 @@
                                 </div>
                             </div>
                             <div class="p-2" id="displayMessage"></div>
-                            <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0" > <i class="me-1 fa fa-shopping-basket" ></i> Add to
-                                cart
+                            <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0" > <i class="me-1 fa fa-shopping-basket" ></i>
+                                <spring:message code="product_addCart" />
                             </button>
                         </div>
             </main>

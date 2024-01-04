@@ -34,11 +34,11 @@ public class ProductEntity {
 
     @OneToOne
     @JoinColumn(name="category_id")
-    private CategoryEntity categoryId;
+    private CategoryEntity category;
 
     @OneToOne
     @JoinColumn(name="promotion_id")
-    private PromotionEntity promotionId;
+    private PromotionEntity promotion;
 
     @Column(name="dimension")
     private String dimension;
