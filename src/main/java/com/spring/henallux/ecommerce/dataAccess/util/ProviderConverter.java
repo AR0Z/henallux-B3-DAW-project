@@ -87,4 +87,12 @@ public class ProviderConverter {
     public Order orderEntityToOrder(OrderEntity orderEntity) {
         return mapper.map(orderEntity, Order.class);
     }
+
+    public Category categoryEntityToCategory(CategoryEntity categoryEntity) {
+        return mapper.map(categoryEntity, Category.class);
+    }
+
+    public CategoryEntity categoryToCategoryEntity(Category category) {
+        return mapper.map(category, CategoryEntity.class);
+    }
 }

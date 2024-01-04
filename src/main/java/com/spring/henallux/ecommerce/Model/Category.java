@@ -16,6 +16,17 @@ public class Category {
     private String labelEn;
     private String labelFr;
 
+    public String getName(Locale locale) {
+        if (locale.getLanguage().equals("fr")) {
+            return labelFr;
+        }
+        return labelEn;
+    }
+
+    public String getLink() {
+        return "category/" + labelEn;
+    }
+
     public String getLocalizedLabel(Locale locale) {
         return "fr".equalsIgnoreCase(locale.getLanguage()) ? labelFr : labelEn;
     }

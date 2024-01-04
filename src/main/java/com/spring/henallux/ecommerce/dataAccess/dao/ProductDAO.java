@@ -1,11 +1,15 @@
 package com.spring.henallux.ecommerce.dataAccess.dao;
 
+import com.spring.henallux.ecommerce.Model.Category;
 import com.spring.henallux.ecommerce.Model.Product;
+import com.spring.henallux.ecommerce.dataAccess.entity.CategoryEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.ProductEntity;
 import com.spring.henallux.ecommerce.dataAccess.repository.ProductRepository;
 import com.spring.henallux.ecommerce.dataAccess.util.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class ProductDAO implements ProductDataAccess {
@@ -37,5 +41,18 @@ public class ProductDAO implements ProductDataAccess {
         }
 
         return providerConverter.productEntityToProduct(productEntity);
+    }
+
+    public ArrayList<Product> findByCategory(Category category) {
+        CategoryEntity categoryEntity = providerConverter.categoryToCategoryEntity(category);
+        ArrayList<ProductEntity> productEntity = productRepository.findAllByCategoryId(categoryEntity);
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        for(ProductEntity product : productEntity) {
+            products.add(providerConverter.productEntityToProduct(product));
+        }
+
+        return products;
     }
 }

@@ -24,9 +24,9 @@
                     <spring:message code="categories" />
                 </button>
                 <ul class=" dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <c:forEach var="entry" items="${categories}">
+                        <li><a class="dropdown-item" href="${entry.key}">${entry.value}</a></li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="search w-100">
