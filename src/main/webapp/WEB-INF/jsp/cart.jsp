@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="./include/importTags.jsp" %>
+
 <section class="h-100 h-custom">
         <div class="container h-100 py-3">
             <div class="col d-flex h-100 w-100" style="justify-content: space-between">
@@ -6,9 +8,15 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="h5">Shopping Bag</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col" class="h5">
+                                        <spring:message code="cart_bag" />
+                                    </th>
+                                    <th scope="col">
+                                        <spring:message code="cart_quantity" />
+                                    </th>
+                                    <th scope="col">
+                                        <spring:message code="cart_price" />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,26 +56,31 @@
                             </tbody>
                         </table>
                     </div>
-                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;width: 20rem">
+                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;width: 30rem;">
                         <div class="card-body">
-                                <div style="width: 20rem">
+                                <div style="width: 100%">
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                        <p class="mb-2">Subtotal</p>
+                                        <p class="mb-2">
+                                            <spring:message code="cart_subTotal" />
+                                        </p>
                                         <p class="mb-2" id="totalPrice">${cart.getTotalPrice()}</p>
                                     </div>
 
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
-                                        <p class="mb-0">Shipping</p>
+                                        <p class="mb-0">
+                                            <spring:message code="cart_shipping" />
+                                        </p>
                                         <p class="mb-0">5 euros</p>
                                     </div>
 
                                     <hr class="my-4">
 
                                     <div class="d-flex justify-content-between mb-4 w-100" style="font-weight: 500;">
-                                        <p class="mb-2">Total (tax included)</p>
+                                        <p class="mb-2">
+                                            <spring:message code="cart_total" />
+                                        </p>
                                         <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()} euros</p>
                                     </div>
-
                                     <div id="paypal-button-container"></div>
                                 </div>
                             </div>
@@ -77,7 +90,7 @@
             </div>
         </div>
     </section>
-<script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR&disable-funding=card,credit,bancontact,sofort"></script>
 <script>
     const quantityInputs = document.getElementsByClassName("editQuantity");
 
