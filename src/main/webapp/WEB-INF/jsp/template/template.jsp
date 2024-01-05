@@ -60,7 +60,7 @@
         }
 
         footer {
-            margin-top : auto;
+            margin-top : auto !important;
         }
     </style>
 </head>

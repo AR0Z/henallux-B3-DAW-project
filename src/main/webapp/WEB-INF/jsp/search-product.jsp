@@ -183,7 +183,7 @@
         }
     }
 </style>
-<section>
+<div style="height: 75vh">
     <div class="filter">
         <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter"
                 aria-expanded="false" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span>
@@ -277,7 +277,7 @@
             </form>
         </div>
     </section>
-</section>
+</div>
 <section id="products">
     <div class="container">
         <div class="row">
