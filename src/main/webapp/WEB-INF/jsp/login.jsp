@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="./include/importTags.jsp" %>
 
-<section class="d-flex justify-content-center align-items-center" style="height: 70vh;">
+<section class="d-flex justify-content-center align-items-center" style="height: 75%;">
     <form:form method="post" action="" modelAttribute="user">
         <!-- Email input -->
         <div class="mb-4">

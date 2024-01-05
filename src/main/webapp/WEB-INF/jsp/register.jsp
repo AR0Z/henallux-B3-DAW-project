@@ -7,7 +7,7 @@
         margin-bottom: 2px !important;
     }
 </style>
-<div class="wrapper d-flex align-items-center justify-content-center" style="height:100%;width:100%">
+<div class="wrapper d-flex align-items-center justify-content-center" style="height:75%;width:100%">
     <section class="background-image mb-2" style="width: 50vw; ">
         <div class="container d-flex align-items-center justify-content-center ">
             <form:form class="col g-4 needs-validation d-flex align-items-center justify-content-center flex-column"

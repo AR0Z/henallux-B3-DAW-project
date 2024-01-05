@@ -66,10 +66,10 @@
                 <div id="search">
                     <form:select path="categoryLabel" class="btn btn-secondary" id="category" style="display: block">
                         <option value="all">
-                            Toutes les catégories
+                            <spring:message code="every_categories"/>
                         </option>
                         <c:forEach var="entry" items="${categories}">
-                            <option value="${entry.key}"><a class="dropdown-item">${entry.value}</a></option>
+                            <option value="${entry.key}">${entry.value}</option>
                         </c:forEach>
                     </form:select>
                     <div id="search-bar">

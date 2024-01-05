@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./include/importTags.jsp" %>
 
-<section class="h-100 h-custom">
-        <div class="container h-100 py-3">
-            <div class="col d-flex h-100 w-100" style="justify-content: space-between">
+<section style="min-height: 75%">
+        <div class="container py-3">
+            <div class="col d-flex w-100" style="justify-content: space-between">
                 <div class="table-responsive w-100">
                         <table class="table">
                             <thead>
