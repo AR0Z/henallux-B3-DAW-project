@@ -5,17 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.HashMap;
 
 @NoArgsConstructor
 @Getter
 @Setter
 public class Order {
-    private Integer id;
-    private String date;
+    private int id;
+    private Date date;
     private String orderStatus;
     private String paypalOrderId;
-    private UserEntity userId;
+    private User userId;
     private HashMap<Integer, OrderLine> orderLines;
     public float getTotalPrice() {
         float totalPrice = 0;

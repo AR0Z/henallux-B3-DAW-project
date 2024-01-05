@@ -5,6 +5,7 @@ import com.spring.henallux.ecommerce.Model.CartLine;
 import com.spring.henallux.ecommerce.Model.Product;
 import com.spring.henallux.ecommerce.dataAccess.dao.ProductDataAccess;
 import com.spring.henallux.ecommerce.service.Constants;
+import com.spring.henallux.ecommerce.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,12 @@ import java.util.Locale;
 public class cartController {
 
     private ProductDataAccess productDAO;
+    private PromotionService promotionService;
 
     @Autowired
-    public cartController(ProductDataAccess productDAO){
+    public cartController(ProductDataAccess productDAO, PromotionService promotionService){
         this.productDAO = productDAO;
+        this.promotionService = promotionService;
     }
 
     @ModelAttribute(Constants.CURRENT_CART)
@@ -72,6 +75,9 @@ public class cartController {
     public ResponseEntity<?> addProduct(@RequestParam int productId, @RequestParam int quantity, Locale locale,
                                         @ModelAttribute(value = Constants.CURRENT_CART) Cart cart) {
         Product product = productDAO.findById(productId);
+
+        product = promotionService.applyPromotion(product);
+
         HashMap<String, Object> response = new HashMap<>();
 
         if(product == null) {

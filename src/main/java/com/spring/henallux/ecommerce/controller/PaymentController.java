@@ -51,7 +51,7 @@ public class PaymentController {
 
         Order order = cart.toOrder();
 
-        order.setUserId(userDAO.findEntityByEmail(user.getEmail()));
+        order.setUserId(userDAO.findByEmail(user.getEmail()));
 
         // save order in database
         OrderEntity orderEntity = orderDAO.save(order);

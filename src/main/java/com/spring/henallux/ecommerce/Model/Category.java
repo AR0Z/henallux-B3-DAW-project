@@ -12,7 +12,7 @@ import java.util.Locale;
 @Setter
 @AllArgsConstructor
 public class Category {
-    private Integer id;
+    private int id;
     private String labelEn;
     private String labelFr;
 

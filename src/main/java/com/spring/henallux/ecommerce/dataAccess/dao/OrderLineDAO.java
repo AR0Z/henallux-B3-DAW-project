@@ -1,5 +1,6 @@
 package com.spring.henallux.ecommerce.dataAccess.dao;
 
+import com.spring.henallux.ecommerce.Model.Order;
 import com.spring.henallux.ecommerce.Model.OrderLine;
 import com.spring.henallux.ecommerce.dataAccess.entity.OrderEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.OrderLineEntity;
@@ -40,5 +41,18 @@ public class OrderLineDAO implements OrderLineDataAccess {
 
             orderLineRepository.save(orderLineEntity);
         }
+    }
+
+    public HashMap<Integer, OrderLine> findByOrderId(Order order){
+        ArrayList<OrderLineEntity> orderLineEntity = orderLineRepository.findAllByOrderId(providerConverter.orderToOrderEntity(order));
+        HashMap<Integer, OrderLine> orderLines = new HashMap<>();
+
+        for(OrderLineEntity orderLineEntityToAdd : orderLineEntity){
+            OrderLine orderLine = providerConverter.orderLineEntityToOrderLine(orderLineEntityToAdd);
+            orderLine.setProduct(providerConverter.productEntityToProduct(orderLineEntityToAdd.getProductId()));
+            orderLines.put(orderLine.getId(), orderLine);
+        }
+
+        return orderLines;
     }
 }

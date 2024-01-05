@@ -1,5 +1,6 @@
 package com.spring.henallux.ecommerce.Model;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class Cart {
@@ -68,7 +69,7 @@ public class Cart {
     public Order toOrder() {
         Order order = new Order();
 
-        order.setDate(java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        order.setDate(new Date());
         order.setOrderStatus("Waiting for payment");
 
         return order;

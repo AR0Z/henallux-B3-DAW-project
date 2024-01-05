@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "promotions")
@@ -17,17 +18,17 @@ public class PromotionEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "promotion_id")
-    private Integer id;
+    private int id;
     @Column(name = "label_fr")
     private String labelFr;
     @Column(name = "label_en")
     private String labelEn;
     @Column(name = "percentage")
-    private Integer percentage;
+    private int percentage;
     @Column(name = "type")
     private String type;
     @Column(name = "begin_date")
-    private String beginDate;
+    private Date beginDate;
     @Column(name = "end_date")
-    private String endDate;
+    private Date endDate;
 }

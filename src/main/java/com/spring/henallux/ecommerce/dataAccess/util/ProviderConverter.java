@@ -15,12 +15,7 @@ public class ProviderConverter {
     public User userEntityToUser(UserEntity userEntity) {
         User user = new User();
 
-        user.setEmail(userEntity.getEmail());
-        user.setPassword(userEntity.getPassword());
-        user.setFirstName(userEntity.getFirstName());
-        user.setLastName(userEntity.getLastName());
-        user.setPhoneNumber(userEntity.getPhoneNumber());
-        user.setDeliveryAddress(userEntity.getDeliveryAddress());
+        mapper.map(userEntity, user);
         user.setAuthorities(userEntity.getAuthorities());
         user.setAccountNonExpired(userEntity.getAccountNonExpired());
         user.setAccountNonLocked(userEntity.getAccountNonLocked());
@@ -61,16 +56,8 @@ public class ProviderConverter {
         return category;
     }
 
-    private Promotion getPromotionByPromotionEntity(PromotionEntity promotionEntity) {
-        Promotion promotion = new Promotion();
-        promotion.setId(promotionEntity.getId());
-        promotion.setLabelEn(promotionEntity.getLabelEn());
-        promotion.setLabelFr(promotionEntity.getLabelFr());
-        promotion.setBeginDate(promotionEntity.getBeginDate());
-        promotion.setEndDate(promotionEntity.getEndDate());
-        promotion.setPercentage(promotionEntity.getPercentage());
-        promotion.setType(promotionEntity.getType());
-        return promotion;
+    public Promotion promotionEntityToPromotion (PromotionEntity promotionEntity) {
+        return mapper.map(promotionEntity, Promotion.class);
     }
 
     public OrderEntity orderToOrderEntity(Order order) {
@@ -94,5 +81,9 @@ public class ProviderConverter {
 
     public CategoryEntity categoryToCategoryEntity(Category category) {
         return mapper.map(category, CategoryEntity.class);
+    }
+
+    public OrderLine orderLineEntityToOrderLine(OrderLineEntity orderLineEntity) {
+        return mapper.map(orderLineEntity, OrderLine.class);
     }
 }

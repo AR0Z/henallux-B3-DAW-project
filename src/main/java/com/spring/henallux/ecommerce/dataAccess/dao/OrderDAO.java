@@ -3,6 +3,7 @@ package com.spring.henallux.ecommerce.dataAccess.dao;
 import com.spring.henallux.ecommerce.Model.Order;
 import com.spring.henallux.ecommerce.Model.User;
 import com.spring.henallux.ecommerce.dataAccess.entity.OrderEntity;
+import com.spring.henallux.ecommerce.dataAccess.entity.OrderLineEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import com.spring.henallux.ecommerce.dataAccess.repository.OrderRepository;
 import com.spring.henallux.ecommerce.dataAccess.repository.UserRepository;
@@ -30,9 +31,14 @@ public class OrderDAO implements OrderDataAccess {
         return orderEntity;
     }
 
-    public Order findById(Integer id) {
+    public Order findById(int id) {
         OrderEntity orderEntity = orderRepository.findById(id);
-        return providerConverter.orderEntityToOrder(orderEntity);
+
+        Order order = providerConverter.orderEntityToOrder(orderEntity);
+
+        order.setUserId(providerConverter.userEntityToUser(orderEntity.getUserId()));
+
+        return order;
     }
 
 }

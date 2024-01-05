@@ -1,19 +1,19 @@
 package com.spring.henallux.ecommerce.Model;
 
 public class OrderLine {
-    private Integer id;
-    private Integer quantity;
+    private int id;
+    private int quantity;
     private Double price;
     private Product product;
     private Order order;
 
     public OrderLine() {}
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -33,11 +33,11 @@ public class OrderLine {
         return quantity * price;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

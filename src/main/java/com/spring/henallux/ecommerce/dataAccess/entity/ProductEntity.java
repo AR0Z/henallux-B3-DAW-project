@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="product_id")
-    private Integer id;
+    private int id;
 
     @Column(name="label_en")
     private String labelEn;
@@ -45,16 +46,16 @@ public class ProductEntity {
 
     @Column(name="weight")
     @Min(0)
-    private Double weight;
+    private double weight;
 
     @Column(name="price")
     @Min(0)
-    private Double price;
+    private double price;
 
     @Column(name="stock")
     @Min(0)
-    private Integer stock;
+    private int stock;
 
     @Column(name="date_added")
-    private String dateAdded;
+    private Date dateAdded;
 }

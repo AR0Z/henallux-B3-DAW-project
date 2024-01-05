@@ -5,16 +5,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Promotion {
-    private Integer id;
+    private int id;
     private String labelEn;
     private String labelFr;
-    private String beginDate;
-    private String endDate;
-    private Integer percentage;
+    private Date beginDate;
+    private Date endDate;
+    private int percentage;
     private String type;
+
+    @Override
+    public String toString(){
+        return "Promotion{" +
+                "id=" + id +
+                ", labelEn='" + labelEn + '\'' +
+                ", labelFr='" + labelFr + '\'' +
+                ", beginDate='" + beginDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ import com.spring.henallux.ecommerce.Model.Category;
 import com.spring.henallux.ecommerce.Model.Product;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.dao.ProductDataAccess;
+import com.spring.henallux.ecommerce.service.PromotionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 public class SearchProductController {
     private CategoryDataAccess categoryDAO;
     private ProductDataAccess productDAO;
+    private PromotionService promotionService;
 
-    public SearchProductController(CategoryDataAccess categoryDAO, ProductDataAccess productDAO) {
+    public SearchProductController(CategoryDataAccess categoryDAO, ProductDataAccess productDAO, PromotionService promotionService) {
         this.categoryDAO = categoryDAO;
         this.productDAO = productDAO;
+        this.promotionService = promotionService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -31,10 +34,12 @@ public class SearchProductController {
             @RequestParam(value = "filter", required = false) String searchLabel,
             Model model, Locale locale) {
         model.addAttribute("locale", locale);
-        System.out.println("categoryLabel: " + categoryLabel);
         ArrayList<Product> products;
         if (categoryLabel == null && searchLabel == null) {
             products = productDAO.findAll();
+
+            products = promotionService.calculatePromotionOfProducts(products);
+
             model.addAttribute("products", products);
             return "integrated:search-product";
         }
@@ -48,6 +53,8 @@ public class SearchProductController {
             if (searchLabel != null) {
                 products = filterBySearch(products, searchLabel, locale);
             }
+            products = promotionService.calculatePromotionOfProducts(products);
+
             model.addAttribute("products", products);
             return "integrated:search-product";
         }
@@ -55,11 +62,13 @@ public class SearchProductController {
         category = categoryDAO.findByLabelEn(categoryLabel);
         System.out.println(category.getId());
         products = productDAO.findByCategory(category);
-        System.out.println("TEST1");
 
         if (searchLabel != null) {
             products = filterBySearch(products, searchLabel, locale);
         }
+
+        products = promotionService.calculatePromotionOfProducts(products);
+
         model.addAttribute("products", products);
         return "integrated:search-product";
     }

@@ -6,7 +6,6 @@ import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 
 public interface UserDataAccess {
     User findByEmail(String username);
-    UserEntity findEntityByEmail(String email);
     User save(User user);
     User update(UserEdit user, User oldUser);
 }

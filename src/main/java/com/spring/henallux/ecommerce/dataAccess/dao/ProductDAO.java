@@ -6,6 +6,7 @@ import com.spring.henallux.ecommerce.dataAccess.entity.CategoryEntity;
 import com.spring.henallux.ecommerce.dataAccess.entity.ProductEntity;
 import com.spring.henallux.ecommerce.dataAccess.repository.ProductRepository;
 import com.spring.henallux.ecommerce.dataAccess.util.ProviderConverter;
+import com.spring.henallux.ecommerce.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,37 +24,47 @@ public class ProductDAO implements ProductDataAccess {
         this.providerConverter = providerConverter;
     }
 
-    public Product findByLabelEnAndId(String labelEn, Integer id) {
+    public Product findByLabelEnAndId(String labelEn, int id) {
         ProductEntity productEntity = productRepository.findByLabelEnAndId(labelEn, id);
 
         if (productEntity == null) {
             return null;
         }
 
-        return providerConverter.productEntityToProduct(productEntity);
+        Product product = providerConverter.productEntityToProduct(productEntity);
+
+        product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
+
+        return product;
     }
 
-    public Product findById(Integer id) {
+    public Product findById(int id) {
         ProductEntity productEntity = productRepository.findById(id);
 
         if (productEntity == null) {
             return null;
         }
 
-        return providerConverter.productEntityToProduct(productEntity);
+        Product product = providerConverter.productEntityToProduct(productEntity);
+
+        product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
+
+        return product;
     }
 
     public ArrayList<Product> findByCategory(Category category) {
-        System.out.println("TEST2");
         CategoryEntity categoryEntity = providerConverter.categoryToCategoryEntity(category);
-        System.out.println("TEST3");
         ArrayList<ProductEntity> productEntity = productRepository.findAllByCategoryId(categoryEntity);
-        System.out.println("TEST4");
 
         ArrayList<Product> products = new ArrayList<>();
 
         for(ProductEntity product : productEntity) {
-            products.add(providerConverter.productEntityToProduct(product));
+            Product productToAdd = providerConverter.productEntityToProduct(product);
+
+            productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
+            products.add(productToAdd);
+
+
         }
 
         return products;
@@ -65,7 +76,10 @@ public class ProductDAO implements ProductDataAccess {
         ArrayList<Product> products = new ArrayList<>();
 
         for(ProductEntity product : productEntity) {
-            products.add(providerConverter.productEntityToProduct(product));
+            Product productToAdd = providerConverter.productEntityToProduct(product);
+
+            productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
+            products.add(productToAdd);
         }
 
         return products;

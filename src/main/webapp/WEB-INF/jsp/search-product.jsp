@@ -233,6 +233,7 @@
             </form>
         </div>
     </div>
+<<<<<<< Updated upstream
     <section id="sidebar">
         <div>
             <h6 class="p-1 border-bottom">Home Furniture</h6>
@@ -281,11 +282,20 @@
         <div class="container">
             <div class="row">
                 <c:forEach var="product" items="${products}">
+=======
+</section>
+<section id="products">
+    <div class="container">
+        <div class="row">
+            <c:forEach var="product" items="${products}">
+                <a href="product/${product.labelEn}-${product.id}">
+>>>>>>> Stashed changes
                     <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
                         <div class="card">
                             <img class="card-img-top" src="https://placehold.co/400" alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text">${product.getLocalizedLabel(locale)}</p>
+<<<<<<< Updated upstream
                                 <p>$${product.price}</p>
                                 <span class="fa fa-circle red"></span>
                                 <span class="fa fa-circle teal"></span>
@@ -295,6 +305,23 @@
                     </div>
                 </c:forEach>
             </div>
+=======
+                                <p>
+                                    <span <c:if test="${product.isPromotion}">class="red"</c:if> >${product.price}</span>
+                                    <c:if test="${product.isPromotion}">
+                                        <del>${product.oldPrice}</del>
+                                    </c:if>
+                                    euros
+                                </p>
+                                <span class="fa fa-circle red" ></span>
+                                <span class="fa fa-circle teal" ></span>
+                                <span class="fa fa-circle blue" ></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </c:forEach>
+>>>>>>> Stashed changes
         </div>
     </section>
 </section>

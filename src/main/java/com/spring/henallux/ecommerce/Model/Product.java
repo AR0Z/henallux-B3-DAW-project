@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,7 +13,7 @@ import java.util.Locale;
 @Setter
 @NoArgsConstructor
 public class Product {
-    private Integer id;
+    private int id;
     private String labelEn;
     private String labelFr;
     private String descriptionEn;
@@ -20,10 +21,12 @@ public class Product {
     private Category category;
     private Promotion promotion;
     private String dimension;
-    private Double weight;
-    private Double price;
-    private Integer stock;
-    private String dateAdded;
+    private double weight;
+    private double price;
+    private int stock;
+    private Date dateAdded;
+    private double oldPrice;
+    private Boolean isPromotion;
 
     public String getLocalizedLabel(Locale locale) {
         return "fr".equalsIgnoreCase(locale.getLanguage()) ? labelFr : labelEn;

@@ -15,7 +15,7 @@ public class CategoryEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private Integer id;
+    private int id;
     @Column(name = "label_fr")
     private String labelFr;
     @Column(name = "label_en")

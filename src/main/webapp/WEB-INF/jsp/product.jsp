@@ -64,7 +64,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <span class="h5">${product.price}€</span>
+                        <span class="h5">
+                            <span <c:if test="${product.isPromotion}">class="red"</c:if> >${product.price}</span>
+                                <c:if test="${product.isPromotion}">
+                                    <del>${product.oldPrice}</del>
+                                </c:if>
+                                euros
+                        </span>
                         <span class="text-muted">/
                             <spring:message code="product_each" />
                         </span>

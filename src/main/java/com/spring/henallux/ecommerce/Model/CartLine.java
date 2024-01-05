@@ -2,11 +2,11 @@ package com.spring.henallux.ecommerce.Model;
 
 public class CartLine {
     private Product product;
-    private Integer quantity;
+    private int quantity;
 
     public CartLine() {}
 
-    public CartLine(Product product, Integer quantity) {
+    public CartLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -15,7 +15,7 @@ public class CartLine {
         return product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -23,7 +23,7 @@ public class CartLine {
         this.product = product;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

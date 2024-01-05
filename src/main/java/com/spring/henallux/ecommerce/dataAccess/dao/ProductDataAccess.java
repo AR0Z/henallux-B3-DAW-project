@@ -7,8 +7,8 @@ import com.spring.henallux.ecommerce.dataAccess.entity.CategoryEntity;
 import java.util.ArrayList;
 
 public interface ProductDataAccess {
-    Product findByLabelEnAndId(String labelEn, Integer id);
-    Product findById(Integer id);
+    Product findByLabelEnAndId(String labelEn, int id);
+    Product findById(int id);
     ArrayList<Product> findByCategory(Category category);
     ArrayList<Product> findAll();
 }

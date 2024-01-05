@@ -14,9 +14,9 @@ public class OrderLineEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "line_id")
-    private Integer id;
+    private int id;
     @Column(name = "quantity")
-    private Integer quantity;
+    private int quantity;
     @OneToOne
     @JoinColumn(name = "product_id")
     private ProductEntity productId;

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
-    ProductEntity findByLabelEnAndId(String labelEn, Integer id);
-    ProductEntity findById(Integer id);
+    ProductEntity findByLabelEnAndId(String labelEn, int id);
+    ProductEntity findById(int id);
     ArrayList<ProductEntity> findAllByCategoryId(CategoryEntity category);
     ArrayList<ProductEntity> findAll();
 }
