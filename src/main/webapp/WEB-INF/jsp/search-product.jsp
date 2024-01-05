@@ -283,7 +283,7 @@
                     <div class="card">
                         <img class="card-img-top" src="https://placehold.co/400" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">${product.labelFr}</p>
+                            <p class="card-text">${product.getLocalizedLabel(locale)}</p>
                             <p>$${product.price}</p>
                             <span class="fa fa-circle red" ></span>
                             <span class="fa fa-circle teal" ></span>

@@ -17,15 +17,16 @@
         <span class="fs-4">Furniture paradise</span>
     </a>
     <div class="d-flex justify-content-center" style="width: 50vw">
+        <form:form modelAttribute="searchform" method="get" action="/search-product">
             <div class="d-flex align-items-center">
-                <select class="btn btn-secondary" id="category" style="display: block">
+                <form:select path="categoryLabel" class="btn btn-secondary" id="category" style="display: block">
                     <option value="all">
                         Toutes les catégories
                     </option>
                     <c:forEach var="entry" items="${categories}">
-                        <option value="${entry.value}"><a class="dropdown-item">${entry.value}</a></option>
+                        <option value="${entry.key}"><a class="dropdown-item">${entry.value}</a></option>
                     </c:forEach>
-                </select>
+                </form:select>
             </div>
             <div class="search w-100">
                 <div class="row w-100">
@@ -33,24 +34,17 @@
                         <div>
                             <div class="search-2 d-flex">
                                 <spring:message code="searchBarPlaceholder" var="placeholderSearchbar" />
-                                <input var="search" class="w-100" type="text" placeholder='${placeholderSearchbar}' id="search" />
-                                <button type="submit" class="btn btn-outline-secondary pb-2"
+                                <form:input path="filter" var="search" class="w-100" type="text" placeholder='${placeholderSearchbar}' id="search" />
+                                <form:button type="submit" class="btn btn-outline-secondary pb-2"
                                         style="border-radius: 0 5px 5px 0;" id="submit">
-                                    <script>
-                                        document.getElementById("submit").addEventListener("click", () => {
-                                            var search = document.getElementById("search").value;
-                                            var category = $('#category').val();
-                                            console.log({search: search, category: category});
-                                        });
-                                    </script>
-
                                     <i class="bi bi-search"></i>
-                                </button>
+                                </form:button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </form:form>
         </div>
     </div>
     <div class=" text-end w-20 d-flex">

@@ -1,6 +1,7 @@
 package com.spring.henallux.ecommerce.configuration;
 
 import com.spring.henallux.ecommerce.Model.Category;
+import com.spring.henallux.ecommerce.Model.SearchForm;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDAO;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,11 @@ public class CustomLocaleChangeInterceptor extends LocaleChangeInterceptor {
             // create a map with catgorie link and categorie name with the locale
             Map<String, String> categoriesMap = new java.util.HashMap<>();
             for (Category category : categories) {
-                categoriesMap.put(category.getLink(), category.getName(currentLocale));
+                categoriesMap.put(category.getLabelEn(), category.getName(currentLocale));
             }
 
             modelAndView.addObject("categories", categoriesMap);
+            modelAndView.addObject("searchform", new SearchForm());
         }
     }
 }

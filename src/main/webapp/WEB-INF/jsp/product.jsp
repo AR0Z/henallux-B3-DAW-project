@@ -90,7 +90,6 @@
                             :
                         </dt>
                         <dd class="col-9">${product.category}</dd>
-                        ${System.out.println(product)}
                         <dt class="col-3">Stock:</dt>
                         <dd class="col-9">${product.stock}</dd>
                     </div>

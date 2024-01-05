@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class SearchForm {
     private String filter;
-    private String category;
+    private String categoryLabel;
 
 }

@@ -31,6 +31,7 @@ public class SearchProductController {
             @RequestParam(value = "filter", required = false) String searchLabel,
             Model model, Locale locale) {
         model.addAttribute("locale", locale);
+        System.out.println("categoryLabel: " + categoryLabel);
         ArrayList<Product> products;
         if (categoryLabel == null && searchLabel == null) {
             products = productDAO.findAll();
@@ -52,7 +53,10 @@ public class SearchProductController {
         }
 
         category = categoryDAO.findByLabelEn(categoryLabel);
+        System.out.println(category.getId());
         products = productDAO.findByCategory(category);
+        System.out.println("TEST1");
+
         if (searchLabel != null) {
             products = filterBySearch(products, searchLabel, locale);
         }
