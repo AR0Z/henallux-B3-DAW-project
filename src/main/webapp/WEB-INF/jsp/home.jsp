@@ -312,7 +312,7 @@
         </div>
     </div>
     <div class="banner_position_text">
-        <h2
+        <h2>
             <spring:message code="home_armchair" />
         </h2>
     </div>

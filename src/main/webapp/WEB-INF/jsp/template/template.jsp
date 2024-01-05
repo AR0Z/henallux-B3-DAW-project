@@ -45,9 +45,7 @@
     <style>
         body {
             min-height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
+            max-width: 100vw;
         }
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
