@@ -32,8 +32,8 @@ public class ProductDAO implements ProductDataAccess {
         }
 
         Product product = providerConverter.productEntityToProduct(productEntity);
-
-        product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
+        if(productEntity.getPromotionId() != null)
+            product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
 
         return product;
     }
@@ -46,8 +46,8 @@ public class ProductDAO implements ProductDataAccess {
         }
 
         Product product = providerConverter.productEntityToProduct(productEntity);
-
-        product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
+        if(productEntity.getPromotionId() != null)
+            product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
 
         return product;
     }
@@ -60,8 +60,8 @@ public class ProductDAO implements ProductDataAccess {
 
         for(ProductEntity product : productEntity) {
             Product productToAdd = providerConverter.productEntityToProduct(product);
-
-            productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
+            if(product.getPromotionId() != null)
+                productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
             products.add(productToAdd);
 
 
@@ -77,8 +77,8 @@ public class ProductDAO implements ProductDataAccess {
 
         for(ProductEntity product : productEntity) {
             Product productToAdd = providerConverter.productEntityToProduct(product);
-
-            productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
+            if(product.getPromotionId() != null)
+                productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
             products.add(productToAdd);
         }
 
