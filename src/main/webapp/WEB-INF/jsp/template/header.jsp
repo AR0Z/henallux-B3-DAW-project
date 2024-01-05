@@ -57,8 +57,8 @@
 <header class="p-2 mb-4 border-bottom" style="width: 100%;">
     <div id="wrapper">
         <div id="title">
-            <a href="/" class="col text-dark text-decoration-none">
-                <img src="../../../assets/title.png" alt="logo"/>
+            <a href="/" class="col text-dark text-decoration-none" >
+                <img src="../../../assets/title.png" alt="logo" style="width: 15vw"/>
             </a>
         </div>
         <div id="search-wrapper">

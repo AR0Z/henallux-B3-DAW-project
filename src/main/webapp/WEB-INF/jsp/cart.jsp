@@ -56,7 +56,7 @@
                             </tbody>
                         </table>
                     </div>
-                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;width: 30rem;">
+                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;width: 30rem; height: 17rem">
                         <div class="card-body">
                                 <div style="width: 100%">
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
@@ -81,8 +81,8 @@
                                         </p>
                                         <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()} euros</p>
                                     </div>
-                                    <div id="paypal-button-container"></div>
                                 </div>
+                                <div id="paypal-button-container"></div>
                             </div>
 
                         </div>
