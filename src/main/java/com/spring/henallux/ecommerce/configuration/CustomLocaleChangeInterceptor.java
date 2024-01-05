@@ -1,6 +1,7 @@
 package com.spring.henallux.ecommerce.configuration;
 
 import com.spring.henallux.ecommerce.Model.Category;
+import com.spring.henallux.ecommerce.Model.FilterForm;
 import com.spring.henallux.ecommerce.Model.SearchForm;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDAO;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDataAccess;
@@ -31,7 +32,7 @@ public class CustomLocaleChangeInterceptor extends LocaleChangeInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView){
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         if (modelAndView != null) {
 
             ArrayList<Category> categories = categoryDAO.getAllCategories();
@@ -45,6 +46,7 @@ public class CustomLocaleChangeInterceptor extends LocaleChangeInterceptor {
 
             modelAndView.addObject("categories", categoriesMap);
             modelAndView.addObject("searchform", new SearchForm());
+            modelAndView.addObject("filterform", new FilterForm());
         }
     }
 }

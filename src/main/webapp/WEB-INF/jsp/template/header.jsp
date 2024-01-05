@@ -30,39 +30,40 @@
         align-items: center;
         width: 40%;
     }
+
     #search {
         display: flex;
         align-items: center;
-        margin:0;
+        margin: 0;
         width: 100%;
     }
+
     #title {
         width: 20%;
         margin-right: 5px;
     }
+
     #search-bar {
         display: flex;
         width: 100%;
 
     }
-    #searchform {
-        width: 100%;
-    }
-    #search-input {
-        width: 100%;
-    }
+
 
 </style>
 
 <header class="p-2 mb-4 border-bottom" style="width: 100%;">
     <div id="wrapper">
         <div id="title">
-            <a href="/" class="col text-dark text-decoration-none" >
+            <a href="/" class="col text-dark text-decoration-none">
                 <img src="../../../assets/title.png" alt="logo" style="width: 15vw"/>
             </a>
         </div>
         <div id="search-wrapper">
-            <form:form modelAttribute="searchform" method="get" action="/search-product" cssStyle="margin:0;">
+            <%--@elvariable id="searchform" type="com.spring.henallux.ecommerce.Model.SearchForm"--%>
+            <form:form modelAttribute="searchform" method="get"
+                       action="/search-product" cssStyle="margin:0;">
+                <form:hidden path="orderby" value="labelasc"/>
                 <div id="search">
                     <form:select path="categoryLabel" class="btn btn-secondary" id="category" style="display: block">
                         <option value="all">
@@ -74,13 +75,13 @@
                     </form:select>
                     <div id="search-bar">
 
-                    <spring:message code="searchBarPlaceholder" var="placeholderSearchbar"/>
-                    <form:input path="filter" var="search" type="text"
-                                placeholder='${placeholderSearchbar}' id="search-input"/>
-                    <form:button type="submit" class="btn btn-outline-secondary pb-2"
-                                 style="border-radius: 0 5px 5px 0;" id="submit">
-                        <i class="bi bi-search"></i>
-                    </form:button>
+                        <spring:message code="searchBarPlaceholder" var="placeholderSearchbar"/>
+                        <form:input path="filter" var="search" type="text"
+                                    placeholder='${placeholderSearchbar}' id="search-input"/>
+                        <form:button type="submit" class="btn btn-outline-secondary pb-2"
+                                     style="border-radius: 0 5px 5px 0;" id="submit">
+                            <i class="bi bi-search"></i>
+                        </form:button>
                     </div>
 
                 </div>

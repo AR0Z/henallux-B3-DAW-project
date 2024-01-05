@@ -20,8 +20,13 @@ public class Promotion {
     private int percentage;
     private String type;
 
+    public Boolean isPromotionValid() {
+        Date currentDate = new Date();
+        return currentDate.after(beginDate) && currentDate.before(endDate);
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Promotion{" +
                 "id=" + id +
                 ", labelEn='" + labelEn + '\'' +

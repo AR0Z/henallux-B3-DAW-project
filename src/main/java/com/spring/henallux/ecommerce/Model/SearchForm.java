@@ -10,5 +10,5 @@ import lombok.Setter;
 public class SearchForm {
     private String filter;
     private String categoryLabel;
-
+    private String orderby;
 }

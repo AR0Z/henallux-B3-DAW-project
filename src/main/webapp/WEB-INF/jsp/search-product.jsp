@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <style>
     body {
         color: grey;
     }
 
     #sidebar {
-        width: 20%;
+        width: auto;
         padding: 10px;
         margin: 0;
         float: left;
@@ -33,15 +34,6 @@
     .red {
         color: #e94545d7;
     }
-
-    .teal {
-        color: rgb(69, 129, 129);
-    }
-
-    .blue {
-        color: #0000ff;
-    }
-
 
     .card-body p {
         margin: 2px;
@@ -105,7 +97,6 @@
             padding: 10px;
         }
     }
-
 
 
     .section-products {
@@ -195,49 +186,58 @@
             </form>
         </div>
     </div>
-    <section id="sidebar">
-        <div>
-            <h6 class="p-1 border-bottom">Home Furniture</h6>
-            <ul>
-                <li><a href="#">Living</a></li>
-                <li><a href="#">Dining</a></li>
-                <li><a href="#">Office</a></li>
-                <li><a href="#">Bedroom</a></li>
-                <li><a href="#">Kitchen</a></li>
-            </ul>
-        </div>
-        <div>
-            <h6 class="p-1 border-bottom">Filter By</h6>
-            <p class="mb-2">Color</p>
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#">
-                    <span class="fa fa-circle pr-1 red"></span>Red
-                </a></li>
-                <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#">
-                    <span class="fa fa-circle pr- teal"></span>Teal
-                </a></li>
-                <li class="list-group-item list-group-item-action mb-2 rounded"><a href="#">
-                    <span class="fa fa-circle pr-1 blue"></span>Blue
-                </a></li>
-            </ul>
-        </div>
-        <div>
-            <h6>Type</h6>
-            <form class="ml-md-2">
-                <div class="form-inline border rounded p-sm-2 my-2">
-                    <input type="radio" name="type">
-                    <label for="boring" class="pl-1 pt-sm-0 pt-1">Boring</label>
-                </div>
-                <div class="form-inline border rounded p-sm-2 my-2">
-                    <input type="radio" name="type">
-                    <label for="ugly" class="pl-1 pt-sm-0 pt-1">Ugly</label>
-                </div>
-                <div class="form-inline border rounded p-md-2 p-sm-1">
-                    <input type="radio" name="type">
-                    <label for="notugly" class="pl-1 pt-sm-0 pt-1">Not Ugly</label>
-                </div>
-            </form>
-        </div>
+    <section id="sidebar" style="width: 20%">
+
+        <%--@elvariable id="filterform" type="com.spring.henallux.ecommerce.Model.FilterForm"--%>
+        <form:form method="get" modelAttribute="filterform" cssClass="d-flex"
+                   cssStyle="flex-direction: column;gap: 10px" id="filterform">
+            <h6 class="p-1 border-bottom mb-3">Trie par</h6>
+            <form:select path="orderby">
+                <form:option value="priceasc">Prix croissant</form:option>
+                <form:option value="pricedesc">Prix decroissant</form:option>
+                <form:option value="labelasc">Nom croissant</form:option>
+                <form:option value="labeldesc">Nom decroissant</form:option>
+            </form:select>
+            <div class="d-flex" style="justify-content: space-between">
+                <label for="checkbox">Promotion</label>
+                <form:checkbox path="ispromotion" id="checkbox"/>
+            </div>
+            <form:input id="minprice" path="minprice" type="number" placeholder="Prix minimum" maxlength="6"/>
+            <form:input id="maxprice" path="maxprice" type="number" placeholder="Prix maximum" maxlength="6"/>
+            <form:button id="submitbtn" type="submit">Filtrer</form:button>
+            <div id="error" class="red d-flex"></div>
+            <script defer>
+                const filterform = document.getElementById("filterform");
+                const minprice = document.getElementById("minprice");
+                const maxprice = document.getElementById("maxprice");
+                const error = document.getElementById("error");
+
+                filterform.addEventListener("submit", (e) => {
+                    e.preventDefault()
+                    let errorText = ""
+                    console.log({minprice: minprice.value, maxprice: maxprice.value})
+                    if (minprice.value > maxprice.value && maxprice.value !== "") {
+                        errorText = "Le prix minimum ne peut pas etre superieur au prix maximum";
+                    }
+                    if (minprice.value < 0 || maxprice.value < 0) {
+                        errorText = "Le prix minimum et maximum ne peuvent pas etre negatif";
+                    }
+                    if (minprice.value > 100000 || maxprice.value > 100000) {
+                        errorText = "Le prix minimum et maximum ne peuvent pas etre superieur a 100000";
+                    }
+                    if (errorText !== "") {
+                        error.innerText = errorText;
+                        error.style.display = "block";
+                    } else {
+                        error.style.display = "none";
+                        filterform.submit();
+                    }
+                });
+
+
+            </script>
+        </form:form>
+
     </section>
     <section class="section-products">
         <div class="container">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -32,13 +33,34 @@ public class SearchProductController {
     public String searchProduct(
             @RequestParam(value = "categoryLabel", required = false) String categoryLabel,
             @RequestParam(value = "filter", required = false) String searchLabel,
+            @RequestParam(value = "orderby", required = false) String orderBy,
+            @RequestParam(value = "ispromotion", required = false) Boolean isPromotion,
+            @RequestParam(value = "minprice", required = false) Double minPrice,
+            @RequestParam(value = "maxprice", required = false) Double maxPrice,
             Model model, Locale locale) {
         model.addAttribute("locale", locale);
         ArrayList<Product> products;
+
+        if (orderBy == null) {
+            orderBy = "labelasc";
+        }
+
+        if (isPromotion == null) {
+            isPromotion = false;
+        }
+
         if (categoryLabel == null && searchLabel == null) {
             products = productDAO.findAll();
 
             products = promotionService.calculatePromotionOfProducts(products);
+
+            if (isPromotion) {
+                products = filterByPromotion(products);
+            }
+
+            products = filterByOrderBy(products, orderBy, locale);
+
+            products = filterByPrice(products, minPrice, maxPrice);
 
             model.addAttribute("products", products);
             return "integrated:search-product";
@@ -60,7 +82,6 @@ public class SearchProductController {
         }
 
         category = categoryDAO.findByLabelEn(categoryLabel);
-        System.out.println(category.getId());
         products = productDAO.findByCategory(category);
 
         if (searchLabel != null) {
@@ -68,6 +89,8 @@ public class SearchProductController {
         }
 
         products = promotionService.calculatePromotionOfProducts(products);
+        products = filterByOrderBy(products, orderBy, locale);
+        products = filterByPrice(products, minPrice, maxPrice);
 
         model.addAttribute("products", products);
         return "integrated:search-product";
@@ -85,5 +108,45 @@ public class SearchProductController {
                 .filter(product -> product.getLabelEn().toLowerCase().contains(searchLabel.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
+    }
+
+    ArrayList<Product> filterByPromotion(ArrayList<Product> products) {
+        return products
+                .stream()
+                .filter(product -> product.getPromotion() != null && product.getPromotion().isPromotionValid())
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    ArrayList<Product> filterByOrderBy(ArrayList<Product> products, String orderBy, Locale locale) {
+        switch (orderBy) {
+            case "priceasc":
+                products.sort(Comparator.comparingDouble(Product::getPrice));
+                break;
+            case "pricedesc":
+                products.sort((p1, p2) -> Double.compare(p2.getPrice(), (p1.getPrice())));
+                break;
+            case "labelasc":
+                products.sort(Comparator.comparing(p -> p.getLocalizedLabel(locale)));
+                break;
+            case "labeldesc":
+                products.sort((p1, p2) -> p2.getLocalizedLabel(locale).compareTo(p1.getLocalizedLabel(locale)));
+                break;
+        }
+        return products;
+    }
+
+    ArrayList<Product> filterByPrice(ArrayList<Product> products, Double minPrice, Double maxPrice) {
+        if (minPrice == null) {
+            minPrice = 0.0;
+        }
+        if (maxPrice == null) {
+            maxPrice = 100000.0;
+        }
+        Double finalMinPrice = minPrice;
+        Double finalMaxPrice = maxPrice;
+        return products
+                .stream()
+                .filter(product -> product.getPrice() >= finalMinPrice && product.getPrice() <= finalMaxPrice)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
