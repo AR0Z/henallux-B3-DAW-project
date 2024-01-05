@@ -1,5 +1,7 @@
 package com.spring.henallux.ecommerce.controller;
 
+import com.spring.henallux.ecommerce.Model.Order;
+import com.spring.henallux.ecommerce.Model.PasswordChangeForm;
 import com.spring.henallux.ecommerce.Model.User;
 import com.spring.henallux.ecommerce.Model.UserEdit;
 import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping(value="/editProfile")
@@ -39,6 +42,12 @@ public class editProfileController {
         user.setPhoneNumber(oldUser.getPhoneNumber());
 
         model.addAttribute("user", user);
+
+        // TODO: add attribute orders to model findOrderByUser
+        // model.addAttribute("orders", orderDAO.findOrderByUser(oldUser));
+
+        model.addAttribute("orders", new HashMap<Integer, Order>());
+        model.addAttribute("passwordchangeform", new PasswordChangeForm());
 
         return "integrated:editProfile";
     }

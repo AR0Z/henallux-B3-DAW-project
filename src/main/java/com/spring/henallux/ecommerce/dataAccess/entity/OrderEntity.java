@@ -25,7 +25,7 @@ public class OrderEntity {
     private String paypalOrderId;
     @Column(name = "order_status")
     private String status;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
