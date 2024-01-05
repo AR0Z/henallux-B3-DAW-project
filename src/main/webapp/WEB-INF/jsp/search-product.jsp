@@ -11,13 +11,6 @@
         float: left;
     }
 
-    #products {
-        width: 80%;
-        padding: 10px;
-        margin: 0;
-        float: right;
-    }
-
     ul {
         list-style: none;
         padding: 5px;
@@ -49,25 +42,11 @@
         color: #0000ff;
     }
 
-    .card {
-        width: 250px;
-        display: inline-block;
-        height: 300px;
-    }
-
-    .card-img-top {
-        width: 250px;
-        height: 210px;
-    }
 
     .card-body p {
         margin: 2px;
     }
 
-    .card-body {
-        padding: 0;
-        padding-left: 2px;
-    }
 
     .filter {
         display: none;
@@ -76,16 +55,6 @@
     }
 
     @media (min-width: 991px) {
-        .card {
-            width: 190px;
-            display: inline-block;
-            height: 300px;
-        }
-
-        .card-img-top {
-            width: 188px;
-            height: 210px;
-        }
 
         #mobile-filter {
             display: none;
@@ -93,17 +62,6 @@
     }
 
     @media (min-width: 768px) and (max-width: 991px) {
-        .card {
-            width: 230px;
-            display: inline-block;
-            height: 300px;
-            margin-bottom: 10px;
-        }
-
-        .card-img-top {
-            width: 230px;
-            height: 210px;
-        }
 
         #mobile-filter {
             display: none;
@@ -111,17 +69,6 @@
     }
 
     @media (min-width: 568px) and (max-width: 767px) {
-        .card {
-            width: 205px;
-            display: inline-block;
-            height: 300px;
-            margin-bottom: 10px;
-        }
-
-        .card-img-top {
-            width: 203px;
-            height: 210px;
-        }
 
         .fa-circle {
             font-size: 15px;
@@ -140,32 +87,8 @@
             float: left;
         }
 
-        #products {
-            width: 100%;
-            padding: 5px;
-            margin: 0;
-            float: right;
-        }
-
-        .card {
-            width: 230px;
-            display: inline-block;
-            height: 300px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-        }
-
-        .card-img-top {
-            width: 230px;
-            height: 210px;
-        }
-
         .list-group-item {
             padding: 3px;
-        }
-
-        .offset-1 {
-            margin-left: 8%;
         }
 
         .filter {
@@ -182,8 +105,47 @@
             padding: 10px;
         }
     }
+
+
+
+    .section-products {
+        padding: 80px 0 54px;
+    }
+
+
+    .section-products .single-product {
+        margin-bottom: 26px;
+    }
+
+    .section-products .single-product .part-2 .product-title {
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+
+    .section-products .single-product .part-2 h4 {
+        display: inline-block;
+        font-size: 1rem;
+    }
+
+    .section-products .single-product .part-2 .product-old-price {
+        position: relative;
+        padding: 0 7px;
+        margin-right: 2px;
+        opacity: 0.6;
+    }
+
+    .section-products .single-product .part-2 .product-old-price::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #444444;
+        transform: translateY(-50%);
+    }
 </style>
-<div style="height: 75vh">
+<div style="min-height: 75vh">
     <div class="filter">
         <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter"
                 aria-expanded="false" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span>
@@ -277,34 +239,27 @@
             </form>
         </div>
     </section>
-</div>
-<section id="products">
-    <div class="container">
-        <div class="row">
-            <c:forEach var="product" items="${products}">
-                <a href="product/${product.labelEn}-${product.id}">
+    <section class="section-products">
+        <div class="container">
+            <div class="row">
+                <c:forEach var="product" items="${products}">
 
-                    <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
-                        <div class="card">
-                            <img class="card-img-top" src="https://placehold.co/400" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text">${product.getLocalizedLabel(locale)}</p>
-
-                                <p>
-                                    <span <c:if test="${product.isPromotion}">class="red"</c:if> >${product.price}</span>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div id="product-1" class="single-product">
+                            <a href="product/${product.labelEn}-${product.id}">
+                                <img src="https://placehold.co/400" alt="" width="100%">
+                                <div class="part-2">
+                                    <h3 class="product-title">${product.getLocalizedLabel(locale)}</h3>
                                     <c:if test="${product.isPromotion}">
-                                        <del>${product.oldPrice}</del>
+                                        <h4 class="product-old-price">${product.oldPrice}</h4>
                                     </c:if>
-                                    euros
-                                </p>
-                                <span class="fa fa-circle red"></span>
-                                <span class="fa fa-circle teal"></span>
-                                <span class="fa fa-circle blue"></span>
-                            </div>
+                                    <h4 class="product-price">${String.format("%.2f",product.price)} euros</h4>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
     </section>
-</section>
+</div>

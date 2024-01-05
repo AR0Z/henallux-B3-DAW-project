@@ -66,7 +66,7 @@
 </head>
 <body>
 
-    <tiles:insertAttribute name="header" />
+    <tiles:insertAttribute name="header"  />
 
     <main>
         <tiles:insertAttribute name="main-content" />

@@ -1,7 +1,31 @@
 <%@ include file="./include/importTags.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
-<div class="wrapper d-flex align-items-center justify-content-center" style="height:100%;width:100%">
+<div class="wrapper d-flex align-items-center " style="min-height:75vh;width:100%;flex-direction: column">
+    <section id="orders">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+
+                <th scope="col">Date de commande</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Prix total</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${orders}" var="order">
+                <tr>
+                    <td>${order.date}</td>
+                    <td>${order.status}</td>
+                    <td>${order.totalPrice}</td>
+                    <td><a href="/order/${order.id}">Details</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </section>
+
     <section class="background-image mb-2" style="width: 50vw; ">
         <div class="container d-flex align-items-center justify-content-center ">
             <form:form class="col g-4 needs-validation d-flex align-items-center justify-content-center flex-column"
@@ -68,5 +92,13 @@
                 </div>
             </form:form>
         </div>
+    </section>
+    <section id="passwordChange">
+        <form:form modelAttribute="passwordchangeform">
+            <form:input class="form-control mt-2" path="oldPassword" type="password" placeholder="Ancien mot de passe" />
+            <form:input class="form-control mt-2" path="newPassword" type="password" placeholder="Nouveau mot de passe" />
+            <form:input class="form-control mt-2" path="newPasswordConfirm" type="password" placeholder="Confirmer le nouveau mot de passe" />
+            <form:button class="btn btn-primary mt-2" type="submit">Changer le mot de passe</form:button>
+        </form:form>
     </section>
 </div>

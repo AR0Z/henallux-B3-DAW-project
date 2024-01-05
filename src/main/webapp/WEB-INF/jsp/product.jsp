@@ -65,7 +65,7 @@
 
                     <div class="mb-3">
                         <span class="h5">
-                            <span <c:if test="${product.isPromotion}">class="red"</c:if> >${product.price}</span>
+                            <span <c:if test="${product.isPromotion}">class="red"</c:if> >${String.format("%.2f",product.price)}</span>
                                 <c:if test="${product.isPromotion}">
                                     <del>${product.oldPrice}</del>
                                 </c:if>
