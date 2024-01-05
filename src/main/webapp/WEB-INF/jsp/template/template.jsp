@@ -72,8 +72,6 @@
         <tiles:insertAttribute name="main-content" />
     </main>
 
-    <footer>
-        <tiles:insertAttribute name="footer" />
-    </footer>
+    <tiles:insertAttribute name="footer" />
 </body>
 </html>
