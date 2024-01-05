@@ -70,7 +70,7 @@ public class Cart {
         Order order = new Order();
 
         order.setDate(new Date());
-        order.setOrderStatus("Waiting for payment");
+        order.setStatus("Pending");
 
         return order;
     }

@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Order {
     private int id;
     private Date date;
-    private String orderStatus;
+    private String status;
     private String paypalOrderId;
     private User userId;
     private HashMap<Integer, OrderLine> orderLines;

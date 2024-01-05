@@ -16,13 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Locale;
 
 @Controller
 @RequestMapping(value="/order")
-@SessionAttributes({Constants.CURRENT_CART})
+@SessionAttributes({Constants.CURRENT_ORDER, Constants.CURRENT_CART} )
 public class OrderController {
 
     private OrderDataAccess orderDAO;
@@ -36,8 +37,9 @@ public class OrderController {
         this.userDAO = userDAO;
     }
 
+
     @RequestMapping(value = "{orderId}" ,method = RequestMethod.GET)
-    public String order(@PathVariable int orderId, Model model, Locale locale, Authentication authentication){
+    public String order(@PathVariable int orderId, HttpSession session , Model model, Locale locale, Authentication authentication){
         // check if order exists
         Order order = orderDAO.findById(orderId);
 
@@ -47,7 +49,6 @@ public class OrderController {
         // current user
         User user = (User) authentication.getPrincipal();
 
-        System.out.println(order.getUserId().getId() + " " + user.getId());
         // check if order belongs to user
         if(order.getUserId().getId() != user.getId())
             return "redirect:/error";
@@ -57,6 +58,8 @@ public class OrderController {
 
         model.addAttribute("order", order);
         model.addAttribute("locale", locale);
+
+        session.setAttribute(Constants.CURRENT_ORDER, order);
 
         return "integrated:order";
     }
@@ -70,7 +73,7 @@ public class OrderController {
             String jsonResponse = "{\"status\": \"error\", \"message\": \"Empty cart. Please add items to your cart before create order.\"}";
 
             // Renvoie la réponse formatée avec le statut 400 Bad Request
-            return ResponseEntity.badRequest().body(jsonResponse);
+            return ResponseEntity.ok().body(jsonResponse);
         }
 
         // get userId
@@ -89,6 +92,9 @@ public class OrderController {
         // create order object
 
         order.setOrderLines(cart.toOrderLines());
+
+        // clear cart
+        cart.clear();
 
         // return order id
         return ResponseEntity.ok().body("{\"status\": \"success\", \"orderId\": \"" + orderEntity.getId() + "\"}");

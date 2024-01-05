@@ -82,7 +82,10 @@
                                         <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()} euros</p>
                                     </div>
                                 </div>
-                                <div id="paypal-button-container"></div>
+                                <div id="dislayCheckout"></div>
+                                <button id="sumbitCart">
+                                    <spring:message code="cart_checkout" />
+                                </button>
                             </div>
 
                         </div>
@@ -90,7 +93,6 @@
             </div>
         </div>
     </section>
-<script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR&disable-funding=card,credit,bancontact,sofort"></script>
 <script>
     const quantityInputs = document.getElementsByClassName("editQuantity");
 
@@ -172,64 +174,35 @@
 
     const sumbitCart = document.getElementById("sumbitCart");
 
-    window.paypal.Buttons({
-        async createOrder() {
-            try {
-                const response = await fetch("/payment/paypal", {
-                    method: "POST",
-                    credentials: 'include'
-                });
-
-                // Vérifiez si la réponse a un statut OK (200)
-                if (response.ok) {
-                    const orderData = await response.json();
-
-                    if (orderData.id) {
-                        // Si l'ID de la commande est présent, retournez-le
-                        return orderData.id;
-                    } else {
-                        // Sinon, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
-                        throw new Error("Invalid response from server. Missing order ID.");
-                    }
-                } else {
-                    // Si la réponse n'est pas OK, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
-                    throw new Error("Server returned an error: " + response.status);
-                }
-            } catch (error) {
-                // Gérez l'erreur ici, vous pouvez la journaliser ou prendre d'autres mesures
-                console.error("Error creating order:", error);
-                return false; // Retournez une valeur indiquant une erreur
+    sumbitCart.addEventListener("click", function () {
+        const apiUrl = "/order/create";
+        let display = document.getElementById("dislayCheckout");
+        display.innerText = "";
+        fetch(apiUrl, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
             }
-        },
-        async onApprove(data, actions) {
-            const reponse = await fetch("/payment/paypal/capture/" + data.orderID, {
-                method: "POST",
-                credentials: 'include'
-            });
-
-            const captureData = await reponse.json();
-
-            if(captureData.status) {
-                window.location.href = "/payment/success";
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+            // Logique à exécuter après la réception de la réponse
+            if(data.status === "success") {
+                window.location.href = "/order/" + data.orderId;
             } else {
-                window.location.href = "/payment/error";
+                display.innerText = data.message;
             }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+        });
+    });
 
-        },
-        async onCancel(data, actions) {
-            const reponse = await fetch("/payment/paypal/cancel/", {
-                method: "POST",
-                credentials: 'include'
-            });
-
-            const cancelData = await reponse.json();
-
-            if(cancelData.status) {
-                window.location.href = "/payment/cancel";
-            } else {
-                window.location.href = "/payment/error";
-            }
-
-        },
-    }).render("#paypal-button-container");
 </script>

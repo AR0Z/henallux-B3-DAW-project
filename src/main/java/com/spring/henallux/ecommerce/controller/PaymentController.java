@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 
 @Controller
 @RequestMapping(value="/payment")
-@SessionAttributes({Constants.CURRENT_CART})
+@SessionAttributes({Constants.CURRENT_ORDER})
 public class PaymentController {
 
     private PaypalService paypalService;
@@ -36,45 +36,24 @@ public class PaymentController {
 
     @Transactional
     @RequestMapping(value="/paypal", method = RequestMethod.POST)
-    public ResponseEntity<String>  createPayment(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
+    public ResponseEntity<String>  createPayment(@ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+        // if order null
+        if (order == null)
+            return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order not found.\"}");
 
-        //check if cart is empty
-        if(cart.getCartLines().isEmpty()) {
-            String jsonResponse = "{\"status\": \"error\", \"message\": \"Empty cart. Please add items to your cart before proceeding with the payment.\"}";
-
-            // Renvoie la réponse formatée avec le statut 400 Bad Request
-            return ResponseEntity.badRequest().body(jsonResponse);
-        }
-
-        // get userId
-        User user = (User) authentication.getPrincipal();
-
-        Order order = cart.toOrder();
-
-        order.setUserId(userDAO.findByEmail(user.getEmail()));
-
-        // save order in database
-        OrderEntity orderEntity = orderDAO.save(order);
-
-        // save order lines in database
-        orderLineDAO.save(cart.toOrderLines(), orderEntity);
-
-        // create order object
-
-        order.setOrderLines(cart.toOrderLines());
+        // if order status is not pending
+        if (!order.getStatus().equals("Pending"))
+            return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order status is not pending.\"}");
 
         // create payment
         ResponseEntity<String> response = paypalService.createPayment(order);
-
-        // save order id in session
-        cart.setOrderId(orderEntity.getId());
 
         // get approval url
         return response;
     }
 
     @RequestMapping(value="/paypal/capture/{orderID}", method = RequestMethod.POST)
-    public ResponseEntity<String>  capturePayment(@PathVariable String orderID, @ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
+    public ResponseEntity<String>  capturePayment(@PathVariable String orderID, @ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
 
         // capture payment
         ResponseEntity<String> response = paypalService.capturePayment(orderID);
@@ -84,15 +63,10 @@ public class PaymentController {
             return response;
         }
 
-        // put order status to paid
-        Order order = orderDAO.findById(cart.getOrderId());
 
-        order.setOrderStatus("Paid");
+        order.setStatus("Paid");
 
         orderDAO.save(order);
-
-        // clear cart
-        cart.clear();
 
         return response;
     }
@@ -104,22 +78,16 @@ public class PaymentController {
     }
 
     @RequestMapping(value="/paypal/error", method = RequestMethod.GET)
-    public String  errorPayment(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
-
+    public String  errorPayment() {
         return "integrated:error";
     }
 
     @RequestMapping(value="/paypal/cancel/", method = RequestMethod.POST)
-    public ResponseEntity<String>  cancelPayment(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
-        // set order status to canceled
-        Order order = orderDAO.findById(cart.getOrderId());
+    public ResponseEntity<String>  cancelPayment(@ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
 
-        order.setOrderStatus("Canceled");
+        order.setStatus("Canceled");
 
         orderDAO.save(order);
-
-        // clear cart
-        cart.clear();
 
         String jsonResponse = "{\"status\": \"canceled\", \"message\": \"Payment has been canceled.\"}";
 

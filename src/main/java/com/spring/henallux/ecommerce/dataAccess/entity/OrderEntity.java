@@ -24,13 +24,13 @@ public class OrderEntity {
     @Column(name = "paypal_order_id")
     private String paypalOrderId;
     @Column(name = "order_status")
-    private String orderStatus;
+    private String status;
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
     public String toString() {
     	return "OrderEntity [id=" + id + ", date=" + date + ", paypalOrderId=" + paypalOrderId + ", orderStatus="
-    			+ orderStatus + ", userId=" + userId.getId() + "]";
+    			+ status + ", userId=" + userId.getId() + "]";
     }
 }

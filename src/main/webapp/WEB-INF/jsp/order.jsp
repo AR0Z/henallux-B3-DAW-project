@@ -70,7 +70,19 @@
                                         </p>
                                         <p class="mb-2" id="totalPriceWithShippingCost">${order.getTotalPriceWithShippingCost()} euros</p>
                                     </div>
-                                    <div id="paypal-button-container"></div>
+                                    <c:if test="${order.status eq 'Pending'}" >
+                                        <div id="paypal-button-container"></div>
+                                    </c:if>
+                                    <c:if test="${order.status eq 'Paid'}" >
+                                        <div class="alert alert-success">
+                                            <spring:message code="order_paid" />
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${order.status eq 'Canceled'}" >
+                                        <div class="alert alert-danger">
+                                            <spring:message code="order_canceled" />
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -79,67 +91,69 @@
             </div>
         </div>
     </section>
-<script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR&disable-funding=card,credit,bancontact,sofort"></script>
-<script>
 
-    window.paypal.Buttons({
-        async createOrder() {
-            try {
-                const response = await fetch("/payment/paypal", {
+<c:if test="${order.status eq 'Pending'}" >
+    <script src="https://www.paypal.com/sdk/js?client-id=AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-&currency=EUR&disable-funding=card,credit,bancontact,sofort"></script>
+    <script>
+        window.paypal.Buttons({
+            async createOrder() {
+                try {
+                    const response = await fetch("/payment/paypal", {
+                        method: "POST",
+                        credentials: 'include'
+                    });
+
+                    // Vérifiez si la réponse a un statut OK (200)
+                    if (response.ok) {
+                        const orderData = await response.json();
+
+                        if (orderData.id) {
+                            // Si l'ID de la commande est présent, retournez-le
+                            return orderData.id;
+                        } else {
+                            // Sinon, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
+                            throw new Error("Invalid response from server. Missing order ID.");
+                        }
+                    } else {
+                        // Si la réponse n'est pas OK, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
+                        throw new Error("Server returned an error: " + response.status);
+                    }
+                } catch (error) {
+                    // Gérez l'erreur ici, vous pouvez la journaliser ou prendre d'autres mesures
+                    console.error("Error creating order:", error);
+                    return false; // Retournez une valeur indiquant une erreur
+                }
+            },
+            async onApprove(data, actions) {
+                const reponse = await fetch("/payment/paypal/capture/" + data.orderID, {
                     method: "POST",
                     credentials: 'include'
                 });
 
-                // Vérifiez si la réponse a un statut OK (200)
-                if (response.ok) {
-                    const orderData = await response.json();
+                const captureData = await reponse.json();
 
-                    if (orderData.id) {
-                        // Si l'ID de la commande est présent, retournez-le
-                        return orderData.id;
-                    } else {
-                        // Sinon, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
-                        throw new Error("Invalid response from server. Missing order ID.");
-                    }
+                if(captureData.status) {
+                    window.location.href = "/payment/success";
                 } else {
-                    // Si la réponse n'est pas OK, lancez une exception ou retournez une valeur spécifique pour indiquer une erreur
-                    throw new Error("Server returned an error: " + response.status);
+                    window.location.href = "/payment/error";
                 }
-            } catch (error) {
-                // Gérez l'erreur ici, vous pouvez la journaliser ou prendre d'autres mesures
-                console.error("Error creating order:", error);
-                return false; // Retournez une valeur indiquant une erreur
-            }
-        },
-        async onApprove(data, actions) {
-            const reponse = await fetch("/payment/paypal/capture/" + data.orderID, {
-                method: "POST",
-                credentials: 'include'
-            });
 
-            const captureData = await reponse.json();
+            },
+            async onCancel(data, actions) {
+                const reponse = await fetch("/payment/paypal/cancel/", {
+                    method: "POST",
+                    credentials: 'include'
+                });
 
-            if(captureData.status) {
-                window.location.href = "/payment/success";
-            } else {
-                window.location.href = "/payment/error";
-            }
+                const cancelData = await reponse.json();
 
-        },
-        async onCancel(data, actions) {
-            const reponse = await fetch("/payment/paypal/cancel/", {
-                method: "POST",
-                credentials: 'include'
-            });
+                if(cancelData.status) {
+                    window.location.href = "/payment/cancel";
+                } else {
+                    window.location.href = "/payment/error";
+                }
 
-            const cancelData = await reponse.json();
-
-            if(cancelData.status) {
-                window.location.href = "/payment/cancel";
-            } else {
-                window.location.href = "/payment/error";
-            }
-
-        },
-    }).render("#paypal-button-container");
-</script>
+            },
+        }).render("#paypal-button-container");
+    </script>
+</c:if>
