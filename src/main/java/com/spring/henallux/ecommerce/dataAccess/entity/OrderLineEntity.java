@@ -12,10 +12,11 @@ import javax.validation.constraints.Min;
 @Setter
 public class OrderLineEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "line_id")
     private int id;
     @Column(name = "quantity")
+    @Min(1)
     private int quantity;
     @OneToOne
     @JoinColumn(name = "product_id")
