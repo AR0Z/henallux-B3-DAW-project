@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 @Controller
-@RequestMapping(value="/cart")
+@RequestMapping(value = "/cart")
 @SessionAttributes({Constants.CURRENT_CART})
 public class cartController {
 
@@ -24,7 +24,7 @@ public class cartController {
     private PromotionService promotionService;
 
     @Autowired
-    public cartController(ProductDataAccess productDAO, PromotionService promotionService){
+    public cartController(ProductDataAccess productDAO, PromotionService promotionService) {
         this.productDAO = productDAO;
         this.promotionService = promotionService;
     }
@@ -35,27 +35,27 @@ public class cartController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String cart(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Locale locale, Model model) {
+    public String cart(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Locale locale, Model model) {
         model.addAttribute("locale", locale);
         model.addAttribute("cart", cart);
-
+        model.addAttribute("isEmpty", cart.getCartLines().isEmpty());
         return "integrated:cart";
     }
 
-    @RequestMapping(value="/editQuantity", method = RequestMethod.POST)
-    public ResponseEntity<?> editQuantity(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, @RequestParam int productId, @RequestParam int quantity) {
+    @RequestMapping(value = "/editQuantity", method = RequestMethod.POST)
+    public ResponseEntity<?> editQuantity(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, @RequestParam int productId, @RequestParam int quantity) {
 
         Product product = productDAO.findById(productId);
         HashMap<String, Object> response = new HashMap<>();
-        if(product == null) {
+        if (product == null) {
             response.put("error", "Product not found");
             return ResponseEntity.ok(response);
         }
 
-        if(quantity < 1) {
+        if (quantity < 1) {
             cart.removeProduct(productId);
         } else {
-            if(product.getStock() < quantity){
+            if (product.getStock() < quantity) {
                 response.put("error", "Not enough stock");
                 response.put("maxQuantity", product.getStock());
                 return ResponseEntity.ok(response);
@@ -68,10 +68,10 @@ public class cartController {
         response.put("totalPriceWithShippingCost", cart.getTotalPriceWithShippingCost());
 
         // return response
-        return  ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);
     }
 
-    @RequestMapping(value="/addProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public ResponseEntity<?> addProduct(@RequestParam int productId, @RequestParam int quantity, Locale locale,
                                         @ModelAttribute(value = Constants.CURRENT_CART) Cart cart) {
         Product product = productDAO.findById(productId);
@@ -80,22 +80,21 @@ public class cartController {
 
         HashMap<String, Object> response = new HashMap<>();
 
-        if(product == null) {
+        if (product == null) {
             response.put("error", "Product not found");
             return ResponseEntity.ok(response);
         }
 
         int quantityTotal = quantity;
         // check if user alradey has this product in his cart and add quantity to it
-        if(cart.getCartLines().containsKey(productId)){
+        if (cart.getCartLines().containsKey(productId)) {
             quantityTotal += cart.getCartLines().get(productId).getQuantity();
 
         }
 
-        if(product.getStock() < quantityTotal){
+        if (product.getStock() < quantityTotal) {
             response.put("error", "Not enough stock");
-        }
-        else{
+        } else {
             CartLine cartLine = new CartLine();
             cartLine.setProduct(product);
             cartLine.setQuantity(quantity);

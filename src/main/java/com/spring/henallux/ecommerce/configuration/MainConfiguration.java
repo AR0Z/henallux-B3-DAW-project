@@ -2,6 +2,8 @@ package com.spring.henallux.ecommerce.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -26,6 +28,7 @@ public class MainConfiguration implements WebMvcConfigurer {
         DefaultMessageCodesResolver defaultMessageCodesResolver = new DefaultMessageCodesResolver();
         return defaultMessageCodesResolver;
     }
+
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

@@ -30,6 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/assets/**",
             "/login",
             "/search-product",
+            "/error",
     };
     private static final String[] AUTHORIZED_REQUESTS_ADMIN = new String[]{"/admin"};
 
@@ -39,10 +40,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public WebSecurityConfiguration(UserDetailsService userDetailsServiceImplementation) {
         this.userDetailsServiceImpl = userDetailsServiceImplementation;
     }
-
-    /**
-     * We do the configuration of spring security here.
-     */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
