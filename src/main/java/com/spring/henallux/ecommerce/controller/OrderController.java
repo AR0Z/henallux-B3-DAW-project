@@ -26,6 +26,11 @@ import java.util.Locale;
 @SessionAttributes({Constants.CURRENT_ORDER, Constants.CURRENT_CART} )
 public class OrderController {
 
+    @ModelAttribute(Constants.CURRENT_ORDER)
+    public Order order() {
+        return new Order();
+    }
+
     private OrderDataAccess orderDAO;
     private OrderLineDataAccess orderLineDAO;
     private UserDataAccess userDAO;
@@ -39,9 +44,9 @@ public class OrderController {
 
 
     @RequestMapping(value = "{orderId}" ,method = RequestMethod.GET)
-    public String order(@PathVariable int orderId, HttpSession session , Model model, Locale locale, Authentication authentication){
+    public String order(@PathVariable int orderId,@ModelAttribute(value=Constants.CURRENT_ORDER) Order order,  HttpSession session , Model model, Locale locale, Authentication authentication){
         // check if order exists
-        Order order = orderDAO.findById(orderId);
+        Order orderDb = orderDAO.findById(orderId);
 
         if(order == null)
             return "redirect:/error";
@@ -59,7 +64,7 @@ public class OrderController {
         model.addAttribute("order", order);
         model.addAttribute("locale", locale);
 
-        session.setAttribute(Constants.CURRENT_ORDER, order);
+        order = orderDb;
 
         return "integrated:order";
     }
