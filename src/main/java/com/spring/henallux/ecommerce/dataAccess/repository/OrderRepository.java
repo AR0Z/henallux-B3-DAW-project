@@ -8,5 +8,8 @@ import java.util.ArrayList;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, String> {
     OrderEntity findById(int id);
+
     ArrayList<OrderEntity> findAllByUserId(UserEntity userEntity);
+
+    OrderEntity findByPaypalOrderId(String paypalOrderId);
 }

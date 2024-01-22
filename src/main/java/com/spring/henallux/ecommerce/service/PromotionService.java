@@ -13,7 +13,7 @@ public class PromotionService {
     private ProductDataAccess productDAO;
 
     @Autowired
-    public PromotionService( ProductDataAccess productDAO) {
+    public PromotionService(ProductDataAccess productDAO) {
         this.productDAO = productDAO;
     }
 
@@ -32,9 +32,9 @@ public class PromotionService {
     public Product applyPromotion(Product product) {
         if (product.getPromotion() != null) {
             Date dateNow = new Date();
-            if(product.getPromotion().getBeginDate().before(dateNow) && product.getPromotion().getEndDate().after(dateNow)) {
+            if (product.getPromotion().getBeginDate().before(dateNow) && product.getPromotion().getEndDate().after(dateNow)) {
                 product.setOldPrice(product.getPrice());
-                product.setPrice(product.getPrice() - (product.getPrice() * product.getPromotion().getPercentage() / 100));
+                product.setPrice(Math.round((product.getPrice() - (product.getPrice() * product.getPromotion().getPercentage() / 100)) * 100.0) / 100.0);
                 product.setIsPromotion(true);
             }
         }

@@ -11,7 +11,7 @@
 </spring:url>
 
 <style>
-    #wrapper {
+    #wrapper-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -30,9 +30,6 @@
         display: flex;
     }
 
-    #title {
-
-    }
 
     #search-bar {
         width: 70vw;
@@ -43,11 +40,12 @@
         width: 30vw;
     }
 
+
     @media screen and (max-width: 1100px) {
-        #wrapper {
+        #wrapper-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center !important;
             flex-direction: column;
         }
 
@@ -77,8 +75,8 @@
 
 </style>
 
-<header class="p-2 mb-4 border-bottom" style="width: 100%;">
-    <div id="wrapper">
+<header class="mb-4 border-bottom" style="width: 100%;padding: 8px">
+    <div id="wrapper-header">
         <div id="title">
             <a href="/" class="col text-dark text-decoration-none">
                 <img src="../../../assets/title.png" alt="logo" style="width: 15vw"/>
@@ -131,8 +129,10 @@
                 </sec:authorize>
 
                 <sec:authorize access="isAuthenticated()">
-                    <a class="btn btn-outline-primary me-2" href="/editProfile"><spring:message code="editAccount"/></a>
-                    <a class="btn btn-outline-primary me-2" href="/logout"><spring:message code="disconnect"/></a>
+                    <a class="btn btn-outline-primary me-2" href="/editProfile"
+                       style="width: 135px;"><spring:message code="editAccount"/></a>
+                    <a class="btn btn-outline-primary me-2" href="/logout" style="width: 160px;"><spring:message
+                            code="disconnect"/></a>
                 </sec:authorize>
 
                 <a class="btn btn-outline-primary" href="/cart"><spring:message code="cart"/></a>

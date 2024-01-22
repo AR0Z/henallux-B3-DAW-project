@@ -9,6 +9,7 @@ import com.spring.henallux.ecommerce.dataAccess.dao.OrderLineDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.entity.OrderEntity;
 import com.spring.henallux.ecommerce.service.Constants;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 @Controller
-@RequestMapping(value="/order")
-@SessionAttributes({Constants.CURRENT_ORDER, Constants.CURRENT_CART} )
+@RequestMapping(value = "/order")
+@SessionAttributes({Constants.CURRENT_ORDER, Constants.CURRENT_CART})
 public class OrderController {
 
     @ModelAttribute(Constants.CURRENT_ORDER)
@@ -36,45 +37,47 @@ public class OrderController {
     private UserDataAccess userDAO;
 
     @Autowired
-    public OrderController(OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, UserDataAccess userDAO){
+    public OrderController(OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, UserDataAccess userDAO) {
         this.orderDAO = orderDAO;
         this.orderLineDAO = orderLineDAO;
         this.userDAO = userDAO;
     }
 
 
-    @RequestMapping(value = "{orderId}" ,method = RequestMethod.GET)
-    public String order(@PathVariable int orderId,@ModelAttribute(value=Constants.CURRENT_ORDER) Order order,  HttpSession session , Model model, Locale locale, Authentication authentication){
+    @RequestMapping(value = "{orderId}", method = RequestMethod.GET)
+    public String order(@PathVariable int orderId, @ModelAttribute(value = Constants.CURRENT_ORDER) Order order, HttpSession session, Model model, Locale locale, Authentication authentication) {
         // check if order exists
         Order orderDb = orderDAO.findById(orderId);
 
-        if(order == null)
+        if (orderDb == null)
             return "redirect:/error";
+
 
         // current user
         User user = (User) authentication.getPrincipal();
-
         // check if order belongs to user
-        if(order.getUserId().getId() != user.getId())
+        if (orderDb.getUserId().getId() != user.getId())
             return "redirect:/error";
 
         // get order line list
-        order.setOrderLines(orderLineDAO.findAllByOrderId(order));
+        orderDb.setOrderLines(orderLineDAO.findAllByOrderId(orderDb));
 
-        model.addAttribute("order", order);
+        model.addAttribute("order", orderDb);
         model.addAttribute("locale", locale);
 
-        order = orderDb;
+        session.setAttribute(Constants.CURRENT_ORDER, orderDb);
+        Order ordersession = (Order) session.getAttribute(Constants.CURRENT_ORDER);
+        System.out.println(ordersession.getId());
 
         return "integrated:order";
     }
 
     @Transactional
-    @RequestMapping(value="/create", method = RequestMethod.POST)
-    public ResponseEntity<String> createOder(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<String> createOder(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication) {
 
         //check if cart is empty
-        if(cart.getCartLines().isEmpty()) {
+        if (cart.getCartLines().isEmpty()) {
             String jsonResponse = "{\"status\": \"error\", \"message\": \"Empty cart. Please add items to your cart before create order.\"}";
 
             // Renvoie la réponse formatée avec le statut 400 Bad Request

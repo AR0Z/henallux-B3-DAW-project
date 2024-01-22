@@ -10,6 +10,10 @@ import java.util.HashMap;
 
 public interface OrderDataAccess {
     OrderEntity save(Order order);
+
     Order findById(int id);
+
     HashMap<Integer, Order> findAllByUserId(User user);
+
+    Order findByPaypalOrderId(String paypalOrderId);
 }

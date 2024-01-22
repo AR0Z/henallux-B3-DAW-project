@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -18,20 +19,24 @@ public class Order {
     private String paypalOrderId;
     private User userId;
     private HashMap<Integer, OrderLine> orderLines;
-    public float getTotalPrice() {
-        float totalPrice = 0;
+
+    public double getTotalPrice() {
+        double totalPrice = 0;
         for (OrderLine orderLine : orderLines.values()) {
             totalPrice += orderLine.getPrice() * orderLine.getQuantity();
         }
+        totalPrice = Math.round(totalPrice * 100.0) / 100.0;
+
         return totalPrice;
     }
 
-    public float getTotalPriceWithShippingCost() {
-        float totalPrice = 0;
+    public double getTotalPriceWithShippingCost() {
+        double totalPrice = 0;
         for (OrderLine orderLine : orderLines.values()) {
             totalPrice += orderLine.getPrice() * orderLine.getQuantity();
         }
         totalPrice += 5;
+        totalPrice = Math.round(totalPrice * 100.0) / 100.0;
         return totalPrice;
     }
 }

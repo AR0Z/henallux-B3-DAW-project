@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 @Controller
@@ -36,10 +37,21 @@ public class PaymentController {
 
     @Transactional
     @RequestMapping(value = "/paypal", method = RequestMethod.POST)
-    public ResponseEntity<String> createPayment(@ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    public ResponseEntity<String> createPayment(@RequestParam(name = "orderId") int orderId, Authentication authentication) {
+        Order order = orderDAO.findById(orderId);
+
+        order.setOrderLines(orderLineDAO.findAllByOrderId(order));
+
+        User user = (User) authentication.getPrincipal();
+        // check if order belongs to user
+        if (order.getUserId().getId() != user.getId())
+            return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Your are not owner of order\"}");
+
         // if order null
         if (order == null)
             return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order not found.\"}");
+
+        System.out.println(order.getId());
 
         // if order status is not pending
         if (!order.getStatus().equals("Pending"))
@@ -52,16 +64,19 @@ public class PaymentController {
         return response;
     }
 
-    @RequestMapping(value = "/paypal/capture/{orderID}", method = RequestMethod.POST)
-    public ResponseEntity<String> capturePayment(@PathVariable String orderID, @ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    @RequestMapping(value = "/paypal/capture/{paypalId}", method = RequestMethod.POST)
+    public ResponseEntity<String> capturePayment(@PathVariable String paypalId, @RequestParam(name = "orderId") int orderId, Authentication authentication) {
+
 
         // capture payment
-        ResponseEntity<String> response = paypalService.capturePayment(orderID);
+        ResponseEntity<String> response = paypalService.capturePayment(paypalId);
 
         // check if payment is successful
         if (response.getStatusCode().isError()) {
             return response;
         }
+
+        Order order = orderDAO.findById(orderId);
 
 
         order.setStatus("Paid");
@@ -82,8 +97,10 @@ public class PaymentController {
         return "integrated:error";
     }
 
-    @RequestMapping(value = "/paypal/cancel/", method = RequestMethod.POST)
-    public ResponseEntity<String> cancelPayment(@ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    @RequestMapping(value = "/paypal/cancel", method = RequestMethod.POST)
+    public ResponseEntity<String> cancelPayment(@RequestParam(name = "orderId") int orderId, Authentication authentication) {
+
+        Order order = orderDAO.findById(orderId);
 
         order.setStatus("Canceled");
 
@@ -93,6 +110,11 @@ public class PaymentController {
 
         // Renvoie la réponse formatée
         return ResponseEntity.ok(jsonResponse);
+    }
+
+    @RequestMapping(value = "/paypal/cancel", method = RequestMethod.GET)
+    public String cancelPaymentGet() {
+        return "integrated:cancel";
     }
 
 }

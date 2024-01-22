@@ -59,7 +59,7 @@ public class OrderDAO implements OrderDataAccess {
 
         HashMap<Integer, Order> orders = new HashMap<>();
 
-        for(OrderEntity orderEntity : orderEntities) {
+        for (OrderEntity orderEntity : orderEntities) {
             Order order = providerConverter.orderEntityToOrder(orderEntity);
 
             order.setUserId(providerConverter.userEntityToUser(orderEntity.getUserId()));
@@ -68,6 +68,16 @@ public class OrderDAO implements OrderDataAccess {
         }
 
         return orders;
+    }
+
+    public Order findByPaypalOrderId(String paypalOrderId) {
+        OrderEntity orderEntity = orderRepository.findByPaypalOrderId(paypalOrderId);
+
+        Order order = providerConverter.orderEntityToOrder(orderEntity);
+
+        order.setUserId(providerConverter.userEntityToUser(orderEntity.getUserId()));
+
+        return order;
     }
 
 }
