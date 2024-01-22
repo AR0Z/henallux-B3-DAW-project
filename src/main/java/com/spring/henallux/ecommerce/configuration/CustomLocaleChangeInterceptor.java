@@ -3,8 +3,10 @@ package com.spring.henallux.ecommerce.configuration;
 import com.spring.henallux.ecommerce.Model.Category;
 import com.spring.henallux.ecommerce.Model.FilterForm;
 import com.spring.henallux.ecommerce.Model.SearchForm;
+import com.spring.henallux.ecommerce.Model.User;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDAO;
 import com.spring.henallux.ecommerce.dataAccess.dao.CategoryDataAccess;
+import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
@@ -19,21 +21,31 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+
 @Component
 public class CustomLocaleChangeInterceptor extends LocaleChangeInterceptor {
 
     private CategoryDataAccess categoryDAO;
     private LocaleResolver localeResolver;
+    private UserDataAccess userDAO;
 
     @Autowired
-    public CustomLocaleChangeInterceptor(CategoryDataAccess categoryDAO, LocaleResolver localeResolver) {
+    public CustomLocaleChangeInterceptor(CategoryDataAccess categoryDAO, LocaleResolver localeResolver, UserDataAccess userDAO) {
         this.categoryDAO = categoryDAO;
         this.localeResolver = localeResolver;
+        this.userDAO = userDAO;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         if (modelAndView != null) {
+
+            Authentication authentication = (Authentication) request.getUserPrincipal();
+            if (authentication != null) {
+                User user = userDAO.findByEmail(authentication.getName());
+                modelAndView.addObject("username", user.getFirstName());
+            }
 
             ArrayList<Category> categories = categoryDAO.getAllCategories();
             Locale currentLocale = LocaleContextHolder.getLocale();
@@ -47,6 +59,7 @@ public class CustomLocaleChangeInterceptor extends LocaleChangeInterceptor {
             modelAndView.addObject("categories", categoriesMap);
             modelAndView.addObject("searchform", new SearchForm());
             modelAndView.addObject("filterform", new FilterForm());
+
         }
     }
 }

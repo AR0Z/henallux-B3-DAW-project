@@ -7,7 +7,6 @@ import com.spring.henallux.ecommerce.Model.UserEdit;
 import com.spring.henallux.ecommerce.dataAccess.dao.OrderDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.dao.OrderLineDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
-import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

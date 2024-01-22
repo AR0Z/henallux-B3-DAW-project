@@ -11,65 +11,100 @@
 </spring:url>
 
 <style>
+
+
     #wrapper-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 98vw;
+    }
+
+    #title {
+        width: 15%;
     }
 
     #search-wrapper {
-        width: 50vw;
-    }
-
-    #buttons {
-        display: flex;
-        justify-content: space-between;
+        width: 40%;
+        margin-right: 20px;
     }
 
     #search {
         display: flex;
+        flex-direction: row;
     }
 
+    #buttons {
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #helloText {
+        width: 15%;
+    }
+
+    #mainPic {
+        width: 100%;
+        min-width: 8vw;
+        max-width: 15vw;
+    }
+
+    #category {
+        width: 30%;
+        margin-right: 10px;
+    }
 
     #search-bar {
-        width: 70vw;
-
+        display: flex;
+        flex-direction: row;
+        width: 70%;
     }
 
-    #search-input {
-        width: 30vw;
+    #cartImg {
+        max-width: 20px;
     }
 
-
-    @media screen and (max-width: 1100px) {
+    @media screen and (max-width: 1500px) {
         #wrapper-header {
             display: flex;
             justify-content: space-between;
-            align-items: center !important;
+            align-items: center;
+            width: 98vw;
             flex-direction: column;
         }
 
-        #title > a > img {
-            width: 40%;
-            margin-bottom: 10px;
-        }
-
-        #search-input {
-            max-width: 70vw;
-            width: 100%;
-        }
-
-        #search-bar {
-            display: flex;
-            width: 90vw;
-            justify-content: center;
+        #title {
+            width: 15%;
         }
 
         #search-wrapper {
-            width: 100%;
+            width: 95vw;
+
+        }
+
+        #search {
+            display: flex;
+            flex-direction: row;
         }
 
         #buttons {
+            width: 90vw;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #helloText {
+            width: 10%;
+        }
+
+        #mainPic {
+            min-width: 200px;
+        }
+
+        #category {
+            width: 30%;
+            margin-right: 10px;
         }
     }
 
@@ -79,7 +114,7 @@
     <div id="wrapper-header">
         <div id="title">
             <a href="/" class="col text-dark text-decoration-none">
-                <img src="../../../assets/title.png" alt="logo" style="width: 15vw"/>
+                <img id="mainPic" src="../../../assets/title.png" alt="logo"/>
             </a>
         </div>
         <div id="search-wrapper">
@@ -88,17 +123,18 @@
                        action="/search-product" cssStyle="margin:0;">
                 <form:hidden path="orderby" value="labelasc"/>
                 <div id="search">
-                    <form:select path="categoryLabel" class="btn btn-secondary" id="category" style="display: block">
+                    <form:select path="categoryLabel" class="form-select btn-secondary" id="category"
+                                 style="display: block;">
                         <option value="all">
                             <spring:message code="every_categories"/>
                         </option>
                         <c:forEach var="entry" items="${categories}">
-                            <option value="${entry.key}">${entry.value}</option>
+                            <option value="${entry.key}"> ${entry.value} </option>
                         </c:forEach>
                     </form:select>
                     <div id="search-bar">
                         <spring:message code="searchBarPlaceholder" var="placeholderSearchbar"/>
-                        <form:input path="filter" var="search" type="text"
+                        <form:input cssClass="form-control" path="filter" var="search" type="text"
                                     placeholder='${placeholderSearchbar}' id="search-input"/>
                         <form:button type="submit" class="btn btn-outline-secondary pb-2"
                                      style="border-radius: 0 5px 5px 0;" id="submit">
@@ -110,33 +146,42 @@
             </form:form>
         </div>
         <div id="buttons">
-            <div class="container d-flex align-items-center justify-content-end">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        <spring:message code="language"/>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="${localeFr}"><spring:message code="languageFr"/></a></li>
-                        <li><a class="dropdown-item" href="${localeEn}"><spring:message code="languageEn"/></a></li>
-                    </ul>
-                </div>
+            <div class="dropdown" style="margin-right: 20px">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <spring:message code="language"/>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="${localeFr}">
+                        <img width="12" src="../../../assets/icons/france.png">
+                        <spring:message code="languageFr"/>
+                    </a></li>
+                    <li><a class="dropdown-item" href="${localeEn}">
+                        <img width="12" src="../../../assets/icons/united-kingdom.png">
+                        <spring:message code="languageEn"/></a></li>
+                </ul>
             </div>
-            <div class="container d-flex">
-                <sec:authorize access="!isAuthenticated()">
-                    <a class="btn btn-outline-primary me-2" href="/login"><spring:message code="login"/></a>
-                    <a class="btn btn-outline-primary me-3" href="/register"><spring:message code="register"/></a>
-                </sec:authorize>
+            <sec:authorize access="!isAuthenticated()">
+                <a class="btn btn-outline-primary me-2" href="/login"><spring:message code="login"/></a>
+                <a class="btn btn-outline-primary me-3" href="/register"><spring:message code="register"/></a>
+            </sec:authorize>
 
-                <sec:authorize access="isAuthenticated()">
-                    <a class="btn btn-outline-primary me-2" href="/editProfile"
-                       style="width: 135px;"><spring:message code="editAccount"/></a>
-                    <a class="btn btn-outline-primary me-2" href="/logout" style="width: 160px;"><spring:message
-                            code="disconnect"/></a>
-                </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <a class="btn btn-outline-primary me-2" href="/editProfile"
+                   style="width: 135px;"><spring:message code="editAccount"/></a>
+                <a class="btn btn-outline-primary me-2" href="/logout" style="width: 170px;"><spring:message
+                        code="disconnect"/></a>
+            </sec:authorize>
 
-                <a class="btn btn-outline-primary" href="/cart"><spring:message code="cart"/></a>
-            </div>
+            <a class="btn btn-outline-primary" href="/cart">
+                <img id="cartImg" src="../../../assets/icons/shopping-cart.png">
+            </a>
         </div>
+        <sec:authorize access="isAuthenticated()">
+            <div id="helloText" class="d-flex" style="max-width: 200px; justify-content: center">
+                <spring:message code="hello"/>
+                <span>${username}</span>
+            </div>
+        </sec:authorize>
     </div>
 </header>

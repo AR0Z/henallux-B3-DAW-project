@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <style>
     #wrapper {
         display: flex;
@@ -102,19 +103,21 @@
         <%--@elvariable id="filterform" type="com.spring.henallux.ecommerce.Model.FilterForm"--%>
         <form:form method="get" modelAttribute="filterform" cssClass="d-flex"
                    cssStyle="flex-direction: column;gap: 10px" id="filterform">
-            <h6 class="p-1 border-bottom mb-3">Trie par</h6>
-            <form:select path="orderby">
-                <form:option value="priceasc">Prix croissant</form:option>
-                <form:option value="pricedesc">Prix decroissant</form:option>
-                <form:option value="labelasc">Nom croissant</form:option>
-                <form:option value="labeldesc">Nom decroissant</form:option>
+            <h6 class="p-1 border-bottom mb-3"><spring:message code="orderBy"/></h6>
+            <form:select path="orderby" cssClass="form-select">
+                <form:option value="priceasc"><spring:message code="price_asc"/></form:option>
+                <form:option value="pricedesc"><spring:message code="price_desc"/></form:option>
+                <form:option value="labelasc"><spring:message code="name_asc"/></form:option>
+                <form:option value="labeldesc"><spring:message code="name_desc"/></form:option>
             </form:select>
             <div class="d-flex" style="justify-content: space-between">
                 <label for="checkbox">Promotion</label>
                 <form:checkbox path="ispromotion" id="checkbox"/>
             </div>
-            <form:input id="minprice" path="minprice" type="number" placeholder="Prix minimum" maxlength="6"/>
-            <form:input id="maxprice" path="maxprice" type="number" placeholder="Prix maximum" maxlength="6"/>
+            <form:input cssClass="form-control" id="minprice" path="minprice" type="number" placeholder="Prix minimum"
+                        maxlength="6"/>
+            <form:input cssClass="form-control" id="maxprice" path="maxprice" type="number" placeholder="Prix maximum"
+                        maxlength="6"/>
             <form:button id="submitbtn" type="submit">Filtrer</form:button>
             <div id="error" class="red d-flex"></div>
             <script defer>
@@ -128,13 +131,13 @@
                     let errorText = ""
                     console.log({minprice: minprice.value, maxprice: maxprice.value})
                     if (minprice.value > maxprice.value && maxprice.value !== "") {
-                        errorText = "Le prix minimum ne peut pas etre superieur au prix maximum";
+                        errorText = "<spring:message code="filter_price_error" javaScriptEscape="true" />";
                     }
                     if (minprice.value < 0 || maxprice.value < 0) {
-                        errorText = "Le prix minimum et maximum ne peuvent pas etre negatif";
+                        errorText = "<spring:message code="filter_min_price_error" javaScriptEscape="true" />";
                     }
                     if (minprice.value > 100000 || maxprice.value > 100000) {
-                        errorText = "Le prix minimum et maximum ne peuvent pas etre superieur a 100000";
+                        errorText = "<spring:message code="filter_max_price_error" javaScriptEscape="true" />";
                     }
                     if (errorText !== "") {
                         error.innerText = errorText;
