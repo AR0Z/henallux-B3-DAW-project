@@ -51,7 +51,7 @@ public class ProviderConverter {
         return category;
     }
 
-    public Promotion promotionEntityToPromotion (PromotionEntity promotionEntity) {
+    public Promotion promotionEntityToPromotion(PromotionEntity promotionEntity) {
         return mapper.map(promotionEntity, Promotion.class);
     }
 
