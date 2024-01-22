@@ -9,12 +9,21 @@ import com.spring.henallux.ecommerce.dataAccess.repository.OrderRepository;
 import com.spring.henallux.ecommerce.dataAccess.repository.UserRepository;
 import com.spring.henallux.ecommerce.dataAccess.util.ProviderConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class OrderDAO implements OrderDataAccess {
     private OrderRepository orderRepository;
     private ProviderConverter providerConverter;
+    @PersistenceContext
+    private EntityManager entityManager;
 
 
     @Autowired
@@ -23,9 +32,11 @@ public class OrderDAO implements OrderDataAccess {
         this.providerConverter = providerConverter;
     }
 
+    @Transactional
     public OrderEntity save(Order order) {
         OrderEntity orderEntity = providerConverter.orderToOrderEntity(order);
 
+        orderEntity = entityManager.merge(orderEntity);
         orderEntity = orderRepository.save(orderEntity);
 
         return orderEntity;
@@ -39,6 +50,24 @@ public class OrderDAO implements OrderDataAccess {
         order.setUserId(providerConverter.userEntityToUser(orderEntity.getUserId()));
 
         return order;
+    }
+
+    public HashMap<Integer, Order> findAllByUserId(User user) {
+        UserEntity userEntity = providerConverter.userToUserEntity(user);
+
+        ArrayList<OrderEntity> orderEntities = orderRepository.findAllByUserId(userEntity);
+
+        HashMap<Integer, Order> orders = new HashMap<>();
+
+        for(OrderEntity orderEntity : orderEntities) {
+            Order order = providerConverter.orderEntityToOrder(orderEntity);
+
+            order.setUserId(providerConverter.userEntityToUser(orderEntity.getUserId()));
+
+            orders.put(order.getId(), order);
+        }
+
+        return orders;
     }
 
 }

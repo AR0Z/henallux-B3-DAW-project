@@ -29,12 +29,7 @@ public class ProviderConverter {
         UserEntity userEntity = new UserEntity();
 
 
-        userEntity.setEmail(user.getEmail());
-        userEntity.setPassword(user.getPassword());
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setPhoneNumber(user.getPhoneNumber());
-        userEntity.setDeliveryAddress(user.getDeliveryAddress());
+        mapper.map(user, userEntity);
         userEntity.setAuthorities(user.getAuthoritiesString());
         userEntity.setAccountNonExpired(user.getAccountNonExpired());
         userEntity.setAccountNonLocked(user.getAccountNonLocked());

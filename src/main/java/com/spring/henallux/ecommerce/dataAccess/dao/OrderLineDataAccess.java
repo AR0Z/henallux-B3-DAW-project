@@ -10,5 +10,5 @@ import java.util.HashMap;
 
 public interface OrderLineDataAccess {
     void save(HashMap<Integer, OrderLine> orderLines, OrderEntity orderEntity);
-    HashMap<Integer, OrderLine> findByOrderId(Order orderEntity);
+    HashMap<Integer, OrderLine> findAllByOrderId(Order orderEntity);
 }

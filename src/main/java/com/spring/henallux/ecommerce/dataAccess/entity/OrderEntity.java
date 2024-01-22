@@ -1,5 +1,4 @@
 package com.spring.henallux.ecommerce.dataAccess.entity;
-
 import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 
 import lombok.Data;
@@ -17,10 +16,10 @@ import java.util.Date;
 @Getter
 public class OrderEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int id;
-    @Column(name = "date")
+    @Column(name ="date")
     private Date date;
     @Column(name = "paypal_order_id")
     private String paypalOrderId;
@@ -30,8 +29,4 @@ public class OrderEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
-    public String toString() {
-        return "OrderEntity [id=" + id + ", date=" + date + ", paypalOrderId=" + paypalOrderId + ", orderStatus="
-                + status + ", userId=" + userId.getId() + "]";
-    }
 }

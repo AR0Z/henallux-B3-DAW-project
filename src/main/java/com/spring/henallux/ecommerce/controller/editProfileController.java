@@ -4,7 +4,10 @@ import com.spring.henallux.ecommerce.Model.Order;
 import com.spring.henallux.ecommerce.Model.PasswordChangeForm;
 import com.spring.henallux.ecommerce.Model.User;
 import com.spring.henallux.ecommerce.Model.UserEdit;
+import com.spring.henallux.ecommerce.dataAccess.dao.OrderDataAccess;
+import com.spring.henallux.ecommerce.dataAccess.dao.OrderLineDataAccess;
 import com.spring.henallux.ecommerce.dataAccess.dao.UserDataAccess;
+import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -24,10 +28,14 @@ import java.util.HashMap;
 public class editProfileController {
 
     private UserDataAccess userDAO;
+    private OrderDataAccess orderDAO;
+    private OrderLineDataAccess orderLineDAO;
 
     @Autowired
-    public editProfileController(UserDataAccess userDAO){
+    public editProfileController(UserDataAccess userDAO, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDA){
         this.userDAO = userDAO;
+        this.orderDAO = orderDAO;
+        this.orderLineDAO = orderLineDA;
     }
     @RequestMapping(method = RequestMethod.GET)
     public String editProfile(Model model, Authentication authentication)    {
@@ -43,10 +51,16 @@ public class editProfileController {
 
         model.addAttribute("user", user);
 
-        // TODO: add attribute orders to model findOrderByUser
-        // model.addAttribute("orders", orderDAO.findOrderByUser(oldUser));
 
-        model.addAttribute("orders", new HashMap<Integer, Order>());
+        User userInDb = userDAO.findByEmail(oldUser.getEmail());
+
+        HashMap<Integer, Order> orders = orderDAO.findAllByUserId(userInDb);
+
+        for(Order order : orders.values()){
+            order.setOrderLines(orderLineDAO.findAllByOrderId(order));
+        }
+
+        model.addAttribute("orders", orders);
         model.addAttribute("passwordchangeform", new PasswordChangeForm());
 
         return "integrated:editProfile";

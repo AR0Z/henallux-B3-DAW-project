@@ -54,7 +54,7 @@ public class OrderController {
             return "redirect:/error";
 
         // get order line list
-        order.setOrderLines(orderLineDAO.findByOrderId(order));
+        order.setOrderLines(orderLineDAO.findAllByOrderId(order));
 
         model.addAttribute("order", order);
         model.addAttribute("locale", locale);

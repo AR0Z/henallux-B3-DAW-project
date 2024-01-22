@@ -51,4 +51,5 @@ public class UserEntity {
 
     @Column(name="enabled")
     private Boolean enabled;
+
 }

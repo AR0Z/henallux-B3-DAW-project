@@ -43,7 +43,7 @@ public class OrderLineDAO implements OrderLineDataAccess {
         }
     }
 
-    public HashMap<Integer, OrderLine> findByOrderId(Order order){
+    public HashMap<Integer, OrderLine> findAllByOrderId(Order order){
         ArrayList<OrderLineEntity> orderLineEntity = orderLineRepository.findAllByOrderId(providerConverter.orderToOrderEntity(order));
         HashMap<Integer, OrderLine> orderLines = new HashMap<>();
 

@@ -16,11 +16,12 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${orders}" var="order">
+            <c:forEach items="${orders}" var="entry">
+                <c:set var="order" value="${entry.value}" />
                 <tr>
                     <td>${order.date}</td>
                     <td>${order.status}</td>
-                    <td>${order.totalPrice}</td>
+                    <td>${order.getTotalPrice()}</td>
                     <td><a href="/order/${order.id}">Details</a></td>
                 </tr>
             </c:forEach>
