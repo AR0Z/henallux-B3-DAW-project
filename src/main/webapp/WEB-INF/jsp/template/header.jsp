@@ -13,42 +13,67 @@
 <style>
     #wrapper {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        width: 100%;
+        align-items: center;
     }
 
     #search-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
+        width: 50vw;
     }
 
     #buttons {
         display: flex;
-        align-items: center;
-        width: 40%;
+        justify-content: space-between;
     }
 
     #search {
         display: flex;
-        align-items: center;
-        margin: 0;
-        width: 100%;
     }
 
     #title {
-        width: 20%;
-        margin-right: 5px;
+
     }
 
     #search-bar {
-        display: flex;
-        width: 100%;
+        width: 70vw;
 
     }
 
+    #search-input {
+        width: 30vw;
+    }
+
+    @media screen and (max-width: 1100px) {
+        #wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #title > a > img {
+            width: 40%;
+            margin-bottom: 10px;
+        }
+
+        #search-input {
+            max-width: 70vw;
+            width: 100%;
+        }
+
+        #search-bar {
+            display: flex;
+            width: 90vw;
+            justify-content: center;
+        }
+
+        #search-wrapper {
+            width: 100%;
+        }
+
+        #buttons {
+        }
+    }
 
 </style>
 
@@ -74,7 +99,6 @@
                         </c:forEach>
                     </form:select>
                     <div id="search-bar">
-
                         <spring:message code="searchBarPlaceholder" var="placeholderSearchbar"/>
                         <form:input path="filter" var="search" type="text"
                                     placeholder='${placeholderSearchbar}' id="search-input"/>

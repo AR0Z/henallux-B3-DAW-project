@@ -2,12 +2,12 @@
 <%@ include file="./include/importTags.jsp" %>
 
 <section class="d-flex justify-content-center align-items-center" style="height: 75%;">
-    <form:form method="post" action="" modelAttribute="user">
+    <form:form method="post" action="login" modelAttribute="user" id="form">
         <!-- Email input -->
         <div class="mb-4">
             <spring:message code="register_email" var="emailPlaceholder"/>
             <form:input type="email" class="form-control" placeholder="${emailPlaceholder}" name="email"
-                        aria-label="Adresse mail" path="email" require="require"/>
+                        aria-label="Adresse mail" path="email" require="require" id="email"/>
         </div>
 
         <!-- Password input -->
@@ -24,17 +24,17 @@
             <spring:message code="login_button"/>
         </button>
 
-        <c:if test="${not empty param.error}">
-            <p style="color: red;">
+        <div class="d-flex justify-content-center" style="color: red" id="errorText">
+            <c:if test="${not empty param.error}">
                 <spring:message code="credentials_error"/>
-            </p>
-        </c:if>
+            </c:if>
+        </div>
 
         <!-- Register buttons -->
         <div class="text-center">
             <p>
                 <spring:message code="login_notAMember"/>
-                <a href="">
+                <a href="/register">
                     <spring:message code="login_notAMember_button"/>
                 </a>
             </p>
@@ -42,3 +42,23 @@
     </form:form>
 
 </section>
+
+<script>
+    const passwordInput = document.getElementById('password');
+    const emailInput = document.getElementById('email');
+    const form = document.getElementById('form');
+    const error = document.getElementById('errorText');
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (passwordInput.value.length === 0) {
+            error.innerText = "<spring:message code="register_error_password_empty" javaScriptEscape="true"/>";
+            return;
+        }
+        if (emailInput.value.length === 0) {
+            error.innerText = "<spring:message code="register_error_email" javaScriptEscape="true" />";
+            return;
+        }
+
+        form.submit();
+    })
+</script>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 
 @Controller
-@RequestMapping(value="/payment")
+@RequestMapping(value = "/payment")
 @SessionAttributes({Constants.CURRENT_ORDER})
 public class PaymentController {
 
@@ -35,8 +35,8 @@ public class PaymentController {
     }
 
     @Transactional
-    @RequestMapping(value="/paypal", method = RequestMethod.POST)
-    public ResponseEntity<String>  createPayment(@ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    @RequestMapping(value = "/paypal", method = RequestMethod.POST)
+    public ResponseEntity<String> createPayment(@ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
         // if order null
         if (order == null)
             return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order not found.\"}");
@@ -52,14 +52,14 @@ public class PaymentController {
         return response;
     }
 
-    @RequestMapping(value="/paypal/capture/{orderID}", method = RequestMethod.POST)
-    public ResponseEntity<String>  capturePayment(@PathVariable String orderID, @ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    @RequestMapping(value = "/paypal/capture/{orderID}", method = RequestMethod.POST)
+    public ResponseEntity<String> capturePayment(@PathVariable String orderID, @ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
 
         // capture payment
         ResponseEntity<String> response = paypalService.capturePayment(orderID);
 
         // check if payment is successful
-        if(response.getStatusCode().isError()) {
+        if (response.getStatusCode().isError()) {
             return response;
         }
 
@@ -71,19 +71,19 @@ public class PaymentController {
         return response;
     }
 
-    @RequestMapping(value="/paypal/success", method = RequestMethod.GET)
-    public String  successPayment(@ModelAttribute(value=Constants.CURRENT_CART) Cart cart, Authentication authentication) {
+    @RequestMapping(value = "/paypal/success", method = RequestMethod.GET)
+    public String successPayment(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication) {
 
         return "integrated:success";
     }
 
-    @RequestMapping(value="/paypal/error", method = RequestMethod.GET)
-    public String  errorPayment() {
+    @RequestMapping(value = "/paypal/error", method = RequestMethod.GET)
+    public String errorPayment() {
         return "integrated:error";
     }
 
-    @RequestMapping(value="/paypal/cancel/", method = RequestMethod.POST)
-    public ResponseEntity<String>  cancelPayment(@ModelAttribute(value=Constants.CURRENT_ORDER) Order order, Authentication authentication) {
+    @RequestMapping(value = "/paypal/cancel/", method = RequestMethod.POST)
+    public ResponseEntity<String> cancelPayment(@ModelAttribute(value = Constants.CURRENT_ORDER) Order order, Authentication authentication) {
 
         order.setStatus("Canceled");
 
@@ -94,6 +94,5 @@ public class PaymentController {
         // Renvoie la réponse formatée
         return ResponseEntity.ok(jsonResponse);
     }
-
 
 }
