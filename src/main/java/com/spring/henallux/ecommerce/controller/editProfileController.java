@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 @Controller
-@RequestMapping(value="/editProfile")
+@RequestMapping(value = "/editProfile")
 public class editProfileController {
 
     private UserDataAccess userDAO;
@@ -32,13 +31,14 @@ public class editProfileController {
     private OrderLineDataAccess orderLineDAO;
 
     @Autowired
-    public editProfileController(UserDataAccess userDAO, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDA){
+    public editProfileController(UserDataAccess userDAO, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDA) {
         this.userDAO = userDAO;
         this.orderDAO = orderDAO;
         this.orderLineDAO = orderLineDA;
     }
+
     @RequestMapping(method = RequestMethod.GET)
-    public String editProfile(Model model, Authentication authentication)    {
+    public String editProfile(Model model, Authentication authentication) {
         User oldUser = (User) authentication.getPrincipal();
 
         UserEdit user = new UserEdit();
@@ -56,9 +56,11 @@ public class editProfileController {
 
         HashMap<Integer, Order> orders = orderDAO.findAllByUserId(userInDb);
 
-        for(Order order : orders.values()){
+        for (Order order : orders.values()) {
             order.setOrderLines(orderLineDAO.findAllByOrderId(order));
         }
+
+        orders = sortByDate(orders);
 
         model.addAttribute("orders", orders);
         model.addAttribute("passwordchangeform", new PasswordChangeForm());
@@ -67,19 +69,19 @@ public class editProfileController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String editProfileSubmit(Model model, @Valid @ModelAttribute(value="user") UserEdit user, Authentication authentication, final BindingResult errors) {
+    public String editProfileSubmit(Model model, @Valid @ModelAttribute(value = "user") UserEdit user, Authentication authentication, final BindingResult errors) {
         User oldUser = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
 
         //check
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("user", user);
             return "integrated:editProfile";
         }
 
 
         //check email already exist
-        if(!oldUser.getEmail().equals(user.getEmail()) && userDAO.findByEmail(user.getEmail()) != null){
+        if (!oldUser.getEmail().equals(user.getEmail()) && userDAO.findByEmail(user.getEmail()) != null) {
             model.addAttribute("user", user);
             model.addAttribute("error", "Email already exist");
             return "integrated:editProfile";
@@ -92,5 +94,21 @@ public class editProfileController {
         SecurityContextHolder.getContext().setAuthentication(newAuthentication);
 
         return "integrated:editProfile";
+    }
+
+    private HashMap<Integer, Order> sortByDate(HashMap<Integer, Order> orders) {
+        // Create a list from the entries of the original HashMap
+        List<Map.Entry<Integer, Order>> entryList = new ArrayList<>(orders.entrySet());
+
+        // Sort the list based on the order date using a custom comparator
+        entryList.sort(Comparator.comparing(entry -> entry.getValue().getDate()));
+
+        // Create a new LinkedHashMap to maintain the order
+        HashMap<Integer, Order> sortedOrders = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Order> entry : entryList) {
+            sortedOrders.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedOrders;
     }
 }

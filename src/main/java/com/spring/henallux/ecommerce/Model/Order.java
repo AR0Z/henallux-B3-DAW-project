@@ -39,4 +39,13 @@ public class Order {
         totalPrice = Math.round(totalPrice * 100.0) / 100.0;
         return totalPrice;
     }
+
+    public String getStatusIcon() {
+        if (status.equals("Canceled"))
+            return "/assets/icons/canceled.png";
+        if (status.equals("Paid"))
+            return "/assets/icons/valid.png";
+        return "/assets/icons/pending.png";
+    }
+
 }

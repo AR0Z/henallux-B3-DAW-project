@@ -24,7 +24,8 @@
                     <div class="col">
                         <spring:message code="register_name" var="namePlaceholder"/>
                         <form:input type="text" class="form-control" placeholder='${namePlaceholder}' aria-label="Nom"
-                                    name="lastname" data-mdb-input-init="" required="" pattern="[A-Za-z\-]{2,}" path="lastName"/>
+                                    name="lastname" data-mdb-input-init="" required="" pattern="[A-Za-z\-]{2,}"
+                                    path="lastName"/>
                         <div class="invalid-feedback">
                             <spring:message code="register_error_name"/>
                         </div>
@@ -43,7 +44,8 @@
                 <div class="row mb-4 w-100">
                     <div class="col">
                         <spring:message code="register_password" var="passwordPlaceholder"/>
-                        <form:input var="password" type="password" id="password" class="form-control" placeholder="${passwordPlaceholder}"
+                        <form:input var="password" type="password" id="password" class="form-control"
+                                    placeholder="${passwordPlaceholder}"
                                     name="password" aria-label="Mot de passe" data-mdb-input-init="" require="require"
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" path="password"/>
 
@@ -66,7 +68,7 @@
                             <spring:message code="register_error_password_empty"/>
                         </div>
                         <div class="matching" style="display: none">
-                            <spring:message code="register_error_password_matching" />
+                            <spring:message code="register_error_password_matching"/>
                         </div>
                         <div class="passwordError" style="display: none">
                             <spring:message code="register_error_password"/>
@@ -106,14 +108,7 @@
                             <spring:message code="register_error_address"/>
                         </div>
                     </div>
-                    <div class="col-md-3 form-outlined">
-                        <spring:message code="register_zipcode" var="zipCodePlaceholder"/>
-                        <input type="text" class="form-control" placeholder="${zipCodePlaceholder}" name="zipCode"
-                               aria-label="Code Postal" data-mdb-input-init required pattern="[0-9]{4,5}">
-                        <div class="invalid-feedback">
-                            <spring:message code="register_error_zipcode"/>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-10 mb-4">
                     <div class="form-check">

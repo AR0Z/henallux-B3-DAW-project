@@ -20,7 +20,8 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   mandatory-file-encoding: UTF-8
- 
+  
+
 paypal:
   baseUrl: https://api-m.sandbox.paypal.com
   clientId: AfU8BZvjjUfdv1YamBcsaBux8--rf9HUnG2aAw2GbdNGdAC0fWIG1tg2RrPWo2BHY7W3GlqB6GG0TuO-
