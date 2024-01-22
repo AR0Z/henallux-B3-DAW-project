@@ -115,7 +115,7 @@
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
                         <label class="form-check-label" for="invalidCheck">
                             <spring:message code="register_agree"/>
-                            <a href="terms.html" target="_blank" style="color: black;text-decoration: underline;">
+                            <a href="infos/terms" target="_blank" style="color: black;text-decoration: underline;">
                                 <spring:message code="register_agree_link"/>
                             </a>
                         </label>

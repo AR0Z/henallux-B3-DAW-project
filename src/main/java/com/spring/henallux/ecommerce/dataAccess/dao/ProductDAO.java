@@ -32,7 +32,7 @@ public class ProductDAO implements ProductDataAccess {
         }
 
         Product product = providerConverter.productEntityToProduct(productEntity);
-        if(productEntity.getPromotionId() != null)
+        if (productEntity.getPromotionId() != null)
             product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
 
         return product;
@@ -46,7 +46,7 @@ public class ProductDAO implements ProductDataAccess {
         }
 
         Product product = providerConverter.productEntityToProduct(productEntity);
-        if(productEntity.getPromotionId() != null)
+        if (productEntity.getPromotionId() != null)
             product.setPromotion(providerConverter.promotionEntityToPromotion(productEntity.getPromotionId()));
 
         return product;
@@ -58,9 +58,9 @@ public class ProductDAO implements ProductDataAccess {
 
         ArrayList<Product> products = new ArrayList<>();
 
-        for(ProductEntity product : productEntity) {
+        for (ProductEntity product : productEntity) {
             Product productToAdd = providerConverter.productEntityToProduct(product);
-            if(product.getPromotionId() != null)
+            if (product.getPromotionId() != null)
                 productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
             products.add(productToAdd);
 
@@ -75,9 +75,9 @@ public class ProductDAO implements ProductDataAccess {
 
         ArrayList<Product> products = new ArrayList<>();
 
-        for(ProductEntity product : productEntity) {
+        for (ProductEntity product : productEntity) {
             Product productToAdd = providerConverter.productEntityToProduct(product);
-            if(product.getPromotionId() != null)
+            if (product.getPromotionId() != null)
                 productToAdd.setPromotion(providerConverter.promotionEntityToPromotion(product.getPromotionId()));
             products.add(productToAdd);
         }

@@ -118,7 +118,9 @@
                         maxlength="6"/>
             <form:input cssClass="form-control" id="maxprice" path="maxprice" type="number" placeholder="Prix maximum"
                         maxlength="6"/>
-            <form:button id="submitbtn" type="submit">Filtrer</form:button>
+            <button class="btn btn-secondary" type="submit" id="submitbtn">
+                <spring:message code="filter"/>
+            </button>
             <div id="error" class="red d-flex"></div>
             <script defer>
                 const filterform = document.getElementById("filterform");

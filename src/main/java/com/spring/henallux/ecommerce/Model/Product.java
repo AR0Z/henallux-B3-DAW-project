@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -18,7 +17,7 @@ public class Product {
     private String labelFr;
     private String descriptionEn;
     private String descriptionFr;
-    private Category category;
+    private Category categoryId;
     private Promotion promotion;
     private String dimension;
     private double weight;
@@ -37,7 +36,7 @@ public class Product {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         // return all element
         return "Product{" +
                 "id=" + id +
@@ -45,7 +44,7 @@ public class Product {
                 ", labelFr='" + labelFr + '\'' +
                 ", descriptionEn='" + descriptionEn + '\'' +
                 ", descriptionFr='" + descriptionFr + '\'' +
-                ", category=" + category +
+                ", category=" + categoryId +
                 ", promotion=" + promotion +
                 ", dimension='" + dimension + '\'' +
                 ", weight=" + weight +
