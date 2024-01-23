@@ -10,10 +10,10 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/")
-public class homeController {
+public class HomeController {
     private ProductDataAccess productDAO;
 
-    public homeController(ProductDataAccess productDAO) {
+    public HomeController(ProductDataAccess productDAO) {
         this.productDAO = productDAO;
     }
 
