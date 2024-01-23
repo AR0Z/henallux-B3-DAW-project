@@ -5,50 +5,62 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
 
-    @Column(name="email", unique=true)
+    @NotNull
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name="first_name")
+    @NotNull
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @NotNull
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="phone_number")
+    @NotNull
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name="delivery_address")
+    @NotNull
+    @Column(name = "delivery_address")
     private String deliveryAddress;
 
-    @Column(name="password")
+    @NotNull
+    @Column(name = "password")
     private String password;
 
-    @Column(name="authorities")
+    @NotNull
+    @Column(name = "authorities")
     private String authorities;
 
-    @Column(name="account_non_expired")
+    @NotNull
+    @Column(name = "account_non_expired")
     private Boolean accountNonExpired;
 
-    @Column(name="account_non_locked")
+    @NotNull
+    @Column(name = "account_non_locked")
     private Boolean accountNonLocked;
 
-    @Column(name="credentials_non_expired")
+    @NotNull
+    @Column(name = "credentials_non_expired")
     private Boolean credentialsNonExpired;
 
-    @Column(name="enabled")
+    @NotNull
+    @Column(name = "enabled")
     private Boolean enabled;
 
 }
