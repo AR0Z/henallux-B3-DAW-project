@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "categories")
@@ -21,8 +22,10 @@ public class CategoryEntity {
     private int id;
     @Column(name = "label_fr")
     @Length(min = 1, max = 50)
+    @NotNull
     private String labelFr;
     @Length(min = 1, max = 50)
     @Column(name = "label_en")
+    @NotNull
     private String labelEn;
 }
