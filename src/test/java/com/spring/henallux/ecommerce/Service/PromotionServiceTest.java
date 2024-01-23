@@ -1,4 +1,4 @@
-package com.spring.henallux.ecommerce;
+package com.spring.henallux.ecommerce.Service;
 
 import com.spring.henallux.ecommerce.DataAccess.dao.ProductDAO;
 import com.spring.henallux.ecommerce.DataAccess.dao.ProductDataAccess;
@@ -9,8 +9,9 @@ import com.spring.henallux.ecommerce.DataAccess.repository.ProductRepository;
 import com.spring.henallux.ecommerce.DataAccess.util.ProviderConverter;
 import com.spring.henallux.ecommerce.Model.Product;
 import com.spring.henallux.ecommerce.Model.Promotion;
-import com.spring.henallux.ecommerce.Service.PromotionService;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -20,11 +21,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class PromotionServiceTest {
+class PromotionServiceTest {
 
     private PromotionService promotionService;
     private ProductDataAccess productDAO;
@@ -34,7 +36,7 @@ public class PromotionServiceTest {
     private ProductRepository productRepository;
 
     @Before
-    public void setUp() throws Exception {
+    void setUp() throws Exception {
         providerConverter = new ProviderConverter();
         productDAO = new ProductDAO(productRepository, providerConverter);
 
