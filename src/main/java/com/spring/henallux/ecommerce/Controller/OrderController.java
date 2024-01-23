@@ -69,7 +69,7 @@ public class OrderController {
 
     @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<String> createOder(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication, Locale locale) {
+    public ResponseEntity<String> createOrder(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication, Locale locale) {
 
         //check if cart is empty
         if (cart.getCartLines().isEmpty()) {
