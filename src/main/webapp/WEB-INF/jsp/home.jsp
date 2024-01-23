@@ -181,8 +181,10 @@
                         <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
                             <spring:message code="home_armchair"/>
                         </h3>
-                        <a class="btn btn-link wow fadeInUp" href="/product/Outdoor%20Sofa-11" data-wow-delay="0.2s"
-                           data-wow-duration="1.2s">
+                        <a class="btn btn-link"
+                           href="/product/Outdoor%20Sofa-11"
+                           style="display: flex; align-items: center; justify-content: center; width: 200px"
+                        >
                             <spring:message code="home_shopnow"/>
                         </a>
                     </div>
