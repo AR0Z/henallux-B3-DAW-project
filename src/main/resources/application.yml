@@ -17,10 +17,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   mandatory-file-encoding: UTF-8
-  
+
 
 paypal:
   baseUrl: https://api-m.sandbox.paypal.com

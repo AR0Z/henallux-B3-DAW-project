@@ -48,7 +48,6 @@ public class PaymentController {
         if (order == null)
             return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order not found.\"}");
 
-        System.out.println(order.getId());
 
         // if order status is not pending
         if (!order.getStatus().equals("Pending"))

@@ -131,7 +131,6 @@
                 filterform.addEventListener("submit", (e) => {
                     e.preventDefault()
                     let errorText = ""
-                    console.log({minprice: minprice.value, maxprice: maxprice.value})
                     if (minprice.value > maxprice.value && maxprice.value !== "") {
                         errorText = "<spring:message code="filter_price_error" javaScriptEscape="true" />";
                     }

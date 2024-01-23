@@ -42,7 +42,6 @@ public class Product {
         ArrayList<String> images = new ArrayList<>();
         images.add(id + "-1");
         images.add(id + "-2");
-        System.out.println(images.get(0));
         return images;
     }
 

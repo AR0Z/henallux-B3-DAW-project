@@ -63,8 +63,6 @@ public class OrderController {
         model.addAttribute("locale", locale);
 
         session.setAttribute(Constants.CURRENT_ORDER, orderDb);
-        Order ordersession = (Order) session.getAttribute(Constants.CURRENT_ORDER);
-        System.out.println(ordersession.getId());
 
         return "integrated:order";
     }
@@ -76,17 +74,16 @@ public class OrderController {
         //check if cart is empty
         if (cart.getCartLines().isEmpty()) {
             String message = locale == Locale.FRENCH ? "Votre panier est vide" : "Your cart is empty";
-            return ResponseEntity.ok().body("{\"status\": \"error\", \"message\": \"" + message +"\"}");
+            return ResponseEntity.ok().body("{\"status\": \"error\", \"message\": \"" + message + "\"}");
         }
 
         // get userId
         User user = (User) authentication.getPrincipal();
 
-        System.out.println(user);
 
         if (user == null) {
             String message = locale == Locale.FRENCH ? "Vous devez être connecté pour passer une commande" : "You must be logged in to place an order";
-            return ResponseEntity.ok().body("{\"status\": \"needLogin\", \"message\": \"" + message +"\"}");
+            return ResponseEntity.ok().body("{\"status\": \"needLogin\", \"message\": \"" + message + "\"}");
         }
 
         Order order = cart.toOrder();

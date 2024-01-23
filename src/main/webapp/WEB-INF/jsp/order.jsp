@@ -109,7 +109,6 @@
                     // Vérifiez si la réponse a un statut OK (200)
                     if (response.ok) {
                         const orderData = await response.json();
-                        console.log(orderData);
                         if (orderData.id) {
                             // Si l'ID de la commande est présent, retournez-le
                             return orderData.id;

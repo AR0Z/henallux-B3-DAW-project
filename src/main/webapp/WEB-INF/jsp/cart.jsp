@@ -207,7 +207,6 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 // Logique à exécuter après la réception de la réponse
                 if (data.status === "success") {
                     window.location.href = "/order/" + data.orderId;
