@@ -18,13 +18,13 @@ import java.util.Locale;
 @Controller
 @RequestMapping(value = "/cart")
 @SessionAttributes({Constants.CURRENT_CART})
-public class cartController {
+public class CartController {
 
     private ProductDataAccess productDAO;
     private PromotionService promotionService;
 
     @Autowired
-    public cartController(ProductDataAccess productDAO, PromotionService promotionService) {
+    public CartController(ProductDataAccess productDAO, PromotionService promotionService) {
         this.productDAO = productDAO;
         this.promotionService = promotionService;
     }

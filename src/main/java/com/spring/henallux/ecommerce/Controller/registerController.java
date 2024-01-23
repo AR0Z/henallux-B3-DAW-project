@@ -15,12 +15,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="/register")
-public class registerController {
+public class RegisterController {
 
     private UserDataAccess userDAO;
 
     @Autowired
-    public registerController(UserDataAccess userDAO){
+    public RegisterController(UserDataAccess userDAO){
         this.userDAO = userDAO;
     }
 

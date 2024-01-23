@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 @Controller
-public class productController {
+public class ProductController {
 
     private ProductDataAccess productDAO;
     private PromotionService promotionService;
 
     @Autowired
-    public productController(ProductDataAccess productDAO, PromotionService promotionService) {
+    public ProductController(ProductDataAccess productDAO, PromotionService promotionService) {
         this.productDAO = productDAO;
         this.promotionService = promotionService;
     }
