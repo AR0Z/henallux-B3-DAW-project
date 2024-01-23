@@ -73,158 +73,32 @@
         <div class="tab-content product_container">
             <div class="product_gallery">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html">
-                                        <img src="../../assets/img/product/product5.png" alt="">
-                                    </a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
+                    <c:forEach items="${products}" end="3" var="product">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <article class="single_product">
+                                <figure>
+                                    <div class="product_thumb">
+                                        <a href="/product/${product.labelEn}-${product.id}">
+                                            <img src="../../assets/img/products/${product.getImages().get(0)}.jpg"
+                                                 alt="" height="100%" style="aspect-ratio: 1">
+                                        </a>
                                     </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html">
-                                        <img src="../../assets/img/product/product6.png" alt="">
-                                    </a>
-                                    <div class="label_product">
-                                        <span class="label_sale">Sale</span>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product7.png"
-                                                                       alt=""></a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product8.png"
-                                                                       alt=""></a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product1.png"
-                                                                       alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_hot">hot</span>
-                                    </div>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product2.png"
-                                                                       alt=""></a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product3.png"
-                                                                       alt=""></a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <article class="single_product">
-                            <figure>
-                                <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product4.png"
-                                                                       alt=""></a>
-                                </div>
-                                <figcaption class="product_content">
-                                    <h4><a href="single-product.html">Tufted accent chair with wood legs,
-                                        Beige</a></h4>
-                                    <div class="price_box">
-                                        <span class="old_price">$399.99</span>
-                                        <span class="current_price">$129.99</span>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
+                                    <figcaption class="product_content">
+                                        <h4><a href="/product/${product.labelEn}-${product.id}">
+                                                ${product.getLocalizedLabel(locale)}
+                                        </a></h4>
 
+                                        <div class="price_box">
+                                            <c:if test="${product.isPromotion}">
+                                                <span class="old_price">${product.price}e</span>
+                                            </c:if>
+                                            <span class="current_price">${product.price * (1-(product.promotion.percentage / 100))}e</span>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

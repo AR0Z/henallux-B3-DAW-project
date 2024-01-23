@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,6 +36,14 @@ public class Product {
 
     public String getLocalizedDescription(Locale locale) {
         return "fr".equalsIgnoreCase(locale.getLanguage()) ? descriptionFr : descriptionEn;
+    }
+
+    public ArrayList<String> getImages() {
+        ArrayList<String> images = new ArrayList<>();
+        images.add(id + "-1");
+        images.add(id + "-2");
+        System.out.println(images.get(0));
+        return images;
     }
 
     @Override

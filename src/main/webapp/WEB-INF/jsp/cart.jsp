@@ -32,8 +32,9 @@
                             <tr>
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img src="https://placehold.co/400" class="img-fluid rounded-3"
-                                             style="width: 120px;" alt="Book">
+                                        <img src="../../assets/img/products/${cartLine.product.getImages().get(0)}.jpg"
+                                             class="img-fluid rounded-3"
+                                             style="width: 120px; height: 100px" alt="Book">
                                         <div class="flex-column ms-4">
                                             <p class="mb-2">${cartLine.product.getLocalizedLabel(locale)}</p>
                                         </div>

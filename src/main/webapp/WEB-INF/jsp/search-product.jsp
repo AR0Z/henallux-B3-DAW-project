@@ -162,7 +162,8 @@
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div id="product-1" class="single-product">
                             <a href="product/${product.labelEn}-${product.id}">
-                                <img src="https://placehold.co/400" alt="" width="100%">
+                                <img src="../../assets/img/products/${product.getImages().get(0)}.jpg" alt=""
+                                     width="200px" height="200px">
                                 <div class="part-2">
                                     <h3 class="product-title">${product.getLocalizedLabel(locale)}</h3>
                                     <c:if test="${product.isPromotion}">

@@ -44,30 +44,27 @@
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
-                                    aria-current="true" aria-label="Slide 1"></button>
+                                    aria-current="true" aria-label="Slide 1" style="background-color: darkred"></button>
                             <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
-                                    aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
+                                    aria-label="Slide 2" style="background-color: darkred"></button>
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="https://placehold.co/400" class="d-block w-100" alt="400">
+                                <img src="../../assets/img/products/${product.getImages().get(0)}.jpg"
+                                     class="d-block w-100" alt="400">
                             </div>
                             <div class="carousel-item">
-                                <img src="https://placehold.co/500" class="d-block w-100" alt="500">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://placehold.co/600" class="d-block w-100" alt="600">
+                                <img src="../../assets/img/products/${product.getImages().get(1)}.jpg"
+                                     class="d-block w-100" alt="500">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
-                                data-bs-slide="prev">
+                                data-bs-slide="prev" style="color: darkred">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carousel"
-                                data-bs-slide="next">
+                                data-bs-slide="next" style="color: darkred">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -177,7 +174,8 @@
                 <c:forEach var="p" items="${similarProducts}" end="3">
                     <div class="d-flex mb-3" style="width: 200px">
                         <a href="/product/${p.labelEn}-${p.id}" class="me-3">
-                            <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                            <img src="../../assets/img/products/${p.getImages().get(1)}.jpg"
+                                 style="min-width: 96px; height: 96px;"
                                  class="img-md img-thumbnail"/>
                         </a>
                         <div class="info">
