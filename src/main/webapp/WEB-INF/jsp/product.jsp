@@ -100,7 +100,7 @@
                                 <c:if test="${product.isPromotion}">
                                     <del>${product.oldPrice}</del>
                                 </c:if>
-                                euros
+                                <spring:message code="euro"/>
                         </span>
                             <span class="text-muted">/
                             <spring:message code="product_each"/>

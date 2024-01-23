@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,7 +68,7 @@ public class editProfileController {
         return "integrated:editProfile";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String editProfileSubmit(Model model, @Valid @ModelAttribute(value = "user") UserEdit user, Authentication authentication, final BindingResult errors) {
         User oldUser = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
@@ -92,7 +93,51 @@ public class editProfileController {
         Authentication newAuthentication = new UsernamePasswordAuthenticationToken(oldUser, authentication.getCredentials(), oldUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(newAuthentication);
 
-        return "integrated:editProfile";
+        return "integrated:home";
+    }
+
+
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    public String editPasswordSubmit(Model model, @Valid @ModelAttribute(value = "user") UserEdit user, @Valid @ModelAttribute(value = "passwordchangeform") PasswordChangeForm passwordChangeForm, Authentication authentication, final BindingResult errors) {
+        User oldUser = (User) authentication.getPrincipal();
+        model.addAttribute("passwordchangeform", passwordChangeForm);
+        model.addAttribute("user", oldUser);
+        System.out.println(passwordChangeForm.getOldPassword());
+        //check
+        if (errors.hasErrors()) {
+            model.addAttribute("passwordchangeform", new PasswordChangeForm());
+
+            return "integrated:editProfile";
+        }
+
+        //check old password
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!passwordEncoder.matches(passwordChangeForm.getOldPassword(), oldUser.getPassword())) {
+            model.addAttribute("passwordchangeform", new PasswordChangeForm());
+            model.addAttribute("error", "Old password is incorrect");
+            return "integrated:editProfile";
+        }
+
+
+        //check new password
+        if (!passwordChangeForm.getNewPassword().equals(passwordChangeForm.getNewPasswordConfirm())) {
+            model.addAttribute("passwordchangeform", new PasswordChangeForm());
+            model.addAttribute("error", "New password doesn't match");
+            return "integrated:editProfile";
+        }
+
+        //crypt password
+        String hashedPassword = passwordEncoder.encode(passwordChangeForm.getNewPassword());
+
+        oldUser.setPassword(hashedPassword);
+
+        //save to db
+        oldUser = userDAO.update(user, oldUser);
+
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(oldUser, authentication.getCredentials(), oldUser.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+        return "integrated:home";
     }
 
     private HashMap<Integer, Order> sortByDate(HashMap<Integer, Order> orders) {

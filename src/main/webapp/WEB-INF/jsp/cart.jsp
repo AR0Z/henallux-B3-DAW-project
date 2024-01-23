@@ -80,7 +80,7 @@
                             <p class="mb-0">
                                 <spring:message code="cart_shipping"/>
                             </p>
-                            <p class="mb-0">5 euros</p>
+                            <p class="mb-0">5 <spring:message code="euro"/></p>
                         </div>
 
                         <hr class="my-4">
@@ -90,7 +90,7 @@
                                 <spring:message code="cart_total"/>
                             </p>
                             <p class="mb-2" id="totalPriceWithShippingCost">${cart.getTotalPriceWithShippingCost()}
-                                euros</p>
+                                <spring:message code="euro"/></p>
                         </div>
                     </div>
                     <div id="dislayCheckout"></div>

@@ -60,7 +60,7 @@
                             <p class="mb-0">
                                 <spring:message code="cart_shipping"/>
                             </p>
-                            <p class="mb-0">5 euros</p>
+                            <p class="mb-0">5 <spring:message code="euro"/></p>
                         </div>
 
                         <hr class="my-4">
@@ -70,7 +70,7 @@
                                 <spring:message code="cart_total"/>
                             </p>
                             <p class="mb-2" id="totalPriceWithShippingCost">${order.getTotalPriceWithShippingCost()}
-                                euros</p>
+                                <spring:message code="euro"/></p>
                         </div>
                         <c:if test="${order.status eq 'Pending'}">
                             <div id="paypal-button-container"></div>

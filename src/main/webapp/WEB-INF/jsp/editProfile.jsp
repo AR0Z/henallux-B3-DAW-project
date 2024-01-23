@@ -42,12 +42,13 @@
         <div class="container d-flex align-items-center justify-content-center w-50 ">
             <%--@elvariable id="user" type="com.spring.henallux.ecommerce.Model.User"--%>
             <form:form class="col g-4 needs-validation d-flex align-items-center justify-content-center flex-column"
-                       id="needs-validation" novalidate="" modelAttribute="user" method="post">
+                       id="needs-validation" novalidate="" modelAttribute="user" method="post"
+                       action="/editProfile/profile">
                 <div class="row mb-4 w-100">
                     <div class="col">
                         <form:input type="text" class="form-control" value="${user.lastName}" aria-label="Nom"
                                     name="lastname"
-                                    data-mdb-input-init="" required="true" pattern="[A-Za-z]{2,}" path="lastName"/>
+                                    data-mdb-input-init="" required="true" pattern="[A-Za-z\-]{2,}" path="lastName"/>
                         <div class="invalid-feedback">
                             <spring:message code="register_error_name"/>
                         </div>
@@ -103,15 +104,49 @@
         </div>
     </section>
     <section id="passwordChange" class="w-100 d-flex justify-content-center">
+        <spring:message var="passwordPlaceholder" code="oldpassword"/>
         <%--@elvariable id="passwordchangeform" type="com.spring.henallux.ecommerce.Model.PasswordChangeForm"--%>
-        <form:form modelAttribute="passwordchangeform" cssClass="w-20 d-flex align-items-center justify-content-center"
-                   cssStyle="flex-direction: column">
-            <form:input class="form-control mt-2" path="oldPassword" type="password" placeholder="Ancien mot de passe"/>
-            <form:input class="form-control mt-2" path="newPassword" type="password"
-                        placeholder="Nouveau mot de passe"/>
-            <form:input class="form-control mt-2" path="newPasswordConfirm" type="password"
-                        placeholder="Confirmer le nouveau mot de passe"/>
-            <form:button class="btn btn-primary mt-2" type="submit">Changer le mot de passe</form:button>
+        <form:form class="w-20  needs-validation d-flex align-items-center justify-content-center flex-column"
+                   id="needs-validation" novalidate="" modelAttribute="passwordchangeform" method="post"
+                   action="/editProfile/password">
+
+            <form:input type="password" class="form-control" aria-label="Mot de passe" name="oldPassword" value=""
+                        data-mdb-input-init="" required="true" path="oldPassword" placeholder="${passwordPlaceholder}"/>
+            <div class="invalid-feedback">
+                <spring:message code="register_error_password"/>
+            </div>
+            <spring:message var="passwordPlaceholder" code="new_password"/>
+            <form:input type="password" class="form-control" aria-label="Mot de passe" name="newPassword" value=""
+                        data-mdb-input-init="" required="true" path="newPassword" placeholder="${passwordPlaceholder}"/>
+            <div class="invalid-feedback">
+                <spring:message code="register_error_password"/>
+            </div>
+            <spring:message var="passwordPlaceholder" code="register_passwordConfirm"/>
+            <form:input type="password" class="form-control" aria-label="Mot de passe" name="newPasswordConfirm"
+                        value=""
+                        data-mdb-input-init="" required="true" path="newPasswordConfirm"
+                        placeholder="${passwordPlaceholder}"/>
+            <div class="invalid-feedback">
+                <spring:message code="register_error_password"/>
+            </div>
+
+
+            <button class="btn btn-primary" type="submit" data-mdb-ripple-init>
+                <spring:message code="password_change"/>
+            </button>
+            <div style="color:red"> ${error} </div>
         </form:form>
     </section>
 </div>
+
+<script>
+    const passwordForm = document.getElementById('passwordForm');
+
+    passwordForm.addEventListener('submit', function (event) {
+        if (passwordForm.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        passwordForm.classList.add('was-validated');
+    }, false);
+</script>

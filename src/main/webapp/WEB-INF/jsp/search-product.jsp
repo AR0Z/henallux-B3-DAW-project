@@ -169,7 +169,8 @@
                                     <c:if test="${product.isPromotion}">
                                         <h4 class="product-old-price">${product.oldPrice}</h4>
                                     </c:if>
-                                    <h4 class="product-price">${String.format("%.2f",product.price)} euros</h4>
+                                    <h4 class="product-price">${String.format("%.2f",product.price)} <spring:message
+                                            code="euro"/></h4>
                                 </div>
                             </a>
                         </div>

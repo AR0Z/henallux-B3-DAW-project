@@ -95,9 +95,13 @@
 
                                         <div class="price_box">
                                             <c:if test="${product.promotion != null}">
-                                                <span class="old_price">${product.price}e</span>
+                                                <span class="old_price">${product.price}
+                                                    <spring:message code="euro"/>
+                                                </span>
                                             </c:if>
-                                            <span class="current_price">${product.price * (1-(product.promotion.percentage / 100))}e</span>
+                                            <span class="current_price">${product.price * (1-(product.promotion.percentage / 100))}
+                                                <spring:message code="euro"/>
+                                            </span>
                                         </div>
                                     </figcaption>
                                 </figure>
