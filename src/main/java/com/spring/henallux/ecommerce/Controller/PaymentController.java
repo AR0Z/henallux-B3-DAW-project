@@ -1,8 +1,6 @@
 package com.spring.henallux.ecommerce.Controller;
 
-import com.spring.henallux.ecommerce.Model.Cart;
-import com.spring.henallux.ecommerce.Model.Order;
-import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.Model.*;
 import com.spring.henallux.ecommerce.DataAccess.dao.*;
 import com.spring.henallux.ecommerce.Service.Constants;
 import com.spring.henallux.ecommerce.Service.PaypalService;
@@ -13,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/payment")
@@ -22,14 +21,15 @@ public class PaymentController {
     private PaypalService paypalService;
     private OrderDataAccess orderDAO;
     private OrderLineDataAccess orderLineDAO;
-    private UserDataAccess userDAO;
+    private ProductDataAccess productDAO;
+
 
     @Autowired
-    public PaymentController(PaypalService paypalService, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, UserDataAccess userDAO) {
+    public PaymentController(PaypalService paypalService, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, ProductDataAccess productDAO ) {
         this.paypalService = paypalService;
         this.orderDAO = orderDAO;
         this.orderLineDAO = orderLineDAO;
-        this.userDAO = userDAO;
+        this.productDAO = productDAO;
     }
 
     @Transactional
@@ -48,6 +48,7 @@ public class PaymentController {
         if (order == null)
             return ResponseEntity.ok("{\"status\": \"error\", \"message\": \"Order not found.\"}");
 
+        System.out.println(order.getId());
 
         // if order status is not pending
         if (!order.getStatus().equals("Pending"))
@@ -97,10 +98,19 @@ public class PaymentController {
     public ResponseEntity<String> cancelPayment(@RequestParam(name = "orderId") int orderId, Authentication authentication) {
 
         Order order = orderDAO.findById(orderId);
+        order.setOrderLines(orderLineDAO.findAllByOrderId(order));
 
         order.setStatus("Canceled");
 
         orderDAO.save(order);
+
+        for(Map.Entry<Integer, OrderLine> entry : order.getOrderLines().entrySet()){
+            OrderLine orderLine = entry.getValue();
+
+            Product product = orderLine.getProduct();
+            product.setStock(product.getStock() + entry.getValue().getQuantity());
+            productDAO.save(product);
+        }
 
         String jsonResponse = "{\"status\": \"canceled\", \"message\": \"Payment has been canceled.\"}";
 

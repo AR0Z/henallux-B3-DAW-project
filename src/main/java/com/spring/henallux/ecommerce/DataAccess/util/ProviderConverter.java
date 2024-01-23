@@ -41,6 +41,10 @@ public class ProviderConverter {
         return mapper.map(productEntity, Product.class);
     }
 
+    public ProductEntity productToProductEntity(Product product) {
+        return mapper.map(product, ProductEntity.class);
+    }
+
     private Category getCategoryByCategoryEntity(CategoryEntity categoryEntity) {
         Category category = new Category();
         category.setId(categoryEntity.getId());

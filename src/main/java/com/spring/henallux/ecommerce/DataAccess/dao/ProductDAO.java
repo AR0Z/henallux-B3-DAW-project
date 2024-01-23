@@ -83,4 +83,10 @@ public class ProductDAO implements ProductDataAccess {
 
         return products;
     }
+
+    public Product save(Product product) {
+        ProductEntity productEntity = providerConverter.productToProductEntity(product);
+        productEntity = productRepository.save(productEntity);
+        return providerConverter.productEntityToProduct(productEntity);
+    }
 }

@@ -10,4 +10,5 @@ public interface ProductDataAccess {
     Product findById(int id);
     ArrayList<Product> findByCategory(Category category);
     ArrayList<Product> findAll();
+    Product save(Product product);
 }

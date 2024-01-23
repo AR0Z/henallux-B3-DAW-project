@@ -1,8 +1,7 @@
 package com.spring.henallux.ecommerce.Controller;
 
-import com.spring.henallux.ecommerce.Model.Cart;
-import com.spring.henallux.ecommerce.Model.Order;
-import com.spring.henallux.ecommerce.Model.User;
+import com.spring.henallux.ecommerce.DataAccess.dao.ProductDataAccess;
+import com.spring.henallux.ecommerce.Model.*;
 import com.spring.henallux.ecommerce.DataAccess.dao.OrderDataAccess;
 import com.spring.henallux.ecommerce.DataAccess.dao.OrderLineDataAccess;
 import com.spring.henallux.ecommerce.DataAccess.dao.UserDataAccess;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -32,12 +33,14 @@ public class OrderController {
     private OrderDataAccess orderDAO;
     private OrderLineDataAccess orderLineDAO;
     private UserDataAccess userDAO;
+    private ProductDataAccess productDAO;
 
     @Autowired
-    public OrderController(OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, UserDataAccess userDAO) {
+    public OrderController(OrderDataAccess orderDAO, OrderLineDataAccess orderLineDAO, UserDataAccess userDAO, ProductDataAccess productDAO) {
         this.orderDAO = orderDAO;
         this.orderLineDAO = orderLineDAO;
         this.userDAO = userDAO;
+        this.productDAO = productDAO;
     }
 
 
@@ -63,6 +66,8 @@ public class OrderController {
         model.addAttribute("locale", locale);
 
         session.setAttribute(Constants.CURRENT_ORDER, orderDb);
+        Order ordersession = (Order) session.getAttribute(Constants.CURRENT_ORDER);
+        System.out.println(ordersession.getId());
 
         return "integrated:order";
     }
@@ -74,16 +79,17 @@ public class OrderController {
         //check if cart is empty
         if (cart.getCartLines().isEmpty()) {
             String message = locale == Locale.FRENCH ? "Votre panier est vide" : "Your cart is empty";
-            return ResponseEntity.ok().body("{\"status\": \"error\", \"message\": \"" + message + "\"}");
+            return ResponseEntity.ok().body("{\"status\": \"error\", \"message\": \"" + message +"\"}");
         }
 
         // get userId
         User user = (User) authentication.getPrincipal();
 
+        System.out.println(user);
 
         if (user == null) {
             String message = locale == Locale.FRENCH ? "Vous devez être connecté pour passer une commande" : "You must be logged in to place an order";
-            return ResponseEntity.ok().body("{\"status\": \"needLogin\", \"message\": \"" + message + "\"}");
+            return ResponseEntity.ok().body("{\"status\": \"needLogin\", \"message\": \"" + message +"\"}");
         }
 
         Order order = cart.toOrder();
@@ -96,12 +102,21 @@ public class OrderController {
         // save order lines in database
         orderLineDAO.save(cart.toOrderLines(), orderEntity);
 
-        // create order object
-
         order.setOrderLines(cart.toOrderLines());
 
         // clear cart
         cart.clear();
+
+        // remove stock
+        for(Map.Entry<Integer, OrderLine> entry : order.getOrderLines().entrySet()) {
+            OrderLine orderLine = entry.getValue();
+
+            Product product = orderLine.getProduct();
+
+            product.setStock(product.getStock() - orderLine.getQuantity());
+
+            productDAO.save(product);
+        }
 
         // return order id
         return ResponseEntity.ok().body("{\"status\": \"success\", \"orderId\": \"" + orderEntity.getId() + "\"}");
