@@ -14,11 +14,12 @@
                     <div class="swiper-wrapper">
                         <div class="single_slider swiper-slide d-flex align-items-center">
                             <div class="slider_text">
-                                <h2><spring:message code="home_title"/></h2>
+                                <h2 style="margin-bottom: 60px"
+                                ><spring:message code="home_title"/></h2>
                                 <div class="slider_text_shape">
-                                    <img src="../../assets/img/slider/slider-text-shape.png"/>
                                     <div class="slider_btn">
-                                        <a class="btn btn-link" href="shop-left-sidebar.html">
+                                        <a class="btn btn-link" href="/product/Living%20Room%20Sofa-17"
+                                           style="display: flex; align-items: center; justify-content: center;">
                                             <spring:message code="home_shopnow"/>
                                         </a>
                                     </div>
@@ -26,26 +27,29 @@
                             </div>
 
                             <div class="slider_thumb">
-                                <img src="../../assets/img/slider/slider-shape1.png" alt="">
+                                <img src="../../assets/img/products/17-1.jpg" alt="">
                             </div>
                         </div>
                         <div class="single_slider swiper-slide d-flex align-items-center">
                             <div class="slider_text">
-                                <h2><spring:message code="home_title"/></h2>
+                                <h2 style="margin-bottom: 60px"
+                                ><spring:message code="home_title"/></h2>
                                 <div class="slider_text_shape">
-                                    <img src="../../assets/img/slider/slider-text-shape.png" alt="">
                                     <div class="slider_btn">
-                                        <a class="btn btn-link" href="shop-left-sidebar.html">
+                                        <a class="btn btn-link"
+                                           style="display: flex; align-items: center; justify-content: center;"
+                                           href="product/Living%20Room%20Chair-18">
                                             <spring:message code="home_shopnow"/>
                                         </a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="slider_thumb">
-                                <img src="../../assets/img/slider/slider-shape1.png" alt="">
+                            <div class="slider_thumb" style="width: 30vw">
+                                <img src="../../assets/img/products/18-2.jpg" width="100%" alt="">
                             </div>
                         </div>
+
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>
@@ -80,7 +84,8 @@
                                     <div class="product_thumb">
                                         <a href="/product/${product.labelEn}-${product.id}">
                                             <img src="../../assets/img/products/${product.getImages().get(0)}.jpg"
-                                                 alt="" height="100%" style="aspect-ratio: 1">
+                                                 alt=""
+                                                 style="max-height: 200px;">
                                         </a>
                                     </div>
                                     <figcaption class="product_content">
@@ -89,7 +94,7 @@
                                         </a></h4>
 
                                         <div class="price_box">
-                                            <c:if test="${product.isPromotion}">
+                                            <c:if test="${product.promotion != null}">
                                                 <span class="old_price">${product.price}e</span>
                                             </c:if>
                                             <span class="current_price">${product.price * (1-(product.promotion.percentage / 100))}e</span>
@@ -172,7 +177,7 @@
                         <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
                             <spring:message code="home_armchair"/>
                         </h3>
-                        <a class="btn btn-link wow fadeInUp" href="#" data-wow-delay="0.2s"
+                        <a class="btn btn-link wow fadeInUp" href="/product/Outdoor%20Sofa-11" data-wow-delay="0.2s"
                            data-wow-duration="1.2s">
                             <spring:message code="home_shopnow"/>
                         </a>
@@ -180,7 +185,7 @@
                 </div>
             </div>
             <div class="banner_position_img">
-                <img src="../../assets/img/others/armchair.png" alt="">
+                <img src="../../assets/img/products/11-1.jpg" alt="">
             </div>
         </div>
     </div>

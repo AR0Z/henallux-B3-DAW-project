@@ -46,8 +46,19 @@
         body {
             min-height: 100vh;
             max-width: 100vw;
+            display: flex;
+            flex-direction: column;
+
         }
 
+        footer {
+            flex-shrink: 0;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+        
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -60,9 +71,6 @@
             -moz-appearance: textfield;
         }
 
-        footer {
-            margin-top: auto !important;
-        }
     </style>
 </head>
 <body>

@@ -51,7 +51,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="../../assets/img/products/${product.getImages().get(0)}.jpg"
-                                     class="d-block w-100" alt="400">
+                                     class="d-block w-100" alt="400" style="max-height: 620px">
                             </div>
                             <div class="carousel-item">
                                 <img src="../../assets/img/products/${product.getImages().get(1)}.jpg"
@@ -173,7 +173,7 @@
                 <c:forEach var="p" items="${similarProducts}" end="3">
                     <div class="d-flex mb-3" style="width: 200px">
                         <a href="/product/${p.labelEn}-${p.id}" class="me-3">
-                            <img src="../../assets/img/products/${p.getImages().get(1)}.jpg"
+                            <img src="../../assets/img/products/${p.getImages().get(0)}.jpg"
                                  style="min-width: 96px; height: 96px;"
                                  class="img-md img-thumbnail"/>
                         </a>

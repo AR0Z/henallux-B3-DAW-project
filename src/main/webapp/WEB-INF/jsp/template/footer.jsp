@@ -1,5 +1,5 @@
 <%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<footer class="pt-3">
+<footer>
     <ul class="nav justify-content-center border-top pt-3 mb-3 w-100">
         <a class="nav-item px-2 text-muted" href="/"><spring:message key="main"/></a>
         <a class="nav-item px-2 text-muted" href="/infos/aboutus"><spring:message key="aboutus"/></a>

@@ -19,7 +19,7 @@ public class homeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model, Locale locale) {
-        System.out.println(productDAO.findAll().get(0).getLabelEn());
+        System.out.println(productDAO.findAll().get(0).getIsPromotion());
         model.addAttribute("products", productDAO.findAll());
         model.addAttribute("locale", locale);
         return "integrated:home";
