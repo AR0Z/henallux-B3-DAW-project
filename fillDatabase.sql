@@ -81,26 +81,3 @@ VALUES
      400.00, 5, 30, 1, NULL),
     (CURRENT_DATE, 'Chair for Living Room', 'Chaise pour salon', '80x70', 'Living Room Chair', 'Chaise de salon',
      150.00, 10, 15, 1, NULL);
-
--- Insertion dans la table users
-INSERT INTO users (account_non_expired, account_non_locked, authorities, credentials_non_expired, delivery_address,
-                   email, enabled, first_name, last_name, password, phone_number)
-VALUES (1, 1, 'ROLE_USER', 1, '123 Main St, City', 'user1@example.com', 1, 'John', 'Doe', 'password123',
-        '123-456-7890'),
-       (1, 1, 'ROLE_USER', 1, '456 Elm St, Town', 'user2@example.com', 1, 'Jane', 'Smith', 'password456',
-        '987-654-3210'),
-       (1, 1, 'ROLE_ADMIN', 1, '789 Oak St, Village', 'admin@example.com', 1, 'Admin', 'Adminson', 'adminpass',
-        '555-555-5555');
-
--- Insertion dans la table orders
-INSERT INTO orders (date, order_status, paypal_order_id, user_id)
-VALUES ('2024-01-10', 'Pending', 'PAYPAL123', 1),
-       ('2024-02-20', 'Delivered', 'PAYPAL456', 2),
-       ('2024-03-15', 'Processing', 'PAYPAL789', 3);
-
--- Insertion dans la table orders_lines
-INSERT INTO orders_lines (price, quantity, order_id, product_id)
-VALUES (599.99, 1, 1, 1),
-       (799.99, 1, 2, 2),
-       (499.99, 1, 3, 3),
-       (199.99, 2, 3, 4);
