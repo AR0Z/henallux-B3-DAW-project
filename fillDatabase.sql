@@ -7,7 +7,6 @@ VALUES ('Living Room', 'Salon'),
        ('Office', 'Bureau'),
        ('Dining Room', 'Salle à manger'),
        ('Outdoor', 'Extérieur'),
-       ('Bathroom', 'Salle de bains'),
        ('Kids Room', 'Chambre d\'enfant'),
        ('Storage', 'Rangement'),
        ('Decor', 'Décoration');
@@ -25,29 +24,63 @@ VALUES ('2024-01-01', '2024-01-31', 'New Year Sale', 'Soldes du Nouvel An', 20, 
        ('2024-12-10', '2024-12-25', 'Holiday Season Deals', 'Offres de la saison des fêtes', 40, 'Holiday'),
        ('2025-01-01', '2025-01-15', 'New Year New Furniture', 'Nouvelle année, nouveau mobilier', 20, 'Seasonal');
 
--- Insertion dans la table products
+-- Insertion des produits
 INSERT INTO products (date_added, description_en, description_fr, dimension, label_en, label_fr, price, stock, weight,
                       category_id, promotion_id)
-VALUES ('2023-12-20', 'Comfortable sofa', 'Canapé confortable', '80x35x40', 'Cozy Sofa', 'Canapé confortable', 599.99,
-        50, 40.5, 1, 1),
-       ('2024-01-05', 'Elegant bed frame', 'Cadre de lit élégant', '160x200', 'Elegant Bed Frame',
-        'Cadre de lit élégant', 799.99, 30, 65.2, 2, 2),
-       ('2024-02-10', 'Modern dining table', 'Table à manger moderne', '120x80x75', 'Modern Dining Table',
-        'Table à manger moderne', 499.99, 20, 30.8, 5, 3),
-       ('2024-03-25', 'Adjustable office chair', 'Chaise de bureau réglable', '60x60x110', 'Adjustable Office Chair',
-        'Chaise de bureau réglable', 199.99, 40, 15.6, 4, 4),
-       ('2024-04-12', 'Outdoor lounge set', 'Ensemble de salon extérieur', '200x150x80', 'Outdoor Lounge Set',
-        'Ensemble de salon extérieur', 899.99, 15, 75.0, 6, 5),
-       ('2024-05-30', 'Bathroom vanity set', 'Ensemble de salle de bains', '100x50x85', 'Bathroom Vanity Set',
-        'Ensemble de salle de bains', 349.99, 25, 50.3, 7, 6),
-       ('2024-06-15', 'Kids bunk bed', 'Lits superposés pour enfants', '90x190', 'Kids Bunk Bed',
-        'Lits superposés pour enfants', 399.99, 10, 45.9, 8, 7),
-       ('2024-07-20', 'Storage cabinet', 'Armoire de rangement', '120x40x180', 'Storage Cabinet',
-        'Armoire de rangement', 299.99, 35, 55.0, 9, 8),
-       ('2024-08-05', 'Decorative vase', 'Vase décoratif', '30x30x50', 'Decorative Vase', 'Vase décoratif', 49.99, 60,
-        5.2, 10, 9),
-       ('2024-09-10', 'Bookshelf', 'Étagère à livres', '100x30x150', 'Bookshelf', 'Étagère à livres', 179.99, 25, 22.7,
-        9, 10);
+VALUES
+    -- Bureau
+    (CURRENT_DATE, 'Table for Office', 'Table pour bureau', '120x80', 'Office Table', 'Table de bureau', 150.00, 10, 15,
+     4, 1),
+    (CURRENT_DATE, 'Chair for Office', 'Chaise pour bureau', '50x60', 'Office Chair', 'Chaise de bureau', 80.00, 20, 8,
+     4, 1),
+
+    -- Chambre
+    (CURRENT_DATE, 'Night Table for Bedroom', 'Table de nuit pour chambre', '50x40', 'Bedroom Night Table',
+     'Table de nuit chambre', 100.00, 15, 5, 2, 3),
+    (CURRENT_DATE, 'Chair for Bedroom', 'Chaise pour chambre', '60x70', 'Bedroom Chair', 'Chaise de chambre', 120.00,
+     25, 10, 2, NULL),
+
+    -- Chambre d'enfant
+    (CURRENT_DATE, 'Chair for Kids Room', 'Chaise pour chambre d''enfant', '40x30', 'Kids Chair', 'Chaise d''enfant',
+     50.00, 30, 5, 7, 4),
+    (CURRENT_DATE, 'Armchair for Kids Room', 'Fauteuil pour chambre d''enfant', '60x50', 'Kids Armchair',
+     'Fauteuil d''enfant', 80.00, 20, 8, 7, 5),
+
+    -- Cuisine
+    (CURRENT_DATE, 'Kitchen Island', 'Îlot de cuisine', '120x80', 'Kitchen Island', 'Îlot de cuisine', 200.00, 10, 20,
+     3, 5),
+    (CURRENT_DATE, 'Kitchen Stool', 'Tabouret de cuisine', '30x30', 'Kitchen Stool', 'Tabouret de cuisine', 30.00, 30,
+     5, 3, 6),
+
+    -- Décoration
+    (CURRENT_DATE, 'Canvas Art', 'Toile artistique', '80x60', 'Canvas Art', 'Toile artistique', 80.00, 15, 5,
+     9, 7),
+    (CURRENT_DATE, 'Woman Canvas', 'Toile de femme', '100x80', 'Woman Canvas', 'Toile de femme', 120.00, 10, 8,
+     9, 8),
+
+    -- Extérieur
+    (CURRENT_DATE, 'Outdoor Sofa', 'Canapé extérieur', '150x80', 'Outdoor Sofa', 'Canapé extérieur', 300.00, 5, 25,
+     6, 9),
+    (CURRENT_DATE, 'Outdoor Table', 'Table extérieure', '120x60', 'Outdoor Table', 'Table extérieure', 150.00, 10, 15,
+     6, 10),
+
+    -- Rangement
+    (CURRENT_DATE, 'Wardrobe', 'Armoire', '150x200', 'Wardrobe', 'Armoire', 250.00, 8, 50, 8, 10),
+    (CURRENT_DATE, 'Drawer Unit', 'Caisson', '60x40', 'Drawer Unit', 'Caisson', 120.00, 12, 15, 8, 1),
+
+    -- Salle à manger
+    (CURRENT_DATE, 'White Dining Table', 'Table à manger blanche', '120x80', 'White Dining Table',
+     'Table à manger blanche', 180.00, 10, 20, 5,
+     NULL),
+    (CURRENT_DATE, 'Wooden Dining Table', 'Table à manger en bois', '150x90', 'Wooden Dining Table',
+     'Table à manger en bois', 220.00, 8, 25, 5,
+     NULL),
+
+    -- Salon
+    (CURRENT_DATE, 'Sofa for Living Room', 'Canapé pour salon', '200x100', 'Living Room Sofa', 'Canapé de salon',
+     400.00, 5, 30, 1, NULL),
+    (CURRENT_DATE, 'Chair for Living Room', 'Chaise pour salon', '80x70', 'Living Room Chair', 'Chaise de salon',
+     150.00, 10, 15, 1, NULL);
 
 -- Insertion dans la table users
 INSERT INTO users (account_non_expired, account_non_locked, authorities, credentials_non_expired, delivery_address,

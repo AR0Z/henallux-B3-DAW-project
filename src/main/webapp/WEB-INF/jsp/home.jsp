@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./include/importTags.jsp" %>
 
-<!-- CSS  -->
+<!-- CSS -->
 <link rel="stylesheet" href="../../assets/swiper-bundle.min.css">
 <link rel="stylesheet" href="../../assets/home.css">
 
@@ -14,12 +14,12 @@
                     <div class="swiper-wrapper">
                         <div class="single_slider swiper-slide d-flex align-items-center">
                             <div class="slider_text">
-                                <h2><spring:message code="home_title" /></h2>
+                                <h2><spring:message code="home_title"/></h2>
                                 <div class="slider_text_shape">
                                     <img src="../../assets/img/slider/slider-text-shape.png"/>
                                     <div class="slider_btn">
                                         <a class="btn btn-link" href="shop-left-sidebar.html">
-                                            <spring:message code="home_shopnow" />
+                                            <spring:message code="home_shopnow"/>
                                         </a>
                                     </div>
                                 </div>
@@ -31,12 +31,12 @@
                         </div>
                         <div class="single_slider swiper-slide d-flex align-items-center">
                             <div class="slider_text">
-                                <h2><spring:message code="home_title" /></h2>
+                                <h2><spring:message code="home_title"/></h2>
                                 <div class="slider_text_shape">
                                     <img src="../../assets/img/slider/slider-text-shape.png" alt="">
                                     <div class="slider_btn">
                                         <a class="btn btn-link" href="shop-left-sidebar.html">
-                                            <spring:message code="home_shopnow" />
+                                            <spring:message code="home_shopnow"/>
                                         </a>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                 <li>
                     <a class="active" data-toggle="tab" href="#seller" role="tab" aria-controls="seller"
                        aria-selected="false">
-                        <spring:message code="home_bestSeller" />
+                        <spring:message code="home_bestSeller"/>
                     </a>
                 </li>
             </ul>
@@ -96,8 +96,9 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a href="single-product.html"><img src="../../assets/img/product/product6.png"
-                                                                       alt=""></a>
+                                    <a href="single-product.html">
+                                        <img src="../../assets/img/product/product6.png" alt="">
+                                    </a>
                                     <div class="label_product">
                                         <span class="label_sale">Sale</span>
                                     </div>
@@ -106,7 +107,6 @@
                                     <h4><a href="single-product.html">Tufted accent chair with wood legs,
                                         Beige</a></h4>
                                     <div class="price_box">
-                                        <span class="old_price">$399.99</span>
                                         <span class="current_price">$129.99</span>
                                     </div>
                                 </figcaption>
@@ -243,12 +243,12 @@
                              data-wow-duration="1.1s">
                             <img src="../../assets/img/others/shipping1.png" alt="">
                             <h3>
-                                <spring:message code="home_manyChoices" />
+                                <spring:message code="home_manyChoices"/>
                             </h3>
                         </div>
                         <div class="shipping_desc wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
                             <p>
-                                <spring:message code="home_manyChoices_text" />
+                                <spring:message code="home_manyChoices_text"/>
                             </p>
                         </div>
                     </div>
@@ -257,12 +257,12 @@
                              data-wow-duration="1.1s">
                             <img src="../../assets/img/others/shipping2.png" alt="">
                             <h3>
-                                <spring:message code="home_goodFacilities" />
+                                <spring:message code="home_goodFacilities"/>
                             </h3>
                         </div>
                         <div class="shipping_desc wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
                             <p>
-                                <spring:message code="home_goodFacilities_text" />
+                                <spring:message code="home_goodFacilities_text"/>
                             </p>
                         </div>
                     </div>
@@ -271,12 +271,12 @@
                              data-wow-duration="1.1s">
                             <img src="../../assets/img/others/shipping3.png" alt="">
                             <h3>
-                                <spring:message code="home_affordablePrice" />
+                                <spring:message code="home_affordablePrice"/>
                             </h3>
                         </div>
                         <div class="shipping_desc wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
                             <p>
-                                <spring:message code="home_affordablePrice_text" />
+                                <spring:message code="home_affordablePrice_text"/>
                             </p>
                         </div>
                     </div>
@@ -288,7 +288,6 @@
 <!-- shipping area end -->
 
 
-
 <!-- banner advice section start -->
 <section class="banner_advice_section mb-100">
     <div class="container">
@@ -297,12 +296,12 @@
                 <div class="col-lg-5 offset-lg-7 col-md-5 offset-md-7">
                     <div class="banner_advice_text">
                         <h3 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                            <spring:message code="home_armchair" />
-                            </h3>
+                            <spring:message code="home_armchair"/>
+                        </h3>
                         <a class="btn btn-link wow fadeInUp" href="#" data-wow-delay="0.2s"
                            data-wow-duration="1.2s">
-                            <spring:message code="home_shopnow" />
-                            </a>
+                            <spring:message code="home_shopnow"/>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -313,7 +312,7 @@
     </div>
     <div class="banner_position_text">
         <h2>
-            <spring:message code="home_armchair" />
+            <spring:message code="home_armchair"/>
         </h2>
     </div>
 </section>

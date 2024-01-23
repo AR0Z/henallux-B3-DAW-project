@@ -11,6 +11,7 @@ import com.spring.henallux.ecommerce.Model.Product;
 import com.spring.henallux.ecommerce.Model.Promotion;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -35,22 +36,21 @@ class PromotionServiceTest {
     @Mock
     private ProductRepository productRepository;
 
-    @Before
+    @BeforeEach
     void setUp() throws Exception {
         providerConverter = new ProviderConverter();
         productDAO = new ProductDAO(productRepository, providerConverter);
-
         promotionService = new PromotionService(productDAO);
     }
 
     @Test
     public void applyPromotion() throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        ProductEntity productEntity = new ProductEntity(1, "Cozy Sofa", "Canapé confortable", "Comfortable sofa", "Canapé confortable", new CategoryEntity(1, "Living Room", "Salon"), new PromotionEntity(1,  "Soldes du Nouvel An","New Year Sale", 20, "Seasonal", dateFormat.parse("2024-01-01 00:00:00"), dateFormat.parse("2024-01-31 00:00:00")), "80x35x40", 40.5, 599.99,  50, new Date());
+        ProductEntity productEntity = new ProductEntity(1, "Office Table", "Table de bureau", "Table for Office", "Table pour bureau", new CategoryEntity(1, "Living Room", "Salon"), new PromotionEntity(1, "Soldes du Nouvel An", "New Year Sale", 20, "Seasonal", dateFormat.parse("2024-01-01 00:00:00"), dateFormat.parse("2024-01-31 00:00:00")), "120x80", 15, 150, 10, dateFormat.parse("2024-01-23 00:00:00"));
 
         when(productRepository.findById(1)).thenReturn(productEntity);
 
-        assertThat(productEntity.getPrice()).isEqualTo(599.99);
+        assertThat(productEntity.getPrice()).isEqualTo(150);
 
         Promotion promotion = providerConverter.promotionEntityToPromotion(productEntity.getPromotionId());
         Product product = providerConverter.productEntityToProduct(productEntity);
@@ -59,7 +59,7 @@ class PromotionServiceTest {
 
         product = promotionService.applyPromotion(product);
 
-        assertThat(product.getPrice()).isEqualTo(479.99);
+        assertThat(product.getPrice()).isEqualTo(120);
 
     }
 }

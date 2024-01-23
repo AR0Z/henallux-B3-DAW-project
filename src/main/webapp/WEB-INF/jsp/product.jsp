@@ -166,29 +166,32 @@
             </div>
         </div>
     </div>
-    <div id="similar" class="bg-light">
-        <div class="card border rounded-2 shadow-0" style="width: 300px !important; padding: 10px">
-            <h5 class="card-title" style="width: 200px">
-                <spring:message code="similar"/>
-            </h5>
-            <%--@elvariable id="similarProducts" type="java.util.List<com.spring.henallux.ecommerce.Model.Product>"--%>
-            <c:forEach var="p" items="${similarProducts}" end="3">
-                <div class="d-flex mb-3" style="width: 200px">
-                    <a href="/product/${p.labelEn}-${p.id}" class="me-3">
-                        <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
-                             class="img-md img-thumbnail"/>
-                    </a>
-                    <div class="info">
-                        <a href="/product/${p.labelEn}-${p.id}" class="nav-link mb-1">
-                                ${p.getLocalizedLabel(locale)}
-                        </a>
-                        <strong class="text-dark">${p.price}e</strong>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
+    <c:if test="${similarProducts.size() != 0}">
+        <div id="similar" class="bg-light">
+            <div class="card border rounded-2 shadow-0" style="width: 300px !important; padding: 10px">
+                <h5 class="card-title" style="width: 200px">
+                    <spring:message code="similar"/>
+                </h5>
 
-    </div>
+                    <%--@elvariable id="similarProducts" type="java.util.List<com.spring.henallux.ecommerce.Model.Product>"--%>
+                <c:forEach var="p" items="${similarProducts}" end="3">
+                    <div class="d-flex mb-3" style="width: 200px">
+                        <a href="/product/${p.labelEn}-${p.id}" class="me-3">
+                            <img src="https://placehold.co/400" style="min-width: 96px; height: 96px;"
+                                 class="img-md img-thumbnail"/>
+                        </a>
+                        <div class="info">
+                            <a href="/product/${p.labelEn}-${p.id}" class="nav-link mb-1">
+                                    ${p.getLocalizedLabel(locale)}
+                            </a>
+                            <strong class="text-dark">${p.price}e</strong>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+
+        </div>
+    </c:if>
 </div>
 <script>
     let quantity = document.getElementById("quantity");
