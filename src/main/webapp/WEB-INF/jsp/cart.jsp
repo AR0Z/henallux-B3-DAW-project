@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div id="dislayCheckout"></div>
-                    <button id="submitCart">
+                    <button class="btn w-100" id="submitCart">
                         <spring:message code="cart_checkout"/>
                     </button>
                 </div>
@@ -160,7 +160,7 @@
                                 totalPriceElement.innerText = totalPrice;
                                 totalPriceWithShippingCostElement.innerText = totalPriceWithShippingCost;
                                 submitCart.disabled = quantityInputs.length === 0;
-                                
+
                             } else if (data.error) {
                                 quantityInput.value = data.maxQuantity;
                                 errorDisplay.innerText = data.error;
