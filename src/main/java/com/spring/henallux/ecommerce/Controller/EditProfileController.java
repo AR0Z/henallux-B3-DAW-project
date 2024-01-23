@@ -24,14 +24,14 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = "/editProfile")
-public class editProfileController {
+public class EditProfileController {
 
     private UserDataAccess userDAO;
     private OrderDataAccess orderDAO;
     private OrderLineDataAccess orderLineDAO;
 
     @Autowired
-    public editProfileController(UserDataAccess userDAO, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDA) {
+    public EditProfileController(UserDataAccess userDAO, OrderDataAccess orderDAO, OrderLineDataAccess orderLineDA) {
         this.userDAO = userDAO;
         this.orderDAO = orderDAO;
         this.orderLineDAO = orderLineDA;
