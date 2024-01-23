@@ -128,7 +128,7 @@
                                 <spring:message code="product_category"/>
                                 :
                             </dt>
-                            <%--                        <dd class="col-9">${product.getCategoryId().getName()}</dd>--%>
+                            <dd class="col-9">${product.getCategoryId().getLocalizedLabel(locale)}</dd>
                             <dt class="col-3">Stock:</dt>
                             <dd class="col-9">${product.stock}</dd>
                         </div>
@@ -155,8 +155,7 @@
                         </div>
                         <div class="p-2" id="displayMessage"></div>
                         <button type="submit" id="sumbitAddProduct" class="btn btn-primary shadow-0"><i
-                                class="me-1 fa fa-shopping-basket"></i> Add to
-                            cart
+                                class="me-1 fa fa-shopping-basket"></i> <spring:message code="button_addToCart"/>
                         </button>
                     </div>
                 </main>

@@ -43,12 +43,12 @@ public class cartController {
     }
 
     @RequestMapping(value = "/editQuantity", method = RequestMethod.POST)
-    public ResponseEntity<?> editQuantity(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, @RequestParam int productId, @RequestParam int quantity) {
+    public ResponseEntity<?> editQuantity(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, @RequestParam int productId, @RequestParam int quantity, Locale locale) {
 
         Product product = productDAO.findById(productId);
         HashMap<String, Object> response = new HashMap<>();
         if (product == null) {
-            response.put("error", "Product not found");
+            response.put("error", locale == Locale.FRENCH ? "Produit non trouvé" : "Product not found");
             return ResponseEntity.ok(response);
         }
 
@@ -56,7 +56,7 @@ public class cartController {
             cart.removeProduct(productId);
         } else {
             if (product.getStock() < quantity) {
-                response.put("error", "Not enough stock");
+                response.put("error", locale == Locale.FRENCH ? "Pas assez de stock" : "Not enough stock");
                 response.put("maxQuantity", product.getStock());
                 return ResponseEntity.ok(response);
             }
@@ -81,7 +81,7 @@ public class cartController {
         HashMap<String, Object> response = new HashMap<>();
 
         if (product == null) {
-            response.put("error", "Product not found");
+            response.put("error", locale == Locale.FRENCH ? "Produit non trouvé" : "Product not found");
             return ResponseEntity.ok(response);
         }
 
@@ -93,13 +93,13 @@ public class cartController {
         }
 
         if (product.getStock() < quantityTotal) {
-            response.put("error", "Not enough stock");
+            response.put("error", locale == Locale.FRENCH ? "Pas assez de stock" : "Not enough stock");
         } else {
             CartLine cartLine = new CartLine();
             cartLine.setProduct(product);
             cartLine.setQuantity(quantity);
             cart.addProduct(cartLine);
-            response.put("success", "Product added to cart");
+            response.put("success", locale == Locale.FRENCH ? "Produit ajouté au panier" : "Product added to cart");
         }
 
 
