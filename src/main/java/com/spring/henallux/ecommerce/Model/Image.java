@@ -1,6 +1,6 @@
 package com.spring.henallux.ecommerce.Model;
 
-import com.spring.henallux.ecommerce.dataAccess.entity.ProductEntity;
+import com.spring.henallux.ecommerce.DataAccess.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

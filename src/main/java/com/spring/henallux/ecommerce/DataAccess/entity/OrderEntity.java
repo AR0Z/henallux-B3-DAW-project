@@ -1,0 +1,30 @@
+package com.spring.henallux.ecommerce.DataAccess.entity;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "orders")
+@Data
+@Setter
+@Getter
+public class OrderEntity {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "order_id")
+    private int id;
+    @Column(name ="date")
+    private Date date;
+    @Column(name = "paypal_order_id")
+    private String paypalOrderId;
+    @Column(name = "order_status")
+    private String status;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
+
+}

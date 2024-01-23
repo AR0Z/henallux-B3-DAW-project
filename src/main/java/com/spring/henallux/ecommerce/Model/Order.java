@@ -1,11 +1,9 @@
 package com.spring.henallux.ecommerce.Model;
 
-import com.spring.henallux.ecommerce.dataAccess.entity.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.HashMap;
 
