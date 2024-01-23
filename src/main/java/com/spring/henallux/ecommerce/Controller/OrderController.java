@@ -71,18 +71,23 @@ public class OrderController {
 
     @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<String> createOder(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication) {
+    public ResponseEntity<String> createOder(@ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Authentication authentication, Locale locale) {
 
         //check if cart is empty
         if (cart.getCartLines().isEmpty()) {
-            String jsonResponse = "{\"status\": \"error\", \"message\": \"Empty cart. Please add items to your cart before create order.\"}";
-
-            // Renvoie la réponse formatée avec le statut 400 Bad Request
-            return ResponseEntity.ok().body(jsonResponse);
+            String message = locale == Locale.FRENCH ? "Votre panier est vide" : "Your cart is empty";
+            return ResponseEntity.ok().body("{\"status\": \"error\", \"message\": \"" + message +"\"}");
         }
 
         // get userId
         User user = (User) authentication.getPrincipal();
+
+        System.out.println(user);
+
+        if (user == null) {
+            String message = locale == Locale.FRENCH ? "Vous devez être connecté pour passer une commande" : "You must be logged in to place an order";
+            return ResponseEntity.ok().body("{\"status\": \"needLogin\", \"message\": \"" + message +"\"}");
+        }
 
         Order order = cart.toOrder();
 

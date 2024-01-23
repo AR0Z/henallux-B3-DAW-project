@@ -216,7 +216,7 @@
                 }
             })
             .catch(error => {
-                console.error("Fetch error:", error);
+                window.location.href = "/login";
             });
     });
 

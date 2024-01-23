@@ -51,7 +51,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin() // We define the login part here.
-                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler()) // provided by spring to redirect to the last request
+                .successHandler((request, response, authentication) -> {
+                    // Custom logic if needed before redirecting
+                    response.sendRedirect("/"); // Redirect to the home page upon successful login
+                }) // provided by spring to redirect to the last request
                 .loginPage(LOGIN_REQUEST) // We specify a login page. Otherwise spring creates one by default
                 .usernameParameter("email") // The username parameter in the login page is "email"
                 .failureUrl("/login?error=true") // URL to return if login is failed
