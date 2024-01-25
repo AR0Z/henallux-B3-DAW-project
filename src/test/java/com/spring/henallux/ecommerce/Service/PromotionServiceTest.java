@@ -33,7 +33,6 @@ import static org.mockito.Mockito.*;
 class PromotionServiceTest {
 
     private PromotionService promotionService;
-    @InjectMocks
     private ProductDataAccess productDAO;
     private ProviderConverter providerConverter;
     private SimpleDateFormat dateFormat;
